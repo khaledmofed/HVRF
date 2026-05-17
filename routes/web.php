@@ -25,6 +25,7 @@ Route::post('/subscribe', [NewsletterController::class, 'store'])->name('newslet
 
 // Admin auth
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn() => redirect()->route('admin.login'));
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
