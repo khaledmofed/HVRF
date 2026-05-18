@@ -493,14 +493,6 @@
             overflow: hidden;
             height: 540px;
         }
-        @media (max-width: 767.98px) {
-            .vision-section { height: auto; min-height: auto; }
-            /* On mobile slides stack in document flow instead of absolute */
-            .vslide { position: relative; inset: auto; }
-            .vslide:not(.vs-active) { display: none; }
-            .vslide.vs-active { display: flex; opacity: 1; pointer-events: auto; }
-        }
-
         .vslide {
             position: absolute;
             inset: 0;
@@ -648,12 +640,16 @@
         @media (max-width: 767.98px) {
             .vision-section { height: auto; min-height: auto; padding-bottom: 3.5rem; }
             .vslide {
+                position: relative;
+                inset: auto;
                 flex-direction: column;
                 padding: 2rem 1.25rem 2.5rem;
                 gap: 1rem;
                 align-items: center;
                 text-align: center;
             }
+            .vslide:not(.vs-active) { display: none; }
+            .vslide.vs-active { display: flex; opacity: 1; pointer-events: auto; }
             .vs-visual {
                 flex: 0 0 auto;
                 width: 100%;
