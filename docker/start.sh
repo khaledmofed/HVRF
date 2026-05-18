@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+# Use Render's $PORT or default to 10000
+export PORT=${PORT:-10000}
+
+# Inject $PORT into nginx config (only replaces ${PORT}, leaves nginx $vars intact)
+envsubst '${PORT}' < /etc/nginx/nginx.conf > /tmp/nginx_rendered.conf
+cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
+
 echo "Running migrations..."
 php /var/www/html/artisan migrate --force
 

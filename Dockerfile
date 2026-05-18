@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-alpine
 
 # Install system deps + nginx
-RUN apk add --no-cache nginx git curl zip unzip libpq-dev supervisor \
+RUN apk add --no-cache nginx git curl zip unzip libpq-dev supervisor gettext \
     && docker-php-ext-install pdo pdo_pgsql opcache
 
 # Composer
@@ -29,6 +29,6 @@ COPY docker/supervisord.conf /etc/supervisord.conf
 COPY docker/start.sh /start.sh
 RUN chmod +x /start.sh
 
-EXPOSE 80
+EXPOSE 10000
 
 CMD ["/start.sh"]
