@@ -433,7 +433,7 @@
             @foreach($focusAreas as $index => $area)
             <div class="col-lg-4 col-md-6 gsap-stagger-child {{ $loop->last && $loop->count % 2 !== 0 ? 'offset-lg-0' : '' }}">
                 <div class="focus-card h-100">
-                    <div class="focus-num-badge">{{ $area->number }}</div>
+                    <!-- <div class="focus-num-badge">{{ $area->number }}</div> -->
                     <div class="focus-icon-wrap">
                         <i class="bi {{ $area->icon_name }}"></i>
                     </div>
@@ -1134,10 +1134,11 @@ gsap.to('#heroCanvas', {
     var current   = 0;
     var barTween  = null;
     var autoTimer = null;
+    var isMobile  = window.innerWidth < 768;
 
     /* ── initial state: hide all non-active slides ── */
     slides.forEach(function (sl, i) {
-        if (i !== 0) {
+        if (i !== 0 && !isMobile) {
             gsap.set(sl, { opacity: 0, display: 'none' });
         }
         /* pre-hide caption children so they can be revealed per slide */

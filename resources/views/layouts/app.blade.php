@@ -493,7 +493,13 @@
             overflow: hidden;
             height: 540px;
         }
-        @media (max-width: 767.98px) { .vision-section { height: auto; min-height: 580px; } }
+        @media (max-width: 767.98px) {
+            .vision-section { height: auto; min-height: auto; }
+            /* On mobile slides stack in document flow instead of absolute */
+            .vslide { position: relative; inset: auto; }
+            .vslide:not(.vs-active) { display: none; }
+            .vslide.vs-active { display: flex; opacity: 1; pointer-events: auto; }
+        }
 
         .vslide {
             position: absolute;
@@ -640,11 +646,27 @@
         .vs-dash    { animation: vs-dash 2s linear infinite; }
 
         @media (max-width: 767.98px) {
-            .vslide { flex-direction: column; padding: 2rem 1.5rem; gap: 1.5rem; }
-            .vs-caption { flex: none; max-width: 100%; }
-            .vs-num { font-size: 3.5rem; }
-            .vs-title { font-size: 1.5rem; }
-            .vs-nav { right: 1.5rem; }
+            .vision-section { height: auto; min-height: auto; padding-bottom: 3.5rem; }
+            .vslide {
+                flex-direction: column;
+                padding: 2rem 1.25rem 2.5rem;
+                gap: 1rem;
+                align-items: center;
+                text-align: center;
+            }
+            .vs-visual {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 260px;
+                max-height: 220px;
+                overflow: hidden;
+            }
+            .vs-visual svg { max-height: 220px; width: 100%; }
+            .vs-caption { flex: none; max-width: 100%; text-align: left; }
+            .vs-num { font-size: 2.8rem; }
+            .vs-title { font-size: 1.45rem; }
+            .vs-desc { font-size: 0.85rem; line-height: 1.7; margin-bottom: 1rem; }
+            .vs-nav { right: 1.25rem; bottom: 1rem; }
         }
 
         /* ── FOCUS AREAS ── */
@@ -1082,11 +1104,58 @@
             .contact-info-panel { margin-bottom: 1.5rem; }
         }
         @media (max-width: 767.98px) {
-            .hero-title { font-size: 1.9rem; }
-            .hero-stats-bar { gap: 1.5rem !important; }
+            /* Hero */
+            .hero-section { min-height: 100svh; padding: 5rem 0 4rem; }
+            .hero-title { font-size: 1.85rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-badge { font-size: 0.78rem; padding: 0.55rem 1rem; }
+            .hero-stats-bar { gap: 1.25rem !important; }
             .stat-sep { display: none !important; }
-            .pill-tabs { flex-wrap: wrap; border-radius: 14px; }
-            .pill-tabs .nav-link { border-radius: 10px; }
+            .stat-value { font-size: 1.6rem; }
+
+            /* Section headings */
+            .section-tag { font-size: 0.65rem; }
+            h2.display-5, .section-title { font-size: 1.75rem !important; }
+
+            /* About */
+            .about-img-ring { width: 200px; height: 200px; }
+            .about-float-badge { display: none; }
+
+            /* Focus cards */
+            .focus-card { padding: 1.5rem; }
+            .focus-card .card-watermark { font-size: 5rem; }
+
+            /* Mini cards */
+            .mini-card { padding: 1.5rem 1.25rem; }
+
+            /* Programs tabs */
+            .pill-tabs { flex-wrap: nowrap; overflow-x: auto; border-radius: 14px; gap: 0; }
+            .pill-tabs .nav-link { border-radius: 10px; white-space: nowrap; font-size: 0.82rem; padding: 0.5rem 1rem; }
+            .program-card { padding: 1.25rem; }
+
+            /* Roadmap */
+            .roadmap-year-badge { font-size: 0.9rem; padding: 0.3rem 0.9rem; }
+            .roadmap-card { padding: 1.25rem; }
+
+            /* Team */
+            .team-photo { width: 72px; height: 72px; }
+
+            /* Contact */
+            .contact-info-panel { margin-bottom: 1.5rem; }
+
+            /* Join section */
+            .join-section { clip-path: none; padding: 3.5rem 0; }
+            .join-section h2 { font-size: 1.75rem; }
+
+            /* Footer */
+            .footer-brand-name { font-size: 1rem; }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-title { font-size: 1.6rem; }
+            .vs-title { font-size: 1.3rem; }
+            h2.display-5, .section-title { font-size: 1.5rem !important; }
+            .hero-badge { max-width: 90vw; text-align: center; }
         }
     </style>
 </head>
