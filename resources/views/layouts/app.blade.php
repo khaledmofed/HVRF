@@ -40,7 +40,7 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
             font-family: 'Inter', sans-serif;
             color: var(--hvrf-dark-text);
@@ -1104,8 +1104,8 @@
             .hero-section { min-height: 100svh; padding: 5rem 0 4rem; }
             .hero-title { font-size: 1.85rem; }
             .hero-subtitle { font-size: 1rem; }
-            .hero-badge { font-size: 0.78rem; padding: 0.55rem 1rem; }
-            .hero-stats-bar { gap: 1.25rem !important; }
+            .hero-badge { font-size: 0.78rem; padding: 0.55rem 1rem; max-width: 90%; white-space: normal; word-break: break-word; }
+            .hero-stats-bar { gap: 1.25rem !important; flex-wrap: wrap; }
             .stat-sep { display: none !important; }
             .stat-value { font-size: 1.6rem; }
 
