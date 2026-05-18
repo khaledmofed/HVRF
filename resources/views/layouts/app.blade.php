@@ -74,6 +74,30 @@
         #mainNavbar.scrolled .nav-link { color: var(--hvrf-navy) !important; }
         #mainNavbar.scrolled .navbar-brand { color: var(--hvrf-navy) !important; }
         #mainNavbar.scrolled .nav-cta { background: var(--hvrf-teal) !important; color: #fff !important; }
+        /* Fix: toggler icon goes dark when navbar is white (scrolled) */
+        #mainNavbar.scrolled .navbar-toggler { color: var(--hvrf-navy) !important; }
+
+        /* Mobile: solid dark background when menu is open */
+        @media (max-width: 991.98px) {
+            #mainNavbar:has(#navMenu.show),
+            #mainNavbar:has(#navMenu.collapsing) {
+                background: rgba(10, 20, 32, 0.97) !important;
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+            }
+            #mainNavbar:has(#navMenu.show) .nav-link,
+            #mainNavbar:has(#navMenu.collapsing) .nav-link {
+                color: rgba(255,255,255,0.85) !important;
+            }
+            #mainNavbar:has(#navMenu.show) .navbar-brand,
+            #mainNavbar:has(#navMenu.collapsing) .navbar-brand {
+                color: #fff !important;
+            }
+            #mainNavbar:has(#navMenu.show) .navbar-toggler,
+            #mainNavbar:has(#navMenu.collapsing) .navbar-toggler {
+                color: rgba(255,255,255,0.8) !important;
+            }
+        }
 
         .navbar-brand img {
             height: 40px; width: 40px;
