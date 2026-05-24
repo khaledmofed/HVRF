@@ -194,9 +194,9 @@
         canvas.width = canvas.height = SZ;
 
         var cx = SZ / 2, cy = SZ / 2;
-        var ORBIT = 215;   /* orbit radius for outer nodes */
-        var CR    = 84;    /* center circle radius         */
-        var NR    = 52;    /* outer node radius            */
+        var ORBIT = 268;   /* orbit radius for outer nodes */
+        var CR    = 105;   /* center circle radius         */
+        var NR    = 62;    /* outer node radius            */
         var T     = '32,178,170';   /* teal */
 
         var NODE_DEFS = [
@@ -224,11 +224,11 @@
         var lblDiv = document.getElementById('ecoLbls');
         nodes.forEach(function (n) {
             var el = document.createElement('div');
-            el.style.cssText = 'position:absolute;transform:translate(-50%,-50%);text-align:center;width:90px;';
+            el.style.cssText = 'position:absolute;transform:translate(-50%,-50%);text-align:center;width:112px;';
             el.style.left = (n.x / SZ * 100).toFixed(2) + '%';
             el.style.top  = (n.y / SZ * 100).toFixed(2) + '%';
             el.innerHTML  = n.lbl.split('\n').map(function (p) {
-                return '<span style="display:block;font-size:.68rem;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.92);text-transform:uppercase;line-height:1.45;">' + p + '</span>';
+                return '<span style="display:block;font-size:.82rem;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.92);text-transform:uppercase;line-height:1.45;">' + p + '</span>';
             }).join('');
             lblDiv.appendChild(el);
         });
@@ -236,8 +236,8 @@
         /* center label */
         var cEl = document.createElement('div');
         cEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);text-align:center;width:110px;';
-        cEl.style.top = ((cy + 28) / SZ * 100).toFixed(2) + '%';
-        cEl.innerHTML = '<span style="font-size:.65rem;font-weight:700;letter-spacing:.1em;color:rgba(32,178,170,.92);text-transform:uppercase;line-height:1.6;">HVRF<br>Foundation Core</span>';
+        cEl.style.top = ((cy + 36) / SZ * 100).toFixed(2) + '%';
+        cEl.innerHTML = '<span style="font-size:.78rem;font-weight:700;letter-spacing:.1em;color:rgba(32,178,170,.92);text-transform:uppercase;line-height:1.6;">HVRF<br>Foundation Core</span>';
         lblDiv.appendChild(cEl);
 
         /* ── logo (original colours) ── */
@@ -316,8 +316,8 @@
 
             /* logo */
             if (logoReady && logoImg) {
-                var ls = 70;
-                ctx.drawImage(logoImg, cx - ls / 2, cy - ls / 2 - 12, ls, ls);
+                var ls = 88;
+                ctx.drawImage(logoImg, cx - ls / 2, cy - ls / 2 - 14, ls, ls);
             }
 
             requestAnimationFrame(tick);
