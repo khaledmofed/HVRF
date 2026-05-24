@@ -73,7 +73,7 @@
         }
         #mainNavbar.scrolled .nav-link { color: var(--hvrf-navy) !important; }
         #mainNavbar.scrolled .navbar-brand { color: var(--hvrf-navy) !important; }
-        #mainNavbar.scrolled .nav-cta { background: var(--hvrf-teal) !important; color: #fff !important; }
+        #mainNavbar.scrolled .nav-cta { background: var(--hvrf-gold) !important; color: var(--hvrf-navy) !important; }
         /* Fix: toggler icon goes dark when navbar is white (scrolled) */
         #mainNavbar.scrolled .navbar-toggler { color: var(--hvrf-navy) !important; }
 
@@ -121,21 +121,31 @@
         }
         .nav-link:hover::after { width: 100%; }
         .nav-cta {
-            background: rgba(78,205,196,0.15) !important;
-            color: var(--hvrf-teal) !important;
-            border: 1px solid rgba(78,205,196,0.3) !important;
-            border-radius: 8px !important;
-            padding: 0.45rem 1.25rem !important;
-            font-size: 0.88rem !important;
-            font-weight: 600 !important;
+            background: var(--hvrf-gold) !important;
+            color: var(--hvrf-navy) !important;
+            border: none !important;
+            border-radius: 2rem !important;
+            padding: 0.5rem 1.4rem !important;
+            font-size: 0.75rem !important;
+            font-weight: 700 !important;
+            letter-spacing: .08em !important;
+            text-transform: uppercase !important;
             transition: var(--transition) !important;
         }
         .nav-cta:hover {
-            background: var(--hvrf-teal) !important;
+            background: #b8924a !important;
             color: #fff !important;
-            box-shadow: 0 4px 16px var(--hvrf-teal-glow) !important;
+            box-shadow: 0 4px 18px rgba(201,169,110,0.45) !important;
+            transform: translateY(-1px);
         }
         .nav-cta::after { display: none !important; }
+
+        /* ── NAV ACTIVE STATE ── */
+        .nav-link.nav-active {
+            color: var(--hvrf-teal) !important;
+        }
+        .nav-link.nav-active::after { width: 100% !important; }
+        #mainNavbar.scrolled .nav-link.nav-active { color: var(--hvrf-teal) !important; }
 
         /* ── BUTTONS ── */
         .btn-hvrf-primary {
@@ -1304,6 +1314,32 @@ window.addEventListener('scroll', function () {
     if (window.scrollY > 60) nb.classList.add('scrolled');
     else nb.classList.remove('scrolled');
 });
+
+/* ── SCROLLSPY — active nav link ── */
+(function () {
+    var navLinks = document.querySelectorAll('#navMenu .nav-link[href*="#"]');
+    var sections = Array.from(document.querySelectorAll('section[id]'));
+    if (!sections.length || !navLinks.length) return;
+
+    function updateActive() {
+        var scrollY = window.scrollY + 120;
+        var current = '';
+        sections.forEach(function (sec) {
+            if (scrollY >= sec.offsetTop) current = sec.id;
+        });
+        navLinks.forEach(function (link) {
+            var hash = (link.getAttribute('href') || '').split('#')[1] || '';
+            if (hash && hash === current) {
+                link.classList.add('nav-active');
+            } else {
+                link.classList.remove('nav-active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+})();
 
 /* ── STATS COUNTER ── */
 const counters = document.querySelectorAll('[data-count]');

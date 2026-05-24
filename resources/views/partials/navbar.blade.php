@@ -14,8 +14,8 @@
                     <a class="nav-link text-white" href="{{ route('home') }}{{ $hash }}" style="font-size: 0.88rem;">{{ $label }}</a>
                 </li>
                 @endforeach
-                <li class="nav-item ms-lg-2">
-                    <a href="{{ route('home') }}#join" class="nav-cta nav-link">Get Involved</a>
+                <li class="nav-item ms-lg-3">
+                    <a href="{{ route('home') }}#contact" class="nav-cta nav-link">Support Our Mission</a>
                 </li>
             </ul>
         </div>
