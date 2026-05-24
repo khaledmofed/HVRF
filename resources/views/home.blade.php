@@ -118,7 +118,7 @@
         </div>
 
         {{-- Ecosystem Wheel --}}
-        <div id="ecoWrap" style="position:relative; max-width:560px; width:100%; margin:0 auto 3.5rem; aspect-ratio:1/1;">
+        <div id="ecoWrap" style="position:relative; max-width:720px; width:100%; margin:0 auto 3.5rem; aspect-ratio:1/1;">
             <canvas id="ecoCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
             <div id="ecoLbls" style="position:absolute;inset:0;pointer-events:none;"></div>
         </div>
@@ -190,7 +190,7 @@
         if (!canvas) return;
         var ctx = canvas.getContext('2d');
 
-        var SZ = 560;
+        var SZ = 720;
         canvas.width = canvas.height = SZ;
 
         var cx = SZ / 2, cy = SZ / 2;
