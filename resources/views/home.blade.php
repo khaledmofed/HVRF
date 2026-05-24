@@ -235,9 +235,10 @@
 
         /* center label */
         var cEl = document.createElement('div');
-        cEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);text-align:center;width:110px;';
+        cEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;';
         cEl.style.top = ((cy + 36) / SZ * 100).toFixed(2) + '%';
-        cEl.innerHTML = '<span style="font-size:.78rem;font-weight:700;letter-spacing:.1em;color:rgba(32,178,170,.92);text-transform:uppercase;line-height:1.6;">HVRF<br>Foundation Core</span>';
+        cEl.innerHTML = '<span style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:rgba(32,178,170,.92);text-transform:uppercase;line-height:1.8;">HVRF</span>'
+                      + '<span style="display:block;font-size:.62rem;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.65);text-transform:uppercase;line-height:1.4;">Foundation Core</span>';
         lblDiv.appendChild(cEl);
 
         /* ── logo (original colours) ── */
