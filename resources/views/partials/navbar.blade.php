@@ -1,7 +1,7 @@
 <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top" style="background: transparent;">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-white" href="{{ route('home') }}" style="text-decoration: none;">
-            <img src="/images/logo.jpeg" alt="HVRF Logo">
+            <img src="/images/logo-hvrf.png" alt="HVRF Logo">
             <span style="font-family: 'Playfair Display', serif; font-size: 1.25rem; letter-spacing: 0.3px;">HVRF</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation" style="color: rgba(255,255,255,0.8);">

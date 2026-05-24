@@ -100,9 +100,8 @@
         }
 
         .navbar-brand img {
-            height: 40px; width: 40px;
-            object-fit: cover; border-radius: 50%;
-            border: 2px solid rgba(78,205,196,0.4);
+            height: 42px; width: 42px;
+            object-fit: contain;
         }
         .nav-link {
             font-weight: 500;
