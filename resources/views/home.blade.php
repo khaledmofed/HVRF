@@ -332,7 +332,8 @@
      VISION SLIDER
 ═══════════════════════════════════════════ --}}
 <section class="vision-section gsap-reveal" data-dir="up">
-
+ {{-- Progress bar --}}
+    <div class="vs-progress"><span class="vs-bar" id="vsBar"></span></div>
     @foreach($visionSlides as $slide)
     <div class="vslide {{ $loop->first ? 'vs-active' : '' }}" data-slide="{{ $loop->index }}">
         <div class="vs-visual">
@@ -394,70 +395,139 @@
             </svg>
 
             @elseif($loop->index === 1)
-            {{-- SVG 2: Intelligence Meets Humanity --}}
+            {{-- SVG 2: Intelligence Meets Humanity — person with report --}}
             <svg viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="mLg" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stop-color="#4ECDC4" stop-opacity="0.35"/>
-                        <stop offset="48%" stop-color="#ffffff" stop-opacity="0.12"/>
+                    <linearGradient id="s2bt" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#4ECDC4" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="#4ECDC4" stop-opacity="0.38"/>
+                    </linearGradient>
+                    <linearGradient id="s2bg" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.9"/>
                         <stop offset="100%" stop-color="#C9A96E" stop-opacity="0.35"/>
                     </linearGradient>
                 </defs>
-                <line x1="260" y1="15" x2="260" y2="365" stroke="url(#mLg)" stroke-width="1.5"/>
-                <ellipse cx="260" cy="190" rx="38" ry="150" fill="rgba(255,255,255,0.025)"/>
-                <polygon points="80,58 100,46 120,58 120,82 100,94 80,82" stroke="#4ECDC4" stroke-opacity="0.5" stroke-width="1.2" fill="rgba(78,205,196,0.06)" class="vs-hex"/>
-                <polygon points="130,58 150,46 170,58 170,82 150,94 130,82" stroke="#4ECDC4" stroke-opacity="0.4" stroke-width="1.2" fill="rgba(78,205,196,0.04)"/>
-                <polygon points="180,58 200,46 220,58 220,82 200,94 180,82" stroke="#4ECDC4" stroke-opacity="0.28" stroke-width="1.2" fill="rgba(78,205,196,0.02)"/>
-                <polygon points="55,106 75,94 95,106 95,130 75,142 55,130" stroke="#4ECDC4" stroke-opacity="0.44" stroke-width="1.2" fill="rgba(78,205,196,0.04)"/>
-                <polygon points="105,106 125,94 145,106 145,130 125,142 105,130" stroke="#4ECDC4" stroke-opacity="0.55" stroke-width="1.2" fill="rgba(78,205,196,0.08)" class="vs-hex"/>
-                <polygon points="155,106 175,94 195,106 195,130 175,142 155,130" stroke="#4ECDC4" stroke-opacity="0.38" stroke-width="1.2" fill="rgba(78,205,196,0.04)"/>
-                <polygon points="205,106 225,94 245,106 245,130 225,142 205,130" stroke="#4ECDC4" stroke-opacity="0.22" stroke-width="1.2" fill="rgba(78,205,196,0.02)"/>
-                <polygon points="80,154 100,142 120,154 120,178 100,190 80,178" stroke="#4ECDC4" stroke-opacity="0.4" stroke-width="1.2" fill="rgba(78,205,196,0.05)"/>
-                <polygon points="130,154 150,142 170,154 170,178 150,190 130,178" stroke="#4ECDC4" stroke-opacity="0.58" stroke-width="1.2" fill="rgba(78,205,196,0.09)" class="vs-hex"/>
-                <polygon points="180,154 200,142 220,154 220,178 200,190 180,178" stroke="#4ECDC4" stroke-opacity="0.32" stroke-width="1.2" fill="rgba(78,205,196,0.03)"/>
-                <polygon points="55,202 75,190 95,202 95,226 75,238 55,226" stroke="#4ECDC4" stroke-opacity="0.3" stroke-width="1.2" fill="rgba(78,205,196,0.03)"/>
-                <polygon points="105,202 125,190 145,202 145,226 125,238 105,226" stroke="#4ECDC4" stroke-opacity="0.45" stroke-width="1.2" fill="rgba(78,205,196,0.06)" class="vs-hex"/>
-                <polygon points="155,202 175,190 195,202 195,226 175,238 155,226" stroke="#4ECDC4" stroke-opacity="0.38" stroke-width="1.2" fill="rgba(78,205,196,0.04)"/>
-                <polygon points="205,202 225,190 245,202 245,226 225,238 205,226" stroke="#4ECDC4" stroke-opacity="0.18" stroke-width="1.2" fill="rgba(78,205,196,0.015)"/>
-                <polygon points="80,250 100,238 120,250 120,274 100,286 80,274" stroke="#4ECDC4" stroke-opacity="0.35" stroke-width="1.2" fill="rgba(78,205,196,0.04)"/>
-                <polygon points="130,250 150,238 170,250 170,274 150,286 130,274" stroke="#4ECDC4" stroke-opacity="0.42" stroke-width="1.2" fill="rgba(78,205,196,0.05)" class="vs-hex"/>
-                <polygon points="180,250 200,238 220,250 220,274 200,286 180,274" stroke="#4ECDC4" stroke-opacity="0.24" stroke-width="1.2" fill="rgba(78,205,196,0.02)"/>
-                <polygon points="80,298 100,286 120,298 120,322 100,334 80,322" stroke="#4ECDC4" stroke-opacity="0.25" stroke-width="1.2" fill="rgba(78,205,196,0.025)"/>
-                <polygon points="130,298 150,286 170,298 170,322 150,334 130,322" stroke="#4ECDC4" stroke-opacity="0.3" stroke-width="1.2" fill="rgba(78,205,196,0.03)"/>
-                <circle cx="100" cy="46" r="3.5" fill="#4ECDC4" opacity="0.75" class="vs-node-pulse"/>
-                <circle cx="150" cy="94" r="4" fill="#4ECDC4" opacity="0.88" class="vs-node-pulse-slow"/>
-                <circle cx="175" cy="142" r="3" fill="#4ECDC4" opacity="0.6"/>
-                <circle cx="125" cy="190" r="3.5" fill="#4ECDC4" opacity="0.72" class="vs-node-pulse"/>
-                <circle cx="75" cy="238" r="3" fill="#4ECDC4" opacity="0.58" class="vs-node-pulse-slow"/>
-                <circle cx="150" cy="238" r="4" fill="#4ECDC4" opacity="0.82" class="vs-node-pulse"/>
-                <circle cx="100" cy="286" r="3" fill="#4ECDC4" opacity="0.5"/>
-                <path d="M368 356 Q364 280 368 238 Q373 196 358 158" stroke="#C9A96E" stroke-opacity="0.62" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <path d="M358 158 Q328 118 298 98" stroke="#C9A96E" stroke-opacity="0.58" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M358 158 Q384 128 404 108" stroke="#C9A96E" stroke-opacity="0.52" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M360 198 Q333 178 308 163" stroke="#C9A96E" stroke-opacity="0.46" stroke-width="1.3" stroke-linecap="round"/>
-                <path d="M361 218 Q393 198 413 183" stroke="#C9A96E" stroke-opacity="0.42" stroke-width="1.3" stroke-linecap="round"/>
-                <path d="M364 258 Q338 248 316 240" stroke="#C9A96E" stroke-opacity="0.4" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M365 278 Q398 263 418 253" stroke="#C9A96E" stroke-opacity="0.36" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M298 98 Q283 83 276 70" stroke="#C9A96E" stroke-opacity="0.46" stroke-width="1" stroke-linecap="round"/>
-                <path d="M298 98 Q290 80 293 66" stroke="#C9A96E" stroke-opacity="0.4" stroke-width="1" stroke-linecap="round"/>
-                <path d="M404 108 Q414 90 418 76" stroke="#C9A96E" stroke-opacity="0.42" stroke-width="1" stroke-linecap="round"/>
-                <path d="M404 108 Q424 96 434 86" stroke="#C9A96E" stroke-opacity="0.36" stroke-width="1" stroke-linecap="round"/>
-                <path d="M308 163 Q293 150 284 140" stroke="#C9A96E" stroke-opacity="0.38" stroke-width="1" stroke-linecap="round"/>
-                <path d="M413 183 Q430 170 438 161" stroke="#C9A96E" stroke-opacity="0.35" stroke-width="1" stroke-linecap="round"/>
-                <circle cx="276" cy="68" r="4.5" fill="#C9A96E" opacity="0.65" class="vs-node-pulse-slow"/>
-                <circle cx="293" cy="64" r="3.5" fill="#C9A96E" opacity="0.52"/>
-                <circle cx="418" cy="74" r="4.5" fill="#C9A96E" opacity="0.68" class="vs-node-pulse"/>
-                <circle cx="434" cy="84" r="3.5" fill="#C9A96E" opacity="0.5"/>
-                <circle cx="283" cy="138" r="4" fill="#C9A96E" opacity="0.58" class="vs-node-pulse-slow"/>
-                <circle cx="439" cy="160" r="3.5" fill="#C9A96E" opacity="0.5"/>
-                <circle cx="246" cy="90" r="3" fill="#4ECDC4" opacity="0.65" class="vs-cross-1"/>
-                <circle cx="248" cy="148" r="2.5" fill="#C9A96E" opacity="0.6" class="vs-cross-2"/>
-                <circle cx="247" cy="200" r="3" fill="#4ECDC4" opacity="0.55" class="vs-cross-1"/>
-                <circle cx="248" cy="258" r="2.5" fill="#C9A96E" opacity="0.6" class="vs-cross-2"/>
-                <circle cx="246" cy="312" r="3" fill="#4ECDC4" opacity="0.5" class="vs-cross-1"/>
-                <circle cx="260" cy="92" r="5.5" fill="#fff" opacity="0.1" class="vs-node-pulse"/>
-                <circle cx="260" cy="198" r="8" fill="#fff" opacity="0.08" class="vs-node-pulse-slow"/>
-                <circle cx="260" cy="312" r="5" fill="#fff" opacity="0.1" class="vs-node-pulse"/>
+
+                <!-- background glow -->
+                <ellipse cx="260" cy="200" rx="215" ry="155" fill="rgba(78,205,196,0.04)"/>
+
+                <!-- ══ DOCUMENT / CLIPBOARD (right) ══ -->
+                <rect x="262" y="50" width="200" height="272" rx="14"
+                      fill="rgba(8,22,42,0.92)" stroke="#4ECDC4" stroke-opacity="0.42" stroke-width="1.5"/>
+                <!-- top highlight -->
+                <rect x="276" y="50" width="125" height="1.5" rx="1" fill="rgba(78,205,196,0.28)"/>
+                <!-- clip at top -->
+                <rect x="332" y="40" width="60" height="22" rx="8"
+                      fill="rgba(8,22,42,0.95)" stroke="#4ECDC4" stroke-opacity="0.5" stroke-width="1.2"/>
+                <rect x="348" y="47" width="28" height="9" rx="3" fill="rgba(78,205,196,0.22)"/>
+
+                <!-- header lines -->
+                <rect x="280" y="86" width="118" height="7" rx="3.5" fill="rgba(255,255,255,0.26)"/>
+                <rect x="280" y="100" width="80" height="4.5" rx="2" fill="rgba(255,255,255,0.12)"/>
+
+                <!-- chart area -->
+                <rect x="280" y="118" width="164" height="108" rx="5"
+                      fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <!-- axes -->
+                <line x1="296" y1="121" x2="296" y2="222" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+                <line x1="296" y1="222" x2="440" y2="222" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+                <!-- grid -->
+                <line x1="296" y1="196" x2="440" y2="196" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-dasharray="3,5"/>
+                <line x1="296" y1="170" x2="440" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-dasharray="3,5"/>
+                <line x1="296" y1="144" x2="440" y2="144" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-dasharray="3,5"/>
+
+                <!-- bars (growing left→right) -->
+                <rect x="308" y="188" width="16" height="34" rx="3" fill="url(#s2bt)"/>
+                <rect x="330" y="174" width="16" height="48" rx="3" fill="url(#s2bt)"/>
+                <rect x="352" y="158" width="16" height="64" rx="3" fill="url(#s2bt)"/>
+                <rect x="374" y="165" width="16" height="57" rx="3" fill="url(#s2bg)"/>
+                <rect x="396" y="146" width="16" height="76" rx="3" fill="url(#s2bt)"/>
+                <rect x="418" y="133" width="16" height="89" rx="3" fill="url(#s2bt)"/>
+
+                <!-- trend line -->
+                <polyline points="316,185 338,171 360,155 382,162 404,143 426,130"
+                          stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.85"/>
+                <circle cx="316" cy="185" r="2.5" fill="#C9A96E" opacity="0.82"/>
+                <circle cx="338" cy="171" r="2.5" fill="#C9A96E" opacity="0.82"/>
+                <circle cx="360" cy="155" r="3"   fill="#C9A96E" opacity="1"    class="vs-node-pulse-slow"/>
+                <circle cx="382" cy="162" r="2.5" fill="#C9A96E" opacity="0.82"/>
+                <circle cx="404" cy="143" r="3"   fill="#C9A96E" opacity="0.9"  class="vs-node-pulse"/>
+                <circle cx="426" cy="130" r="2.5" fill="#C9A96E" opacity="0.82"/>
+
+                <!-- data rows -->
+                <rect x="280" y="240" width="132" height="5" rx="2.5" fill="rgba(255,255,255,0.22)"/>
+                <rect x="280" y="252" width="90"  height="4" rx="2"   fill="rgba(255,255,255,0.12)"/>
+                <rect x="280" y="263" width="110" height="4" rx="2"   fill="rgba(78,205,196,0.4)"/>
+                <rect x="280" y="274" width="68"  height="4" rx="2"   fill="rgba(255,255,255,0.1)"/>
+                <rect x="280" y="285" width="95"  height="4" rx="2"   fill="rgba(201,169,110,0.35)"/>
+
+                <!-- up-arrow badge -->
+                <rect x="400" y="240" width="50" height="50" rx="10"
+                      fill="rgba(78,205,196,0.1)" stroke="#4ECDC4" stroke-opacity="0.38" stroke-width="1"/>
+                <polyline points="413,268 425,256 437,268" stroke="#4ECDC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+                <line x1="425" y1="256" x2="425" y2="280" stroke="#4ECDC4" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+
+                <!-- ══ HUMAN FIGURE (left) ══ -->
+                <ellipse cx="133" cy="198" rx="74" ry="112" fill="rgba(78,205,196,0.055)"/>
+
+                <!-- head -->
+                <circle cx="133" cy="72" r="28" fill="rgba(78,205,196,0.14)" stroke="#4ECDC4" stroke-opacity="0.55" stroke-width="1.5"/>
+                <!-- eyes -->
+                <circle cx="125" cy="70" r="3"   fill="#4ECDC4" opacity="0.65"/>
+                <circle cx="141" cy="70" r="3"   fill="#4ECDC4" opacity="0.65"/>
+                <!-- smile -->
+                <path d="M126 82 Q133 88 140 82" stroke="#4ECDC4" stroke-opacity="0.52" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+
+                <!-- neck -->
+                <rect x="127" y="100" width="12" height="18" rx="5" fill="rgba(78,205,196,0.18)"/>
+
+                <!-- shoulders arc -->
+                <path d="M90 130 Q112 118 133 118 Q154 118 176 130"
+                      stroke="#4ECDC4" stroke-opacity="0.42" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                <!-- torso -->
+                <path d="M95 134 L171 134 L163 244 L103 244 Z"
+                      fill="rgba(78,205,196,0.13)" stroke="#4ECDC4" stroke-opacity="0.36" stroke-width="1.2" stroke-linejoin="round"/>
+
+                <!-- left arm (relaxed, down) -->
+                <path d="M95 150 Q73 178 70 215"
+                      stroke="#4ECDC4" stroke-opacity="0.36" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                <!-- right arm (extended, pointing at report) -->
+                <path d="M171 150 Q210 155 259 170"
+                      stroke="#4ECDC4" stroke-opacity="0.58" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <!-- pointer dot / hand -->
+                <circle cx="260" cy="171" r="5.5" fill="rgba(78,205,196,0.28)" stroke="#4ECDC4" stroke-opacity="0.7" stroke-width="1.3" class="vs-node-pulse"/>
+
+                <!-- legs -->
+                <path d="M103 244 L93 344 L123 344 L133 280 L143 344 L173 344 L163 244 Z"
+                      fill="rgba(78,205,196,0.1)" stroke="#4ECDC4" stroke-opacity="0.28" stroke-width="1.1" stroke-linejoin="round"/>
+
+                <!-- feet -->
+                <rect x="85"  y="340" width="38" height="9" rx="4.5" fill="rgba(78,205,196,0.22)"/>
+                <rect x="143" y="340" width="38" height="9" rx="4.5" fill="rgba(78,205,196,0.22)"/>
+
+                <!-- dashed connection arm → doc -->
+                <line x1="265" y1="170" x2="262" y2="170"
+                      stroke="#4ECDC4" stroke-opacity="0.45" stroke-width="1.2" stroke-dasharray="5,4"/>
+
+                <!-- floating metric tags -->
+                <rect x="38" y="98"  width="46" height="24" rx="7" fill="rgba(78,205,196,0.1)"   stroke="#4ECDC4"  stroke-opacity="0.32" stroke-width="1"/>
+                <line x1="48" y1="108" x2="74" y2="108" stroke="#4ECDC4"  stroke-opacity="0.55" stroke-width="1.5"/>
+                <line x1="48" y1="114" x2="66" y2="114" stroke="#4ECDC4"  stroke-opacity="0.32" stroke-width="1"/>
+
+                <rect x="36" y="244" width="52" height="24" rx="7" fill="rgba(201,169,110,0.1)" stroke="#C9A96E" stroke-opacity="0.32" stroke-width="1"/>
+                <line x1="46" y1="254" x2="78" y2="254" stroke="#C9A96E" stroke-opacity="0.55" stroke-width="1.5"/>
+                <line x1="46" y1="260" x2="64" y2="260" stroke="#C9A96E" stroke-opacity="0.32" stroke-width="1"/>
+
+                <!-- decorative particles -->
+                <circle cx="52"  cy="52"  r="2.5" fill="#4ECDC4" opacity="0.36" class="vs-drift-1"/>
+                <circle cx="225" cy="40"  r="2"   fill="#4ECDC4" opacity="0.30" class="vs-drift-2"/>
+                <circle cx="493" cy="78"  r="2"   fill="#C9A96E" opacity="0.33" class="vs-drift-3"/>
+                <circle cx="490" cy="315" r="2.5" fill="#C9A96E" opacity="0.36" class="vs-drift-1"/>
+                <circle cx="40"  cy="352" r="2"   fill="#4ECDC4" opacity="0.28" class="vs-drift-2"/>
+                <circle cx="238" cy="358" r="1.5" fill="#4ECDC4" opacity="0.26" class="vs-drift-3"/>
+                <circle cx="178" cy="44"  r="2"   fill="#C9A96E" opacity="0.33" class="vs-drift-1"/>
             </svg>
 
             @else
@@ -572,8 +642,7 @@
         @endforeach
     </div>
 
-    {{-- Progress bar --}}
-    <div class="vs-progress"><span class="vs-bar" id="vsBar"></span></div>
+
 </section>
 
 {{-- ═══════════════════════════════════════════
