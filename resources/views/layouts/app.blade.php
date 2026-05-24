@@ -417,6 +417,70 @@
             line-height: 1.6;
             margin: 0 0 0.75rem;
         }
+        /* ── ABOUT CARDS (Wise-style) ── */
+        .about-card {
+            border-radius: 18px;
+            padding: 2rem 1.75rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .about-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .about-card--dark  { background: var(--hvrf-navy);        border: 1px solid rgba(78,205,196,0.18); }
+        .about-card--teal  { background: rgba(78,205,196,0.09);   border: 1px solid rgba(78,205,196,0.22); }
+        .about-card--white { background: #fff;                     border: 1px solid rgba(0,0,0,0.07);      box-shadow: var(--shadow-sm); }
+        .about-card--gold  { background: rgba(201,169,110,0.09);   border: 1px solid rgba(201,169,110,0.22); }
+        .about-card-label {
+            display: inline-block;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .about-card--dark  .about-card-label { color: rgba(78,205,196,0.75);  }
+        .about-card--teal  .about-card-label { color: var(--hvrf-teal-dark);  }
+        .about-card--white .about-card-label { color: var(--hvrf-teal-dark);  }
+        .about-card--gold  .about-card-label { color: #9a7840;                }
+        .about-card-quote {
+            font-size: 3.5rem;
+            line-height: .8;
+            color: var(--hvrf-gold);
+            margin-bottom: .5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .about-card-icon {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.1rem;
+        }
+        .about-card--teal  .about-card-icon { background: rgba(78,205,196,0.18);   color: var(--hvrf-teal-dark); }
+        .about-card--white .about-card-icon { background: rgba(78,205,196,0.12);   color: var(--hvrf-teal);      }
+        .about-card--gold  .about-card-icon { background: rgba(201,169,110,0.18);  color: #9a7840;               }
+        .about-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: .75rem;
+        }
+        .about-card--dark  .about-card-title { color: #fff;             }
+        .about-card--teal  .about-card-title { color: var(--hvrf-navy); }
+        .about-card--white .about-card-title { color: var(--hvrf-navy); }
+        .about-card--gold  .about-card-title { color: var(--hvrf-navy); }
+        .about-card-body {
+            font-size: .9rem;
+            line-height: 1.72;
+            margin-bottom: 0;
+        }
+        .about-card--dark  .about-card-body { color: rgba(255,255,255,0.68); }
+        .about-card--teal  .about-card-body { color: var(--hvrf-gray);       }
+        .about-card--white .about-card-body { color: var(--hvrf-gray);       }
+        .about-card--gold  .about-card-body { color: var(--hvrf-gray);       }
+        .about-card-attr { font-size: .75rem; color: rgba(255,255,255,0.38); margin-top: 1rem; display: block; }
+
         .mini-card {
             background: #fff;
             border-radius: 14px;
@@ -624,7 +688,7 @@
         /* Progress bar */
         .vs-progress {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: rgba(255,255,255,0.05);
         }

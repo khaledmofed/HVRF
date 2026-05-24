@@ -650,63 +650,60 @@
 ═══════════════════════════════════════════ --}}
 <section id="about" style="padding: 6rem 0; background: var(--hvrf-light);">
     <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-7">
-                <div class="gsap-reveal mb-3" data-dir="up">
-                    <span class="section-label">Who We Are</span>
-                </div>
-                <h2 class="section-title mb-4 gsap-reveal" data-dir="up" data-delay="0.1">About the Foundation</h2>
 
-                @if($about)
-                <div class="glass-card mb-4 gsap-reveal" data-dir="up" data-delay="0.15"
-                     style="background: var(--hvrf-navy);">
-                    <blockquote>"{{ $about->philosophy_body }}"</blockquote>
-                    <small style="color: rgba(255,255,255,0.45); font-size: 0.78rem;">— {{ $about->philosophy_title }}</small>
-                </div>
-
-                <div class="row g-3 gsap-stagger">
-                    <div class="col-md-4 gsap-stagger-child">
-                        <div class="mini-card">
-                            <div class="mini-card-icon"><i class="bi bi-eye-fill"></i></div>
-                            <h6 class="fw-bold mb-2" style="font-size: 0.88rem; color: var(--hvrf-navy);">{{ $about->vision_title }}</h6>
-                            <p class="small mb-0" style="color: var(--hvrf-gray); line-height: 1.65;">{{ $about->vision_body }}</p>
-                            <i class="bi bi-eye-fill card-watermark" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4 gsap-stagger-child">
-                        <div class="mini-card">
-                            <div class="mini-card-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
-                            <h6 class="fw-bold mb-2" style="font-size: 0.88rem; color: var(--hvrf-navy);">{{ $about->mission_title }}</h6>
-                            <p class="small mb-0" style="color: var(--hvrf-gray); line-height: 1.65;">{{ $about->mission_body }}</p>
-                            <i class="bi bi-rocket-takeoff-fill card-watermark" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4 gsap-stagger-child">
-                        <div class="mini-card">
-                            <div class="mini-card-icon"><i class="bi bi-hourglass-split"></i></div>
-                            <h6 class="fw-bold mb-2" style="font-size: 0.88rem; color: var(--hvrf-navy);">Why Now</h6>
-                            <p class="small mb-0" style="color: var(--hvrf-gray); line-height: 1.65;">The window to shape a human-centered future is narrow. The choices made today define the next century.</p>
-                            <i class="bi bi-hourglass-split card-watermark" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            </div>
-
-            <div class="col-lg-5 d-flex justify-content-center gsap-reveal" data-dir="right" data-delay="0.2">
-                <div class="about-img-frame">
-                    <div class="about-img-ring">
-                        <img src="/images/logo.jpeg" alt="HVRF Foundation">
-                    </div>
-                    <div class="about-float-badge">
-                        <div style="color: var(--hvrf-gold); font-size: 1.9rem; font-weight: 800; font-family: 'Playfair Display', serif; line-height: 1;">5</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 0.72rem; margin-top: 2px;">Focus Areas</div>
-                    </div>
-                    {{-- Decorative ring --}}
-                    <div style="position:absolute; inset:-20px; border-radius:50%; border: 1px dashed rgba(78,205,196,0.15); pointer-events:none;"></div>
-                </div>
-            </div>
+        {{-- Header --}}
+        <div class="text-center mb-5 gsap-reveal" data-dir="up">
+            <span class="section-label">Who We Are</span>
+            <h2 class="section-title mt-2">About the Foundation</h2>
         </div>
+
+        @if($about)
+        {{-- 4 Wise-style cards --}}
+        <div class="row g-4 gsap-stagger">
+
+            {{-- Card 1: Philosophy — dark navy --}}
+            <div class="col-lg-3 col-md-6 gsap-stagger-child">
+                <div class="about-card about-card--dark h-100">
+                    <span class="about-card-label">Philosophy</span>
+                    <div class="about-card-quote">&ldquo;</div>
+                    <p class="about-card-body" style="font-style:italic;">"{{ $about->philosophy_body }}"</p>
+                    <small class="about-card-attr">— {{ $about->philosophy_title }}</small>
+                </div>
+            </div>
+
+            {{-- Card 2: Vision — teal tint --}}
+            <div class="col-lg-3 col-md-6 gsap-stagger-child">
+                <div class="about-card about-card--teal h-100">
+                    <span class="about-card-label">Vision</span>
+                    <div class="about-card-icon"><i class="bi bi-eye-fill"></i></div>
+                    <h3 class="about-card-title">{{ $about->vision_title }}</h3>
+                    <p class="about-card-body">{{ $about->vision_body }}</p>
+                </div>
+            </div>
+
+            {{-- Card 3: Mission — white --}}
+            <div class="col-lg-3 col-md-6 gsap-stagger-child">
+                <div class="about-card about-card--white h-100">
+                    <span class="about-card-label">Mission</span>
+                    <div class="about-card-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+                    <h3 class="about-card-title">{{ $about->mission_title }}</h3>
+                    <p class="about-card-body">{{ $about->mission_body }}</p>
+                </div>
+            </div>
+
+            {{-- Card 4: Why Now — gold tint --}}
+            <div class="col-lg-3 col-md-6 gsap-stagger-child">
+                <div class="about-card about-card--gold h-100">
+                    <span class="about-card-label">Why Now</span>
+                    <div class="about-card-icon"><i class="bi bi-hourglass-split"></i></div>
+                    <h3 class="about-card-title">The Urgency</h3>
+                    <p class="about-card-body">The window to shape a human-centered future is narrow. The choices made today define the next century.</p>
+                </div>
+            </div>
+
+        </div>
+        @endif
+
     </div>
 </section>
 
