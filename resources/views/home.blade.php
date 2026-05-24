@@ -70,21 +70,22 @@
                 @endif
 
                 {{-- Stats --}}
-                @if($stats->count())
                 <div class="hero-stats-bar d-flex justify-content-center align-items-center gap-4 flex-wrap gsap-hero-stats">
-                    @foreach($stats->take(4) as $i => $stat)
-                        @if($i > 0)<div class="stat-sep d-none d-sm-block"></div>@endif
-                        <div class="stat-item">
-                            <span class="stat-value"
-                                  data-count="{{ preg_replace('/[^0-9.]/', '', $stat->value) }}"
-                                  data-suffix="{{ preg_replace('/[0-9.,]/', '', $stat->value) }}">
-                                {{ $stat->value }}
-                            </span>
-                            <span class="stat-label">{{ $stat->label }}</span>
-                        </div>
-                    @endforeach
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="5000" data-suffix="+">5,000+</span>
+                        <span class="stat-label">First Year Participants Target</span>
+                    </div>
+                    <div class="stat-sep d-none d-sm-block"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="100000" data-suffix="+">100,000+</span>
+                        <span class="stat-label">Users by Year 2 Goal</span>
+                    </div>
+                    <div class="stat-sep d-none d-sm-block"></div>
+                    <div class="stat-item">
+                        <span class="stat-value" data-count="5" data-suffix="">5</span>
+                        <span class="stat-label">Core Pillars of Focus</span>
+                    </div>
                 </div>
-                @endif
             </div>
         </div>
     </div>
