@@ -100,6 +100,244 @@
 </section>
 
 {{-- ═══════════════════════════════════════════
+     HOW HVRF OPERATES — ECOSYSTEM WHEEL
+═══════════════════════════════════════════ --}}
+<section id="hvrf-operates" style="padding:6rem 0 5rem; background:var(--hvrf-navy); position:relative; overflow:hidden;">
+
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 110% 60% at 50% -5%, rgba(32,178,170,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+
+    <div class="container" style="position:relative;z-index:1;">
+
+        {{-- Header --}}
+        <div class="text-center mb-5 gsap-reveal" data-dir="up">
+            <span class="section-label">Our Model</span>
+            <h2 class="section-title" style="color:#fff; margin-top:.5rem;">How HVRF Operates</h2>
+            <p class="section-subtitle" style="color:rgba(255,255,255,0.55); max-width:560px; margin:.75rem auto 0;">
+                A coordinated ecosystem bridging global stakeholders to protect and amplify human value in the age of AI.
+            </p>
+        </div>
+
+        {{-- Ecosystem Wheel --}}
+        <div id="ecoWrap" style="position:relative; max-width:560px; width:100%; margin:0 auto 3.5rem; aspect-ratio:1/1;">
+            <canvas id="ecoCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+            <div id="ecoLbls" style="position:absolute;inset:0;pointer-events:none;"></div>
+        </div>
+
+        {{-- Flow Chain --}}
+        <div class="text-center">
+            <p style="font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Value Flow</p>
+            <div class="eco-flow-row">
+                <div class="eco-fn">Funding</div>
+                <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="eco-fn">Research</div>
+                <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="eco-fn">Communities</div>
+                <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="eco-fn">Human Impact</div>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+    .eco-flow-row {
+        display: inline-flex;
+        align-items: center;
+        gap: .35rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .eco-fn {
+        font-size: .68rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgb(32,178,170);
+        border: 1px solid rgba(32,178,170,.32);
+        border-radius: 2rem;
+        padding: .5rem 1.1rem;
+        white-space: nowrap;
+    }
+    .eco-fc {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0 4px;
+    }
+    .eco-fc span {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(32,178,170,.75);
+        opacity: 0;
+        animation: ecoDot 1.6s ease-in-out infinite;
+    }
+    .eco-fc span:nth-child(1){ animation-delay: 0s; }
+    .eco-fc span:nth-child(2){ animation-delay: .18s; }
+    .eco-fc span:nth-child(3){ animation-delay: .36s; }
+    .eco-fc span:nth-child(4){ animation-delay: .54s; }
+    .eco-fc span:nth-child(5){ animation-delay: .72s; }
+    @keyframes ecoDot {
+        0%,100%{ opacity:0; transform:scale(.5); }
+        50%    { opacity:1; transform:scale(1.1); }
+    }
+    </style>
+
+    <script>
+    (function () {
+        var canvas = document.getElementById('ecoCanvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+
+        var SZ = 560;
+        canvas.width = canvas.height = SZ;
+
+        var cx = SZ / 2, cy = SZ / 2;
+        var ORBIT = 200;   /* orbit radius for outer nodes */
+        var CR    = 72;    /* center circle radius         */
+        var NR    = 40;    /* outer node radius            */
+        var T     = '32,178,170';   /* teal */
+
+        var NODE_DEFS = [
+            'Governments',
+            'Healthcare\nSystems',
+            'Universities',
+            'Communities',
+            'AI\nCompanies',
+            'Foundations',
+            'Volunteers',
+        ];
+
+        /* compute node positions */
+        var nodes = NODE_DEFS.map(function (lbl, i) {
+            var a = (i / NODE_DEFS.length) * Math.PI * 2 - Math.PI / 2;
+            return {
+                lbl  : lbl,
+                x    : cx + ORBIT * Math.cos(a),
+                y    : cy + ORBIT * Math.sin(a),
+                ph   : i * 0.85,
+            };
+        });
+
+        /* ── HTML labels ── */
+        var lblDiv = document.getElementById('ecoLbls');
+        nodes.forEach(function (n) {
+            var el = document.createElement('div');
+            el.style.cssText = 'position:absolute;transform:translate(-50%,-50%);text-align:center;width:76px;';
+            el.style.left = (n.x / SZ * 100).toFixed(2) + '%';
+            el.style.top  = (n.y / SZ * 100).toFixed(2) + '%';
+            el.innerHTML  = n.lbl.split('\n').map(function (p) {
+                return '<span style="display:block;font-size:.56rem;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.88);text-transform:uppercase;line-height:1.45;">' + p + '</span>';
+            }).join('');
+            lblDiv.appendChild(el);
+        });
+
+        /* center label */
+        var cEl = document.createElement('div');
+        cEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);text-align:center;width:110px;';
+        cEl.style.top = ((cy + 28) / SZ * 100).toFixed(2) + '%';
+        cEl.innerHTML = '<span style="font-size:.52rem;font-weight:700;letter-spacing:.1em;color:rgba(32,178,170,.88);text-transform:uppercase;line-height:1.6;">HVRF<br>Foundation Core</span>';
+        lblDiv.appendChild(cEl);
+
+        /* ── white logo ── */
+        var logoReady = false, logoImg = null;
+        var raw = new Image();
+        raw.crossOrigin = 'anonymous';
+        raw.onload = function () {
+            var tmp = document.createElement('canvas');
+            tmp.width = raw.naturalWidth; tmp.height = raw.naturalHeight;
+            var tc = tmp.getContext('2d');
+            tc.drawImage(raw, 0, 0);
+            tc.globalCompositeOperation = 'source-in';
+            tc.fillStyle = '#fff';
+            tc.fillRect(0, 0, tmp.width, tmp.height);
+            logoImg = tmp;
+            logoReady = true;
+        };
+        raw.src = '/images/logo-hvrf.png';
+
+        /* ── animation loop ── */
+        function tick(ts) {
+            ctx.clearRect(0, 0, SZ, SZ);
+
+            var dash = (ts * 0.022) % 16;
+
+            /* orbit glow ring */
+            ctx.beginPath();
+            ctx.arc(cx, cy, ORBIT, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(' + T + ',.07)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            /* connection lines + traveling dots */
+            nodes.forEach(function (n, i) {
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(n.x, n.y);
+                ctx.strokeStyle = 'rgba(' + T + ',.20)';
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([5, 9]);
+                ctx.lineDashOffset = -(dash + i * 2.3);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                var t = ((ts * 0.00032 + n.ph) % 1 + 1) % 1;
+                var px = cx + (n.x - cx) * t;
+                var py = cy + (n.y - cy) * t;
+                var pulse = 0.5 + 0.5 * Math.sin(ts * 0.004 + n.ph);
+                ctx.beginPath();
+                ctx.arc(px, py, 2.5 + pulse * 1, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + T + ',' + (0.6 + pulse * 0.4) + ')';
+                ctx.fill();
+            });
+
+            /* outer node circles */
+            nodes.forEach(function (n) {
+                var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, NR + 16);
+                g.addColorStop(0, 'rgba(' + T + ',.16)');
+                g.addColorStop(1, 'transparent');
+                ctx.beginPath(); ctx.arc(n.x, n.y, NR + 16, 0, Math.PI * 2);
+                ctx.fillStyle = g; ctx.fill();
+
+                ctx.beginPath(); ctx.arc(n.x, n.y, NR, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(8,22,42,.93)'; ctx.fill();
+                ctx.strokeStyle = 'rgba(' + T + ',.5)';
+                ctx.lineWidth = 1.4; ctx.stroke();
+            });
+
+            /* center glow */
+            var cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, CR + 36);
+            cg.addColorStop(0, 'rgba(' + T + ',.25)');
+            cg.addColorStop(1, 'transparent');
+            ctx.beginPath(); ctx.arc(cx, cy, CR + 36, 0, Math.PI * 2);
+            ctx.fillStyle = cg; ctx.fill();
+
+            /* center circle */
+            ctx.beginPath(); ctx.arc(cx, cy, CR, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(6,18,36,.97)'; ctx.fill();
+            ctx.strokeStyle = 'rgba(' + T + ',.72)';
+            ctx.lineWidth = 2; ctx.stroke();
+
+            /* center inner ring */
+            ctx.beginPath(); ctx.arc(cx, cy, CR + 9, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(' + T + ',.15)';
+            ctx.lineWidth = 1; ctx.stroke();
+
+            /* logo */
+            if (logoReady && logoImg) {
+                var ls = 56;
+                ctx.drawImage(logoImg, cx - ls / 2, cy - ls / 2 - 10, ls, ls);
+            }
+
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    })();
+    </script>
+</section>
+
+{{-- ═══════════════════════════════════════════
      VISION SLIDER
 ═══════════════════════════════════════════ --}}
 <section class="vision-section gsap-reveal" data-dir="up">
