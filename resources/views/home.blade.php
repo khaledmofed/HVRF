@@ -32,7 +32,7 @@
     <div class="hero-ring hero-ring-2" aria-hidden="true" style="z-index:1;"></div>
 
     {{-- Watermark --}}
-    <img src="/images/logo.jpeg" alt="" class="hero-watermark" aria-hidden="true" style="z-index:1;">
+    <img src="/images/logo-hvrf.png" alt="" class="hero-watermark" aria-hidden="true" style="z-index:1;">
 
     {{-- Content --}}
     <div class="container position-relative" style="z-index:3;">

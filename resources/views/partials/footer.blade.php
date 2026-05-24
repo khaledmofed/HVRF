@@ -7,8 +7,8 @@
             {{-- Brand --}}
             <div class="col-lg-4">
                 <div class="d-flex align-items-center gap-2 mb-3">
-                    <img src="/images/logo.jpeg" alt="HVRF"
-                         style="height: 42px; width: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(78,205,196,0.3);">
+                    <img src="/images/logo-hvrf.png" alt="HVRF"
+                         style="height: 42px; width: 42px; border-radius: 50%; object-fit: cover; ">
                     <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; font-weight: 700;">HVRF</span>
                 </div>
                 <p class="small mb-4" style="line-height: 1.8; color: rgba(255,255,255,0.5); max-width: 300px;">

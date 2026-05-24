@@ -566,7 +566,7 @@
 <aside class="admin-sidebar" id="adminSidebar">
 
     <a class="sidebar-brand" href="{{ route('admin.dashboard') }}">
-        <img src="/images/logo.jpeg" alt="HVRF" class="sidebar-brand-logo">
+        <img src="/images/logo-hvrf.png" alt="HVRF" class="sidebar-brand-logo">
         <div>
             <div class="sidebar-brand-name">HVRF Admin</div>
             <div class="sidebar-brand-sub">Human Value Reserve Foundation</div>
