@@ -897,106 +897,322 @@
    HERO — PREMIUM ANIMATIONS
 ═══════════════════════════════════════════════════════════ */
 
-/* ── 1. CANVAS CONSTELLATION ────────────────────────────── */
+/* ── 1. CANVAS — AI ⟷ HUMANITY (simultaneous, left/right) ── */
 (function () {
     var canvas = document.getElementById('heroCanvas');
     if (!canvas) return;
     var ctx = canvas.getContext('2d');
-    var W, H, pts = [], RAF;
-    var TEAL  = [78, 205, 196];
-    var GOLD  = [201, 169, 110];
-    var CONN  = 155;   // max connection distance
-    var COUNT = 0;
+    var W, H, RAF = null;
 
+    var TEAL = '78,205,196';
+    var GOLD  = '201,169,110';
+
+    /*
+     * Layout: LEFT zone (0–33%) = human circles (gold/warm)
+     *         RIGHT zone (63%–100%) = AI network (teal/cool)
+     *         CENTER (33–63%) = clear for hero text
+     *         BRIDGES = dashed lines + data packets crossing center
+     */
+    var L = 0.33;   /* left zone right edge  */
+    var R = 0.63;   /* right zone left edge  */
+
+    var humanCircles = [], aiNodes = [], packets = [], pulses = [], labels = [];
+    var CITY = null;
+
+    var H_LABELS = ['Family','Elderly Care','Mentorship','Creativity','Communities',
+                    'Connection','Dignity','Purpose','Belonging'];
+    var A_LABELS = ['agent_01 → active','sync: 98%','model: online','inference: ok',
+                    'processing...','pattern: found','data: streaming','system: ready'];
+
+    /* ── setup ── */
     function resize() {
         W = canvas.width  = canvas.parentElement.offsetWidth;
         H = canvas.height = canvas.parentElement.offsetHeight;
-        COUNT = Math.min(Math.floor(W * H / 9500), 100);
+        CITY = null;
+        build();
     }
 
-    function mkPt() {
-        var col = Math.random() > 0.85 ? GOLD : TEAL;
-        return {
-            x:  Math.random() * W,
-            y:  Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.32,
-            vy: (Math.random() - 0.5) * 0.32,
-            r:  Math.random() * 1.6 + 0.3,
-            a:  Math.random() * 0.5 + 0.08,
-            col: col
-        };
-    }
+    function build() {
+        humanCircles = []; aiNodes = []; packets = []; pulses = []; labels = [];
 
-    function init() {
-        resize();
-        pts = [];
-        for (var i = 0; i < COUNT; i++) pts.push(mkPt());
-    }
-
-    function tick() {
-        ctx.clearRect(0, 0, W, H);
-
-        /* move + draw dots */
-        for (var i = 0; i < pts.length; i++) {
-            var p = pts[i];
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < -4)  p.x = W + 4;
-            if (p.x > W+4) p.x = -4;
-            if (p.y < -4)  p.y = H + 4;
-            if (p.y > H+4) p.y = -4;
-
-            /* glow */
-            var grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-            grd.addColorStop(0, 'rgba(' + p.col + ',' + p.a + ')');
-            grd.addColorStop(1, 'rgba(' + p.col + ',0)');
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-            ctx.fillStyle = grd;
-            ctx.fill();
-
-            /* dot core */
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(' + p.col + ',' + (p.a * 1.8) + ')';
-            ctx.fill();
+        /* Human circles — left zone */
+        var hCount = Math.max(4, Math.min(7, Math.floor(H / 120)));
+        for (var i = 0; i < hCount; i++) {
+            humanCircles.push({
+                x:  W * 0.04 + Math.random() * W * (L - 0.06),
+                y:  H * 0.08 + Math.random() * H * 0.84,
+                vx: (Math.random() - 0.5) * 0.13,
+                vy: (Math.random() - 0.5) * 0.13,
+                r:  Math.random() * 26 + 18,
+                col: Math.random() < 0.65 ? GOLD : TEAL,
+                phase: Math.random() * Math.PI * 2,
+                spd:   0.55 + Math.random() * 0.75,
+                bright: 1,
+                lt: Math.floor(Math.random() * 350),
+                pt: Math.floor(Math.random() * 420)
+            });
         }
 
-        /* draw connecting lines */
-        for (var i = 0; i < pts.length - 1; i++) {
-            for (var j = i + 1; j < pts.length; j++) {
-                var dx = pts[i].x - pts[j].x;
-                var dy = pts[i].y - pts[j].y;
-                var d  = Math.sqrt(dx * dx + dy * dy);
-                if (d < CONN) {
-                    var alpha = (1 - d / CONN) * 0.14;
-                    ctx.beginPath();
-                    ctx.moveTo(pts[i].x, pts[i].y);
-                    ctx.lineTo(pts[j].x, pts[j].y);
-                    ctx.strokeStyle = 'rgba(78,205,196,' + alpha + ')';
-                    ctx.lineWidth   = 0.55;
-                    ctx.stroke();
+        /* AI nodes — right zone */
+        var aCount = Math.min(Math.floor(W * H / 10000), 48);
+        for (var i = 0; i < aCount; i++) {
+            var hub = Math.random() < 0.20;
+            aiNodes.push({
+                x:  W * R + Math.random() * W * (1 - R - 0.02),
+                y:  Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.20,
+                vy: (Math.random() - 0.5) * 0.20,
+                r:  hub ? Math.random() * 1.8 + 2.2 : Math.random() * 1.0 + 0.5,
+                col: Math.random() < 0.82 ? TEAL : GOLD,
+                hub: hub,
+                pt: Math.floor(Math.random() * 220),
+                lt: Math.floor(Math.random() * 300)
+            });
+        }
+    }
+
+    /* ── City skyline in right zone (pre-computed, no per-frame random) ── */
+    function buildCity() {
+        CITY = [];
+        var zoneX = W * R, zoneW = W * (1 - R);
+        var cols = 9;
+        var cw = zoneW / cols;
+        for (var c = 0; c < cols; c++) {
+            var bh = H * (0.09 + ((c * 5 + 3) % 9) * 0.016);
+            var b = {
+                x: zoneX + c * cw + cw * 0.08,
+                y: H - bh,
+                w: cw * 0.84, h: bh, lit: []
+            };
+            for (var wr = 0; wr < 5; wr++)
+                for (var wc = 0; wc < 3; wc++)
+                    if (Math.random() < 0.35) b.lit.push({ r: wr, c: wc });
+            CITY.push(b);
+        }
+    }
+
+    function drawCity() {
+        if (!CITY) buildCity();
+        for (var i = 0; i < CITY.length; i++) {
+            var b = CITY[i];
+            /* building face */
+            ctx.fillStyle   = 'rgba(' + TEAL + ',0.055)';
+            ctx.strokeStyle = 'rgba(' + TEAL + ',0.13)';
+            ctx.lineWidth   = 0.5;
+            ctx.beginPath(); ctx.rect(b.x, b.y, b.w, b.h);
+            ctx.fill(); ctx.stroke();
+            /* lit windows */
+            for (var wi = 0; wi < b.lit.length; wi++) {
+                ctx.fillStyle = 'rgba(' + GOLD + ',0.28)';
+                ctx.fillRect(
+                    b.x + b.w * 0.10 + b.lit[wi].c * b.w * 0.28,
+                    b.y + b.h * 0.08 + b.lit[wi].r * b.h * 0.17,
+                    b.w * 0.13, b.h * 0.09
+                );
+            }
+        }
+    }
+
+    function drawGlow(x, y, r, col, alpha) {
+        alpha = Math.max(0, Math.min(1, alpha));
+        var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0,    'rgba(' + col + ',' + alpha + ')');
+        g.addColorStop(0.45, 'rgba(' + col + ',' + (alpha * 0.48) + ')');
+        g.addColorStop(1,    'rgba(' + col + ',0)');
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = g; ctx.fill();
+    }
+
+    /* ── main loop ── */
+    function tick(ts) {
+        RAF = requestAnimationFrame(tick);
+        ctx.clearRect(0, 0, W, H);
+
+        /* Subtle full-width scan beam */
+        var sy = ((ts / 5500) * H) % H;
+        var sg = ctx.createLinearGradient(0, sy - 55, 0, sy + 55);
+        sg.addColorStop(0,   'rgba(' + TEAL + ',0)');
+        sg.addColorStop(0.5, 'rgba(' + TEAL + ',0.011)');
+        sg.addColorStop(1,   'rgba(' + TEAL + ',0)');
+        ctx.fillStyle = sg; ctx.fillRect(0, sy - 55, W, 110);
+
+        /* ── City skyline (right zone background) ── */
+        drawCity();
+
+        /* ── AI node connections (right zone) ── */
+        var CDIST = Math.min(W * 0.20, 175);
+        for (var i = 0; i < aiNodes.length - 1; i++) {
+            for (var j = i + 1; j < aiNodes.length; j++) {
+                var a = aiNodes[i], b = aiNodes[j];
+                var dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx*dx + dy*dy);
+                if (d < CDIST) {
+                    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+                    ctx.strokeStyle = 'rgba(' + TEAL + ',' + ((1 - d/CDIST) * 0.12) + ')';
+                    ctx.lineWidth = 0.55; ctx.stroke();
+                    if (Math.random() < 0.00020 && packets.length < 55) {
+                        packets.push({ ax: a.x, ay: a.y, bx: b.x, by: b.y,
+                            t: 0, spd: 0.006 + Math.random() * 0.007,
+                            col: Math.random() < 0.7 ? TEAL : GOLD, bridge: false, tgt: null });
+                    }
                 }
             }
         }
 
-        RAF = requestAnimationFrame(tick);
+        /* ── Bridge connections (AI hub → human circle, across center) ── */
+        var hubs = [];
+        for (var i = 0; i < aiNodes.length; i++) { if (aiNodes[i].hub) hubs.push(aiNodes[i]); }
+        hubs.sort(function(a, b) { return a.x - b.x; });
+        var bridgeCount = Math.min(3, hubs.length, humanCircles.length);
+        for (var bi = 0; bi < bridgeCount; bi++) {
+            var hub = hubs[bi];
+            /* find closest human circle vertically */
+            var best = humanCircles[0], bestD = 99999;
+            for (var ci = 0; ci < humanCircles.length; ci++) {
+                var dd = Math.abs(hub.y - humanCircles[ci].y);
+                if (dd < bestD) { bestD = dd; best = humanCircles[ci]; }
+            }
+            /* dashed bridge line */
+            ctx.beginPath(); ctx.moveTo(hub.x, hub.y); ctx.lineTo(best.x, best.y);
+            ctx.strokeStyle = 'rgba(' + TEAL + ',0.048)';
+            ctx.setLineDash([5, 7]); ctx.lineWidth = 0.65; ctx.stroke();
+            ctx.setLineDash([]);
+
+            /* bridge packet (both directions) */
+            if (Math.random() < 0.0014 && packets.length < 60) {
+                var toHuman = Math.random() < 0.5;
+                packets.push({
+                    ax: toHuman ? hub.x : best.x, ay: toHuman ? hub.y : best.y,
+                    bx: toHuman ? best.x : hub.x, by: toHuman ? best.y : hub.y,
+                    t: 0, spd: 0.003 + Math.random() * 0.004,
+                    col: toHuman ? TEAL : GOLD,
+                    bridge: true, tgt: toHuman ? best : null
+                });
+            }
+        }
+
+        /* ── Pulse rings ── */
+        for (var i = pulses.length - 1; i >= 0; i--) {
+            var pu = pulses[i]; pu.r += 0.88; pu.a *= 0.960;
+            if (pu.a < 0.006) { pulses.splice(i, 1); continue; }
+            ctx.beginPath(); ctx.arc(pu.x, pu.y, pu.r, 0, Math.PI*2);
+            ctx.strokeStyle = 'rgba(' + pu.col + ',' + pu.a + ')';
+            ctx.lineWidth = 0.8; ctx.stroke();
+        }
+
+        /* ── Data packets ── */
+        for (var i = packets.length - 1; i >= 0; i--) {
+            var pk = packets[i]; pk.t += pk.spd;
+            if (pk.t >= 1) {
+                if (pk.bridge && pk.tgt) pk.tgt.bright = Math.min(pk.tgt.bright + 0.45, 1.85);
+                packets.splice(i, 1); continue;
+            }
+            var px = pk.ax + (pk.bx - pk.ax)*pk.t, py = pk.ay + (pk.by - pk.ay)*pk.t;
+            var pa = Math.sin(pk.t * Math.PI) * (pk.bridge ? 0.88 : 0.90);
+            ctx.beginPath(); ctx.arc(px, py, pk.bridge ? 2.2 : 1.7, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(' + pk.col + ',' + pa + ')'; ctx.fill();
+            var t2 = Math.max(pk.t - 0.07, 0);
+            ctx.beginPath(); ctx.arc(pk.ax+(pk.bx-pk.ax)*t2, pk.ay+(pk.by-pk.ay)*t2, 0.8, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(' + pk.col + ',' + (pa * 0.30) + ')'; ctx.fill();
+        }
+
+        /* ── AI nodes ── */
+        for (var i = 0; i < aiNodes.length; i++) {
+            var n = aiNodes[i];
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < W*R+4)  { n.x = W*R+4;  n.vx =  Math.abs(n.vx); }
+            if (n.x > W-6)    { n.x = W-6;    n.vx = -Math.abs(n.vx); }
+            if (n.y < 6)      { n.y = 6;      n.vy =  Math.abs(n.vy); }
+            if (n.y > H-6)    { n.y = H-6;    n.vy = -Math.abs(n.vy); }
+            if (n.hub) {
+                n.pt--;
+                if (n.pt <= 0) {
+                    pulses.push({ x: n.x, y: n.y, r: n.r+1, a: 0.5, col: n.col });
+                    n.pt = 160 + Math.floor(Math.random() * 240);
+                }
+                n.lt--;
+                if (n.lt <= 0 && labels.length < 7) {
+                    labels.push({ x: n.x, y: n.y,
+                        text: A_LABELS[Math.floor(Math.random() * A_LABELS.length)],
+                        col: TEAL, life: 1, dec: 0.003 + Math.random() * 0.003 });
+                    n.lt = 260 + Math.floor(Math.random() * 380);
+                }
+                var gn = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*5.5);
+                gn.addColorStop(0, 'rgba(' + n.col + ',0.30)');
+                gn.addColorStop(1, 'rgba(' + n.col + ',0)');
+                ctx.beginPath(); ctx.arc(n.x, n.y, n.r*5.5, 0, Math.PI*2);
+                ctx.fillStyle = gn; ctx.fill();
+            }
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(' + n.col + ',0.58)'; ctx.fill();
+        }
+
+        /* ── Human circles (left zone) ── */
+        for (var i = 0; i < humanCircles.length; i++) {
+            var hc = humanCircles[i];
+            hc.x += hc.vx; hc.y += hc.vy;
+            if (hc.x < hc.r+6)          { hc.x = hc.r+6;          hc.vx =  Math.abs(hc.vx); }
+            if (hc.x > W*L - hc.r)      { hc.x = W*L - hc.r;      hc.vx = -Math.abs(hc.vx); }
+            if (hc.y < hc.r+6)          { hc.y = hc.r+6;          hc.vy =  Math.abs(hc.vy); }
+            if (hc.y > H - hc.r - 6)    { hc.y = H - hc.r - 6;    hc.vy = -Math.abs(hc.vy); }
+
+            hc.bright = Math.max(1, hc.bright - 0.009);
+
+            hc.pt--;
+            if (hc.pt <= 0) {
+                pulses.push({ x: hc.x, y: hc.y, r: hc.r+2, a: 0.42, col: hc.col });
+                hc.pt = 300 + Math.floor(Math.random() * 380);
+            }
+            hc.lt--;
+            if (hc.lt <= 0 && labels.length < 7) {
+                labels.push({ x: hc.x + hc.r + 5, y: hc.y,
+                    text: H_LABELS[Math.floor(Math.random() * H_LABELS.length)],
+                    col: GOLD, life: 1, dec: 0.0022 + Math.random() * 0.003 });
+                hc.lt = 330 + Math.floor(Math.random() * 500);
+            }
+
+            var br = 1 + Math.sin(ts/1000 * hc.spd + hc.phase) * 0.058;
+            var rr = hc.r * br;
+            var aa = 0.52 * hc.bright;
+            drawGlow(hc.x, hc.y, rr * 2.7, hc.col, aa * 0.30);
+            drawGlow(hc.x, hc.y, rr,       hc.col, aa);
+            ctx.beginPath(); ctx.arc(hc.x, hc.y, rr*0.28, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(' + hc.col + ',' + Math.min(aa*1.2, 1) + ')'; ctx.fill();
+        }
+
+        /* ── Floating labels ── */
+        ctx.save();
+        for (var i = labels.length - 1; i >= 0; i--) {
+            var lb = labels[i]; lb.life -= lb.dec;
+            if (lb.life <= 0) { labels.splice(i, 1); continue; }
+            var fi = Math.min((1 - lb.life) / 0.12, 1), fo = Math.min(lb.life / 0.28, 1);
+            var fa = Math.min(fi, fo);
+            if (lb.col === GOLD) {
+                ctx.font = 'italic ' + (W < 600 ? '11px' : '13px') + ' Georgia, serif';
+                ctx.fillStyle = 'rgba(201,169,110,' + (fa * 0.62) + ')';
+            } else {
+                ctx.font = '8px "Courier New", monospace';
+                ctx.fillStyle = 'rgba(78,205,196,' + (fa * 0.56) + ')';
+            }
+            ctx.fillText(lb.text, lb.x, lb.y - 6);
+        }
+        ctx.restore();
     }
 
-    init(); tick();
+    resize();
+    requestAnimationFrame(tick);
 
     window.addEventListener('resize', function () {
-        cancelAnimationFrame(RAF);
-        init(); tick();
+        cancelAnimationFrame(RAF); RAF = null;
+        resize(); requestAnimationFrame(tick);
     });
 
-    /* pause canvas when scrolled off hero */
     ScrollTrigger.create({
         trigger: '#home',
         start: 'top top',
         end: 'bottom top',
-        onLeave:  function () { cancelAnimationFrame(RAF); },
-        onEnter:  function () { tick(); },
-        onEnterBack: function () { tick(); }
+        onLeave:     function () { cancelAnimationFrame(RAF); RAF = null; },
+        onEnter:     function () { if (!RAF) requestAnimationFrame(tick); },
+        onEnterBack: function () { if (!RAF) requestAnimationFrame(tick); }
     });
 })();
 
