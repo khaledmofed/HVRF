@@ -883,8 +883,8 @@
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
             <span class="section-label mb-3 d-flex justify-content-center">Strategic Plan</span>
-            <h2 class="section-title mb-3">3-Year Strategic Roadmap</h2>
-            <p class="section-subtitle">A phased plan to build the infrastructure for sustained human value.</p>
+            <h2 class="section-title mb-3">10-Year Strategic Roadmap</h2>
+            <p class="section-subtitle">Three phases to build human capability, scale ecosystems, and establish global institutions of human value.</p>
         </div>
 
         <div class="row g-5">
@@ -893,8 +893,8 @@
                 <div class="roadmap-section-head">
                     <div class="roadmap-section-icon"><i class="bi bi-people-fill"></i></div>
                     <div>
-                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Human Connection</h5>
-                        <span class="small" style="color: var(--hvrf-gray);">Building belonging at scale</span>
+                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Phase 1: Foundation <span style="color:var(--hvrf-gray); font-weight:400;">(Years 1–3)</span></h5>
+                        <span class="small" style="color: var(--hvrf-gray);">Build human capability and community infrastructure</span>
                     </div>
                 </div>
                 <div class="roadmap-timeline">
@@ -931,8 +931,8 @@
                 <div class="roadmap-section-head">
                     <div class="roadmap-section-icon"><i class="bi bi-bullseye"></i></div>
                     <div>
-                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Human Purpose</h5>
-                        <span class="small" style="color: var(--hvrf-gray);">Creating meaningful contribution</span>
+                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Phase 2–3: Growth & Institution <span style="color:var(--hvrf-gray); font-weight:400;">(Years 4–10)</span></h5>
+                        <span class="small" style="color: var(--hvrf-gray);">Scale ecosystems, build global institutions of human value</span>
                     </div>
                 </div>
                 <div class="roadmap-timeline">
