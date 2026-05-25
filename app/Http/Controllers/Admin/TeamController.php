@@ -52,7 +52,7 @@ class TeamController extends Controller
     public function destroy(TeamMember $team)
     {
         if ($team->photo_url && !str_starts_with($team->photo_url, 'http')) {
-            Storage::disk('public')->delete($team->photo_url);
+            Storage::disk('r2')->delete($team->photo_url);
         }
         $team->delete();
         cache()->forget('team');
@@ -79,9 +79,9 @@ class TeamController extends Controller
 
         // Delete old file if it was a local upload
         if ($existing && !str_starts_with($existing, 'http')) {
-            Storage::disk('public')->delete($existing);
+            Storage::disk('r2')->delete($existing);
         }
 
-        return $request->file('photo')->store('team', 'public');
+        return $request->file('photo')->store('team', 'r2');
     }
 }

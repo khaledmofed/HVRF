@@ -992,7 +992,7 @@
                 <div class="team-card">
                     <div class="team-photo-wrap mx-auto">
                         @if($member->photo_url)
-                        <img src="{{ Str::startsWith($member->photo_url, 'http') ? $member->photo_url : asset('storage/' . $member->photo_url) }}"
+                        <img src="{{ Str::startsWith($member->photo_url, 'http') ? $member->photo_url : \Illuminate\Support\Facades\Storage::disk('r2')->url($member->photo_url) }}"
                              alt="{{ $member->name }}" class="team-photo">
                         @else
                         <div class="team-photo-placeholder">
