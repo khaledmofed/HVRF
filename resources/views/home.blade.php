@@ -1268,10 +1268,10 @@
         segments = []; junctions = []; pulses = [];
         var rng = makeRng(0xC1AC1D);  /* stable seed */
 
-        /* Chip — right side, vertically centred */
+        /* Chip — left side, vertically centred */
         var csz = Math.min(W * 0.105, 86, H * 0.175);
         chip = {
-            x: W * 0.765 - csz * 0.5,
+            x: W * 0.235 - csz * 0.5,
             y: H * 0.475 - csz * 0.5,
             s: csz
         };
@@ -1334,20 +1334,21 @@
             }
         });
 
-        /* ── Background scatter traces (left + far-right, avoid center) ── */
+        /* ── Background scatter traces (left-heavy, avoid center) ── */
         for (var k = 0; k < 22; k++) {
             var isGold = rng() < 0.14;
             var col    = isGold ? GOLD : TEAL;
             var alpha  = 0.05 + rng() * 0.07;
             var x1, y1, x2, y2;
-            if (rng() < 0.5) {
-                x1 = rng() * W * 0.36;
+            /* 75 % left side, 25 % far right */
+            if (rng() < 0.75) {
+                x1 = rng() * W * 0.42;
             } else {
-                x1 = W * 0.64 + rng() * W * 0.36;
+                x1 = W * 0.68 + rng() * W * 0.32;
             }
             y1 = rng() * H;
             if (rng() < 0.5) {
-                x2 = (x1 < W * 0.5 ? rng() * W * 0.36 : W * 0.64 + rng() * W * 0.36);
+                x2 = (x1 < W * 0.5 ? rng() * W * 0.42 : W * 0.68 + rng() * W * 0.32);
                 y2 = y1;
             } else {
                 x2 = x1;
@@ -1407,16 +1408,6 @@
         ctx.fillStyle = 'rgba(' + TEAL + ',' + (0.12 + pulse * 0.12) + ')'; ctx.fill();
         ctx.beginPath(); ctx.arc(mx, my, 3.2, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(' + TEAL + ',0.75)'; ctx.fill();
-
-        /* Labels */
-        var fs = Math.max(10, cs * 0.23);
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.font = 'bold ' + fs + 'px "Courier New",monospace';
-        ctx.fillStyle = 'rgba(' + TEAL + ',0.90)';
-        ctx.fillText('AI', mx, my + cs * 0.08);
-        ctx.font = Math.max(7, cs * 0.12) + 'px "Courier New",monospace';
-        ctx.fillStyle = 'rgba(' + TEAL + ',0.42)';
-        ctx.fillText('CORE', mx, my + cs * 0.30);
 
         /* Pin stubs */
         var pinN = 4, pinL = 5;
