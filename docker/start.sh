@@ -14,6 +14,9 @@ php /var/www/html/artisan migrate --force
 echo "Clearing application cache..."
 php /var/www/html/artisan cache:clear
 
+echo "Creating storage symlink..."
+php /var/www/html/artisan storage:link --force
+
 if [ "$RUN_SEEDER" = "true" ]; then
     echo "Running seeders..."
     php /var/www/html/artisan db:seed --force
