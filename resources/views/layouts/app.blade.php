@@ -993,13 +993,40 @@
             border-radius: 14px;
             padding: 1.5rem 1.75rem;
             border: 1px solid var(--hvrf-border);
-            transition: var(--transition);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                        box-shadow 0.35s ease, background 0.4s ease, border-color 0.35s ease;
             box-shadow: var(--shadow-sm);
+            position: relative; overflow: hidden;
         }
-        .roadmap-card:hover {
-            box-shadow: var(--shadow-md);
+        .roadmap-card::after {
+            content: ''; position: absolute; inset: 0;
+            opacity: 0; border-radius: inherit; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .roadmap-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .roadmap-card:hover::after { opacity: 1; }
+
+        /* Card color variants */
+        .roadmap-card--teal  {
+            background: rgba(78,205,196,0.06);
             border-color: rgba(78,205,196,0.2);
         }
+        .roadmap-card--teal::after  { background: linear-gradient(135deg, rgba(78,205,196,0.18) 0%, rgba(78,205,196,0.04) 100%); }
+        .roadmap-card--teal:hover   { border-color: rgba(78,205,196,0.45); background: rgba(78,205,196,0.06); }
+
+        .roadmap-card--white {
+            background: #fff;
+            border-color: rgba(0,0,0,0.07);
+        }
+        .roadmap-card--white::after { background: linear-gradient(135deg, rgba(78,205,196,0.08) 0%, transparent 100%); }
+        .roadmap-card--white:hover  { border-color: rgba(78,205,196,0.3); }
+
+        .roadmap-card--gold  {
+            background: rgba(201,169,110,0.07);
+            border-color: rgba(201,169,110,0.2);
+        }
+        .roadmap-card--gold::after  { background: linear-gradient(135deg, rgba(201,169,110,0.2) 0%, rgba(201,169,110,0.04) 100%); }
+        .roadmap-card--gold:hover   { border-color: rgba(201,169,110,0.45); background: rgba(201,169,110,0.07); }
         .roadmap-year-pill {
             display: inline-flex;
             align-items: center;

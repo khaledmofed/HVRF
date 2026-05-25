@@ -920,7 +920,8 @@
             <div class="row g-4">
                 @foreach($connectionRoadmap as $yearData)
                 <div class="col-lg-4 col-md-6">
-                    <div class="roadmap-card h-100">
+                    @php $rmColors = ['teal','white','gold']; @endphp
+                    <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
                         <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
                         <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
                         <p class="rm-col-label teal">Projects</p>
@@ -945,7 +946,8 @@
             <div class="row g-4">
                 @foreach($purposeRoadmap->filter(fn($y) => $y->year_number <= 6) as $yearData)
                 <div class="col-lg-4 col-md-6">
-                    <div class="roadmap-card h-100">
+                    @php $rmColors = ['teal','white','gold']; @endphp
+                    <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
                         <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
                         <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
                         <p class="rm-col-label teal">Projects</p>
@@ -970,7 +972,8 @@
             <div class="row g-4">
                 @foreach($purposeRoadmap->filter(fn($y) => $y->year_number >= 7) as $yearData)
                 <div class="col-lg-4 col-md-6">
-                    <div class="roadmap-card h-100">
+                    @php $rmColors = ['teal','white','gold']; @endphp
+                    <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
                         <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
                         <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
                         <p class="rm-col-label teal">Projects</p>
