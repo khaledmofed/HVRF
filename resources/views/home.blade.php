@@ -887,81 +887,99 @@
             <p class="section-subtitle">Three phases to build human capability, scale ecosystems, and establish global institutions of human value.</p>
         </div>
 
-        <div class="row g-5">
-            {{-- Connection Roadmap --}}
-            <div class="col-lg-6 gsap-reveal" data-dir="left" data-delay="0.05">
-                <div class="roadmap-section-head">
-                    <div class="roadmap-section-icon"><i class="bi bi-people-fill"></i></div>
-                    <div>
-                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Phase 1: Foundation <span style="color:var(--hvrf-gray); font-weight:400;">(Years 1–3)</span></h5>
-                        <span class="small" style="color: var(--hvrf-gray);">Build human capability and community infrastructure</span>
-                    </div>
-                </div>
-                <div class="roadmap-timeline">
-                    @foreach($connectionRoadmap as $yearData)
-                    <div class="roadmap-item">
-                        <div class="roadmap-card">
-                            <div class="roadmap-year-pill">
-                                <i class="bi bi-calendar3"></i>
-                                {{ $yearData->year_label }}
-                            </div>
-                            <h6 class="fw-bold mb-2" style="color: var(--hvrf-navy); font-size: 0.92rem;">{{ $yearData->goal }}</h6>
-                            <div class="row g-2 mt-1">
-                                <div class="col-sm-6">
-                                    <p class="small fw-semibold mb-1" style="color: var(--hvrf-teal); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Projects</p>
-                                    <ul class="roadmap-list">
-                                        @foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="small fw-semibold mb-1" style="color: var(--hvrf-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">KPIs</p>
-                                    <ul class="roadmap-list kpi-list">
-                                        @foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+        {{-- Phase Tab Buttons --}}
+        <div class="roadmap-tabs gsap-reveal" data-dir="up" data-delay="0.1">
+            <button class="roadmap-tab active" data-phase="1">
+                <span class="rm-tab-num">Phase 1</span>
+                <span class="rm-tab-name">Foundation</span>
+                <span class="rm-tab-years">Years 1–3</span>
+            </button>
+            <div class="rm-connector"></div>
+            <button class="roadmap-tab" data-phase="2">
+                <span class="rm-tab-num">Phase 2</span>
+                <span class="rm-tab-name">Growth</span>
+                <span class="rm-tab-years">Years 4–6</span>
+            </button>
+            <div class="rm-connector"></div>
+            <button class="roadmap-tab" data-phase="3">
+                <span class="rm-tab-num">Phase 3</span>
+                <span class="rm-tab-name">Institution</span>
+                <span class="rm-tab-years">Years 7–10</span>
+            </button>
+        </div>
+
+        {{-- Phase 1: Foundation --}}
+        <div class="roadmap-phase" id="roadmap-phase-1">
+            <div class="roadmap-phase-header">
+                <div class="roadmap-section-icon"><i class="bi bi-people-fill"></i></div>
+                <div>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Foundation: Human Capability & Community</h5>
+                    <span class="small" style="color:var(--hvrf-gray);">Human Enhancement (Wisdom) + Human Connection Systems</span>
                 </div>
             </div>
+            <div class="row g-4">
+                @foreach($connectionRoadmap as $yearData)
+                <div class="col-lg-4 col-md-6">
+                    <div class="roadmap-card h-100">
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal">Projects</p>
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
 
-            {{-- Purpose Roadmap --}}
-            <div class="col-lg-6 gsap-reveal" data-dir="right" data-delay="0.05">
-                <div class="roadmap-section-head">
-                    <div class="roadmap-section-icon"><i class="bi bi-bullseye"></i></div>
-                    <div>
-                        <h5 class="mb-0 fw-bold" style="font-size: 1rem; color: var(--hvrf-navy);">Phase 2–3: Growth & Institution <span style="color:var(--hvrf-gray); font-weight:400;">(Years 4–10)</span></h5>
-                        <span class="small" style="color: var(--hvrf-gray);">Scale ecosystems, build global institutions of human value</span>
+        {{-- Phase 2: Growth (years 4-6) --}}
+        <div class="roadmap-phase d-none" id="roadmap-phase-2">
+            <div class="roadmap-phase-header">
+                <div class="roadmap-section-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Growth: Creativity & Stewardship Ecosystems</h5>
+                    <span class="small" style="color:var(--hvrf-gray);">Human Creativity Economy + Human Purpose Infrastructure</span>
+                </div>
+            </div>
+            <div class="row g-4">
+                @foreach($purposeRoadmap->filter(fn($y) => $y->year_number <= 6) as $yearData)
+                <div class="col-lg-4 col-md-6">
+                    <div class="roadmap-card h-100">
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal">Projects</p>
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
                     </div>
                 </div>
-                <div class="roadmap-timeline">
-                    @foreach($purposeRoadmap as $yearData)
-                    <div class="roadmap-item">
-                        <div class="roadmap-card">
-                            <div class="roadmap-year-pill">
-                                <i class="bi bi-calendar3"></i>
-                                {{ $yearData->year_label }}
-                            </div>
-                            <h6 class="fw-bold mb-2" style="color: var(--hvrf-navy); font-size: 0.92rem;">{{ $yearData->goal }}</h6>
-                            <div class="row g-2 mt-1">
-                                <div class="col-sm-6">
-                                    <p class="small fw-semibold mb-1" style="color: var(--hvrf-teal); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Projects</p>
-                                    <ul class="roadmap-list">
-                                        @foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="small fw-semibold mb-1" style="color: var(--hvrf-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">KPIs</p>
-                                    <ul class="roadmap-list kpi-list">
-                                        @foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Phase 3: Institution (years 7-10) --}}
+        <div class="roadmap-phase d-none" id="roadmap-phase-3">
+            <div class="roadmap-phase-header">
+                <div class="roadmap-section-icon"><i class="bi bi-bank2"></i></div>
+                <div>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Institution: Global Ethics & Governance</h5>
+                    <span class="small" style="color:var(--hvrf-gray);">Ethics & Governance — Human responsibility at a global scale</span>
                 </div>
+            </div>
+            <div class="row g-4">
+                @foreach($purposeRoadmap->filter(fn($y) => $y->year_number >= 7) as $yearData)
+                <div class="col-lg-4 col-md-6">
+                    <div class="roadmap-card h-100">
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal">Projects</p>
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>

@@ -1014,6 +1014,70 @@
             display: flex; align-items: center; justify-content: center;
             color: var(--hvrf-teal);
             font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* ── ROADMAP TABS ── */
+        .roadmap-tabs {
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap; gap: 0;
+        }
+        .roadmap-tab {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 1rem 2.25rem;
+            border: 2px solid var(--hvrf-border);
+            border-radius: 1rem;
+            background: #fff;
+            cursor: pointer;
+            transition: var(--transition);
+            gap: 0.15rem;
+        }
+        .roadmap-tab:hover { border-color: var(--hvrf-teal); background: rgba(78,205,196,0.04); }
+        .roadmap-tab.active {
+            border-color: var(--hvrf-teal);
+            background: rgba(78,205,196,0.08);
+            box-shadow: 0 4px 16px rgba(78,205,196,0.15);
+        }
+        .rm-tab-num {
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--hvrf-teal);
+        }
+        .roadmap-tab.active .rm-tab-num { color: var(--hvrf-teal-dark); }
+        .rm-tab-name {
+            font-size: 1rem; font-weight: 700;
+            color: var(--hvrf-navy);
+        }
+        .rm-tab-years {
+            font-size: 0.72rem; color: var(--hvrf-gray);
+        }
+        .rm-connector {
+            flex: 1; height: 2px;
+            background: linear-gradient(90deg, var(--hvrf-border), var(--hvrf-teal), var(--hvrf-border));
+            min-width: 1.5rem; max-width: 5rem;
+        }
+        .roadmap-phase-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--hvrf-border);
+        }
+        .roadmap-phase { animation: fadeSlideUp 0.35s ease; }
+        .rm-col-label {
+            font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.35rem;
+        }
+        .rm-col-label.teal { color: var(--hvrf-teal); }
+        .rm-col-label.gold { color: var(--hvrf-gold); }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 576px) {
+            .roadmap-tab { padding: 0.75rem 1.25rem; }
+            .rm-tab-name { font-size: 0.85rem; }
+            .rm-connector { max-width: 2rem; }
         }
 
         /* ── TEAM ── */
@@ -1339,6 +1403,22 @@ window.addEventListener('scroll', function () {
 
     window.addEventListener('scroll', updateActive, { passive: true });
     updateActive();
+})();
+
+/* ── ROADMAP TABS ── */
+(function () {
+    var tabs   = document.querySelectorAll('.roadmap-tab');
+    var phases = document.querySelectorAll('.roadmap-phase');
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            var phase = this.dataset.phase;
+            tabs.forEach(function (t) { t.classList.remove('active'); });
+            phases.forEach(function (p) { p.classList.add('d-none'); });
+            this.classList.add('active');
+            var target = document.getElementById('roadmap-phase-' + phase);
+            if (target) target.classList.remove('d-none');
+        });
+    });
 })();
 
 /* ── STATS COUNTER ── */
