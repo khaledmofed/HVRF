@@ -431,15 +431,39 @@
         .about-card {
             border-radius: 18px;
             padding: 2rem 1.75rem;
-            transition: var(--transition);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                        box-shadow 0.35s cubic-bezier(0.4,0,0.2,1),
+                        background 0.5s ease,
+                        border-color 0.4s ease;
             position: relative;
             overflow: hidden;
         }
-        .about-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-        .about-card--dark  { background: var(--hvrf-navy);        border: 1px solid rgba(78,205,196,0.18); }
-        .about-card--teal  { background: rgba(78,205,196,0.09);   border: 1px solid rgba(78,205,196,0.22); }
-        .about-card--white { background: #fff;                     border: 1px solid rgba(0,0,0,0.07);      box-shadow: var(--shadow-sm); }
-        .about-card--gold  { background: rgba(201,169,110,0.09);   border: 1px solid rgba(201,169,110,0.22); }
+        .about-card::after {
+            content: '';
+            position: absolute; inset: 0;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+        .about-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .about-card:hover::after { opacity: 1; }
+
+        .about-card--dark  { background: var(--hvrf-navy); border: 1px solid rgba(78,205,196,0.18); }
+        .about-card--dark::after  { background: linear-gradient(135deg, rgba(78,205,196,0.08) 0%, rgba(78,205,196,0.02) 100%); }
+        .about-card--dark:hover   { border-color: rgba(78,205,196,0.45); }
+
+        .about-card--teal  { background: rgba(78,205,196,0.09); border: 1px solid rgba(78,205,196,0.22); }
+        .about-card--teal::after  { background: linear-gradient(135deg, rgba(78,205,196,0.22) 0%, rgba(78,205,196,0.06) 100%); }
+        .about-card--teal:hover   { background: rgba(78,205,196,0.09); border-color: rgba(78,205,196,0.5); }
+
+        .about-card--white { background: #fff; border: 1px solid rgba(0,0,0,0.07); box-shadow: var(--shadow-sm); }
+        .about-card--white::after { background: linear-gradient(135deg, rgba(78,205,196,0.07) 0%, rgba(78,205,196,0.02) 100%); }
+        .about-card--white:hover  { border-color: rgba(78,205,196,0.3); }
+
+        .about-card--gold  { background: rgba(201,169,110,0.09); border: 1px solid rgba(201,169,110,0.22); }
+        .about-card--gold::after  { background: linear-gradient(135deg, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0.06) 100%); }
+        .about-card--gold:hover   { background: rgba(201,169,110,0.09); border-color: rgba(201,169,110,0.5); }
         .about-card-label {
             display: inline-block;
             font-size: .62rem;
@@ -465,10 +489,15 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem;
             margin-bottom: 1.1rem;
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.4s ease;
         }
+        .about-card:hover .about-card-icon { transform: scale(1.18) rotate(-5deg); }
         .about-card--teal  .about-card-icon { background: rgba(78,205,196,0.18);   color: var(--hvrf-teal-dark); }
         .about-card--white .about-card-icon { background: rgba(78,205,196,0.12);   color: var(--hvrf-teal);      }
         .about-card--gold  .about-card-icon { background: rgba(201,169,110,0.18);  color: #9a7840;               }
+        .about-card--teal:hover  .about-card-icon { background: rgba(78,205,196,0.32);  }
+        .about-card--white:hover .about-card-icon { background: rgba(78,205,196,0.22);  }
+        .about-card--gold:hover  .about-card-icon { background: rgba(201,169,110,0.32); }
         .about-card-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
