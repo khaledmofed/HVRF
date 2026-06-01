@@ -11,9 +11,6 @@ cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
 echo "Running migrations..."
 php /var/www/html/artisan migrate --force
 
-echo "Ensuring Phase 3 roadmap data..."
-php /var/www/html/artisan roadmap:ensure-phase3
-
 echo "Clearing application cache..."
 php /var/www/html/artisan cache:clear
 
@@ -24,6 +21,9 @@ if [ "$RUN_SEEDER" = "true" ]; then
     echo "Running seeders..."
     php /var/www/html/artisan db:seed --force
 fi
+
+echo "Ensuring Phase 3 roadmap data..."
+php /var/www/html/artisan roadmap:ensure-phase3
 
 echo "Caching config..."
 php /var/www/html/artisan config:cache
