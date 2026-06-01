@@ -11,6 +11,9 @@ cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
 echo "Running migrations..."
 php /var/www/html/artisan migrate --force
 
+echo "Ensuring Phase 3 roadmap data..."
+php /var/www/html/artisan roadmap:ensure-phase3
+
 echo "Clearing application cache..."
 php /var/www/html/artisan cache:clear
 
