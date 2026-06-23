@@ -20,6 +20,11 @@ chmod 644 /var/www/html/.env
 
 # Pass APP_KEY to php-fpm explicitly (belt-and-suspenders with .env file)
 APP_KEY_VAL=$(grep '^APP_KEY=' /var/www/html/.env | cut -d= -f2-)
+if [ -z "$APP_KEY_VAL" ]; then
+  echo "[startup] ERROR: APP_KEY missing from .env"
+else
+  echo "[startup] APP_KEY loaded from .env"
+fi
 printf 'env[APP_KEY] = %s\n' "$APP_KEY_VAL" > /usr/local/etc/php-fpm.d/zz-laravel-env.conf
 
 rm -f /var/www/html/bootstrap/cache/config.php /var/www/html/bootstrap/cache/routes*.php /var/www/html/bootstrap/cache/packages.php
