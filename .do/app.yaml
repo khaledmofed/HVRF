@@ -8,7 +8,7 @@ services:
   - name: web
     image:
       registry_type: DOCR
-      registry: hvrf
+      registry: aeterna
       repository: hvrf
       tag: latest
       deploy_on_push:
