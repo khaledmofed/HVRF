@@ -25,7 +25,7 @@ if [ -z "$APP_KEY_VAL" ]; then
 else
   echo "[startup] APP_KEY loaded from .env"
 fi
-printf 'env[APP_KEY] = %s\n' "$APP_KEY_VAL" > /usr/local/etc/php-fpm.d/zz-laravel-env.conf
+printf 'env[APP_KEY] = "%s"\n' "$APP_KEY_VAL" > /usr/local/etc/php-fpm.d/zz-laravel-env.conf
 
 rm -f /var/www/html/bootstrap/cache/config.php /var/www/html/bootstrap/cache/routes*.php /var/www/html/bootstrap/cache/packages.php
 php /var/www/html/artisan config:clear || true
