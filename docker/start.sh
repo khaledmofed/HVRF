@@ -5,6 +5,8 @@ export PORT=${PORT:-8080}
 envsubst '${PORT}' < /etc/nginx/nginx.conf > /tmp/nginx_rendered.conf
 cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
 
+php /var/www/html/artisan config:clear || true
+
 echo "Running migrations..."
 php /var/www/html/artisan migrate --force || echo "[startup] migrate skipped"
 
@@ -17,9 +19,6 @@ if [ "$RUN_SEEDER" = "true" ]; then
 fi
 
 php /var/www/html/artisan roadmap:ensure-phase3 || true
-php /var/www/html/artisan config:cache || true
-php /var/www/html/artisan route:cache || true
-php /var/www/html/artisan view:cache || true
 
 echo "Starting supervisord on port $PORT..."
 exec /usr/bin/supervisord -c /etc/supervisord.conf
