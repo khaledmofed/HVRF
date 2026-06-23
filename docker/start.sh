@@ -15,6 +15,9 @@ mv /tmp/.env.runtime /var/www/html/.env
   printf 'DB_URL="%s"\n' "${DB_URL:-$DATABASE_URL}"
 } >> /var/www/html/.env
 
+chown www-data:www-data /var/www/html/.env
+chmod 644 /var/www/html/.env
+
 php /var/www/html/artisan config:clear || true
 
 echo "Running migrations..."

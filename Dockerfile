@@ -19,7 +19,9 @@ RUN test -f .env && grep -q 'APP_KEY=base64:' .env \
     || (echo "BUILD ERROR: .env with APP_KEY must exist (created in GitHub Actions before docker build)" && exit 1)
 
 RUN composer dump-autoload --optimize \
-    && php artisan package:discover --ansi || true
+    && php artisan package:discover --ansi || true \
+    && chown www-data:www-data .env \
+    && chmod 644 .env
 
 # Storage symlink & permissions
 RUN php artisan storage:link || true \
