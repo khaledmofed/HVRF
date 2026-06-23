@@ -39,6 +39,10 @@ jobs:
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
           R2_URL: ${{ secrets.R2_URL }}
         run: |
+          if [ -z "$APP_KEY" ]; then
+            echo "ERROR: GitHub secret APP_KEY is missing. Add it in repo Settings → Secrets."
+            exit 1
+          fi
           python3 <<'PY'
           from pathlib import Path
           import os
