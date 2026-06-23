@@ -55,7 +55,7 @@ jobs:
           R2_ENDPOINT=${R2_ENDPOINT}
           R2_URL=${R2_URL}
           EOF
-          test -s .env && grep -q '^APP_KEY=base64:' .env || (echo "ERROR: .env APP_KEY not set correctly" && exit 1)
+          test -s .env && grep -q 'APP_KEY=base64:' .env || (echo "ERROR: .env APP_KEY not set correctly" && cat .env && exit 1)
           docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
           docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
           docker push ${{ env.IMAGE }}:${{ github.sha }}

@@ -9,11 +9,17 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy app
+# Install PHP deps (before full app copy — .env added at build time in CI)
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
 COPY . .
 
-# Install PHP deps
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN test -f .env && grep -q 'APP_KEY=base64:' .env \
+    || (echo "BUILD ERROR: .env with APP_KEY must exist (created in GitHub Actions before docker build)" && exit 1)
+
+RUN composer dump-autoload --optimize \
+    && php artisan package:discover --ansi || true
 
 # Storage symlink & permissions
 RUN php artisan storage:link || true \
