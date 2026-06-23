@@ -18,6 +18,11 @@ mv /tmp/.env.runtime /var/www/html/.env
 chown www-data:www-data /var/www/html/.env
 chmod 644 /var/www/html/.env
 
+# Pass APP_KEY to php-fpm explicitly (belt-and-suspenders with .env file)
+APP_KEY_VAL=$(grep '^APP_KEY=' /var/www/html/.env | cut -d= -f2-)
+printf 'env[APP_KEY] = %s\n' "$APP_KEY_VAL" > /usr/local/etc/php-fpm.d/zz-laravel-env.conf
+
+rm -f /var/www/html/bootstrap/cache/config.php /var/www/html/bootstrap/cache/routes*.php /var/www/html/bootstrap/cache/packages.php
 php /var/www/html/artisan config:clear || true
 
 echo "Running migrations..."
