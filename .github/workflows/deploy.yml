@@ -1,0 +1,94 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  IMAGE: registry.digitalocean.com/hvrf/hvrf
+  APP_NAME: hvrf
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+
+      - name: Log in to Container Registry
+        run: doctl registry login
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
+          docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.IMAGE }}:latest
+
+      - name: Inject secrets into app spec
+        env:
+          APP_KEY: ${{ secrets.APP_KEY }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_URL: ${{ secrets.R2_URL }}
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import os
+
+          secrets = {
+              "APP_KEY": os.environ["APP_KEY"],
+              "R2_ACCESS_KEY_ID": os.environ["R2_ACCESS_KEY_ID"],
+              "R2_SECRET_ACCESS_KEY": os.environ["R2_SECRET_ACCESS_KEY"],
+              "R2_BUCKET": os.environ["R2_BUCKET"],
+              "R2_ENDPOINT": os.environ["R2_ENDPOINT"],
+              "R2_URL": os.environ["R2_URL"],
+          }
+
+          p = Path(".do/app.yaml")
+          lines = p.read_text().splitlines()
+          out = []
+          i = 0
+          while i < len(lines):
+              line = lines[i]
+              out.append(line)
+              if line.strip().startswith("- key:"):
+                  key = line.split(":", 1)[1].strip()
+                  if key in secrets:
+                      j = i + 1
+                      block = [lines[k] for k in range(i, min(i + 6, len(lines)))]
+                      if any("type: SECRET" in b for b in block) and not any("value:" in b for b in block):
+                          out.append(f"        value: {secrets[key]}")
+              i += 1
+
+          p.write_text("\n".join(out) + "\n")
+          PY
+
+      - name: Create or update App Platform app
+        id: app
+        run: |
+          APP_ID=$(doctl apps list --format ID,Spec.Name --no-header | awk -v n="${{ env.APP_NAME }}" '$2==n{print $1; exit}')
+          if [ -z "$APP_ID" ]; then
+            echo "Creating app ${{ env.APP_NAME }}..."
+            APP_ID=$(doctl apps create --spec .do/app.yaml --format ID --no-header)
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Updating app $APP_ID..."
+            doctl apps update "$APP_ID" --spec .do/app.yaml
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "app_id=$APP_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger deployment
+        run: doctl apps create-deployment ${{ steps.app.outputs.app_id }}
+
+      - name: App URL
+        run: |
+          doctl apps get ${{ steps.app.outputs.app_id }} --format DefaultIngress --no-header

@@ -1,0 +1,79 @@
+# DigitalOcean App Platform — deploys from Container Registry
+# GitHub Actions builds Docker, pushes to DOCR, triggers deploy on push to main/master.
+
+name: hvrf
+region: lon
+
+services:
+  - name: web
+    image:
+      registry_type: DOCR
+      registry: hvrf
+      repository: hvrf
+      tag: latest
+      deploy_on_push:
+        enabled: true
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
+    health_check:
+      http_path: /
+      initial_delay_seconds: 45
+      period_seconds: 10
+      timeout_seconds: 5
+      success_threshold: 1
+      failure_threshold: 3
+    envs:
+      - key: APP_NAME
+        value: HVRF
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+      - key: APP_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${_self.URL}
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: FILESYSTEM_DISK
+        value: r2
+      - key: CACHE_STORE
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
+      - key: RUN_SEEDER
+        value: "true"
+      - key: R2_ACCESS_KEY_ID
+        scope: RUN_TIME
+        type: SECRET
+      - key: R2_SECRET_ACCESS_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: R2_BUCKET
+        scope: RUN_TIME
+        type: SECRET
+      - key: R2_ENDPOINT
+        scope: RUN_TIME
+        type: SECRET
+      - key: R2_URL
+        scope: RUN_TIME
+        type: SECRET
+
+databases:
+  - name: db
+    engine: PG
+    version: "16"
+    production: true
+    cluster_name: hvrf-db
