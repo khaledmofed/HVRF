@@ -32,6 +32,12 @@ jobs:
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
           R2_URL: ${{ secrets.R2_URL }}
         run: |
+          if [ -z "$APP_KEY" ]; then
+            echo "ERROR: GitHub secret APP_KEY is missing or empty."
+            exit 1
+          fi
+          APP_KEY="${APP_KEY#\"}"
+          APP_KEY="${APP_KEY%\"}"
           cat > .env <<EOF
           APP_NAME=HVRF
           APP_ENV=production
@@ -49,6 +55,7 @@ jobs:
           R2_ENDPOINT=${R2_ENDPOINT}
           R2_URL=${R2_URL}
           EOF
+          test -s .env && grep -q '^APP_KEY=base64:' .env || (echo "ERROR: .env APP_KEY not set correctly" && exit 1)
           docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
           docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
           docker push ${{ env.IMAGE }}:${{ github.sha }}
