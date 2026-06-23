@@ -5,12 +5,14 @@ export PORT=${PORT:-8080}
 envsubst '${PORT}' < /etc/nginx/nginx.conf > /tmp/nginx_rendered.conf
 cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
 
-# Append runtime DB + URL from App Platform (secrets baked into .env at build time)
+# Merge runtime DB settings into .env (quote URL — unquoted ?sslmode= breaks dotenv)
+grep -v '^APP_URL=' /var/www/html/.env | grep -v '^DB_CONNECTION=' | grep -v '^DATABASE_URL=' | grep -v '^DB_URL=' > /tmp/.env.runtime
+mv /tmp/.env.runtime /var/www/html/.env
 {
   echo "APP_URL=${APP_URL:-http://localhost}"
   echo "DB_CONNECTION=${DB_CONNECTION:-pgsql}"
-  echo "DATABASE_URL=${DATABASE_URL}"
-  echo "DB_URL=${DB_URL:-${DATABASE_URL}}"
+  printf 'DATABASE_URL="%s"\n' "$DATABASE_URL"
+  printf 'DB_URL="%s"\n' "${DB_URL:-$DATABASE_URL}"
 } >> /var/www/html/.env
 
 php /var/www/html/artisan config:clear || true
