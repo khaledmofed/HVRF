@@ -27,7 +27,8 @@ COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/supervisord.conf /etc/supervisord.conf
 
 COPY docker/start.sh /start.sh
-RUN chmod +x /start.sh
+RUN chmod +x /start.sh \
+    && echo "clear_env = no" >> /usr/local/etc/php-fpm.d/www.conf
 
 EXPOSE 10000
 
