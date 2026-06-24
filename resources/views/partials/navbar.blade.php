@@ -11,7 +11,7 @@
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 pt-3 pt-lg-0">
                 @foreach([['#about','About'],['#focus-areas','What We Do'],['#programs','Programs'],['#roadmap','Roadmap'],['#team','Team'],['#contact','Contact']] as [$hash, $label])
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('home') }}{{ $hash }}" style="font-size: 0.88rem;">{{ $label }}</a>
+                     >> <a class="nav-link text-white" href="{{ route('home') }}{{ $hash }}" style="font-size: 0.88rem;">{{ $label }}</a>
                 </li>
                 @endforeach
                 <li class="nav-item ms-lg-3">
