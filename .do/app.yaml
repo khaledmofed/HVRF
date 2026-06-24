@@ -4,6 +4,20 @@
 name: hvrf
 region: lon
 
+domains:
+  - domain: www.hvrf.org
+    type: PRIMARY
+  - domain: hvrf.org
+    type: ALIAS
+
+ingress:
+  rules:
+    - component:
+        name: web
+      match:
+        path:
+          prefix: /
+
 services:
   - name: web
     image:
@@ -16,8 +30,6 @@ services:
     http_port: 8080
     instance_count: 1
     instance_size_slug: basic-xxs
-    routes:
-      - path: /
     health_check:
       http_path: /up
       initial_delay_seconds: 60
@@ -36,8 +48,8 @@ services:
         scope: RUN_TIME
         type: SECRET
       - key: APP_URL
-        scope: RUN_AND_BUILD_TIME
-        value: ${_self.URL}
+        scope: RUN_TIME
+        value: https://www.hvrf.org
       - key: DB_CONNECTION
         value: pgsql
       - key: DATABASE_URL
