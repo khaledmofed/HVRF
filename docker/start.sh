@@ -5,11 +5,17 @@ export PORT=${PORT:-8080}
 envsubst '${PORT}' < /etc/nginx/nginx.conf > /tmp/nginx_rendered.conf
 cp /tmp/nginx_rendered.conf /etc/nginx/nginx.conf
 
-# Merge runtime DB settings into .env (quote URL — unquoted ?sslmode= breaks dotenv)
-grep -v '^APP_URL=' /var/www/html/.env | grep -v '^DB_CONNECTION=' | grep -v '^DATABASE_URL=' | grep -v '^DB_URL=' > /tmp/.env.runtime
+# Merge runtime settings into .env (quote URL — unquoted ?sslmode= breaks dotenv)
+SAVED_APP_KEY=$(grep '^APP_KEY=' /var/www/html/.env | cut -d= -f2- || true)
+grep -v '^APP_URL=' /var/www/html/.env | grep -v '^APP_KEY=' | grep -v '^DB_CONNECTION=' | grep -v '^DATABASE_URL=' | grep -v '^DB_URL=' > /tmp/.env.runtime
 mv /tmp/.env.runtime /var/www/html/.env
 {
   echo "APP_URL=${APP_URL:-http://localhost}"
+  if [ -n "$APP_KEY" ]; then
+    echo "APP_KEY=${APP_KEY}"
+  elif [ -n "$SAVED_APP_KEY" ]; then
+    echo "APP_KEY=${SAVED_APP_KEY}"
+  fi
   echo "DB_CONNECTION=${DB_CONNECTION:-pgsql}"
   printf 'DATABASE_URL="%s"\n' "$DATABASE_URL"
   printf 'DB_URL="%s"\n' "${DB_URL:-$DATABASE_URL}"
