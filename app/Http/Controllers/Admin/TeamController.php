@@ -68,6 +68,16 @@ class TeamController extends Controller
             'linkedin_url' => 'nullable|string|max:500',
             'sort_order'   => 'required|integer|min:0',
             'photo'        => 'nullable|image|max:2048',
+            'role_ja'      => 'nullable|string|max:150',
+            'role_ko'      => 'nullable|string|max:150',
+            'role_es'      => 'nullable|string|max:150',
+            'role_zh_tw'   => 'nullable|string|max:150',
+            'role_vi'      => 'nullable|string|max:150',
+            'bio_ja'       => 'nullable|string',
+            'bio_ko'       => 'nullable|string',
+            'bio_es'       => 'nullable|string',
+            'bio_zh_tw'    => 'nullable|string',
+            'bio_vi'       => 'nullable|string',
         ]);
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Flag Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css" rel="stylesheet">
 
     <style>
         :root {
@@ -1308,6 +1310,93 @@
             opacity: 0;
         }
 
+        /* ── LANGUAGE SWITCHER ── */
+        .lang-btn-desktop {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 8px;
+            padding: 0.38rem 0.75rem;
+            font-size: 0.82rem; font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+            transition: var(--transition);
+            line-height: 1;
+        }
+        .lang-btn-desktop::after { margin-left: 3px; }
+        .lang-btn-desktop:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+        }
+        .lang-btn-mobile {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            line-height: 1;
+            padding: 0;
+        }
+        .lang-btn-mobile::after { display: none; }
+        .lang-flag-icon { display: inline-block; width: 1.25em; height: 0.9em; vertical-align: middle; border-radius: 2px; }
+        .lang-dropdown-menu .fi { display: inline-block; width: 1.3em; height: 0.95em; vertical-align: middle; border-radius: 2px; }
+        .lang-code-text { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
+
+        /* Scrolled navbar state */
+        #mainNavbar.scrolled .lang-btn-desktop {
+            background: rgba(0,0,0,0.07);
+            border-color: rgba(0,0,0,0.14);
+            color: var(--hvrf-navy);
+        }
+        #mainNavbar.scrolled .lang-btn-desktop:hover {
+            background: rgba(0,0,0,0.12);
+            color: var(--hvrf-navy);
+        }
+        #mainNavbar.scrolled .lang-btn-mobile {
+            background: rgba(0,0,0,0.07);
+            border-color: rgba(0,0,0,0.14);
+        }
+
+        /* Mobile open menu state */
+        @media (max-width: 991.98px) {
+            #mainNavbar:has(#navMenu.show) .lang-btn-mobile,
+            #mainNavbar:has(#navMenu.collapsing) .lang-btn-mobile {
+                background: rgba(255,255,255,0.12);
+                border-color: rgba(255,255,255,0.22);
+            }
+        }
+
+        .lang-dropdown-menu {
+            min-width: 168px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 6px;
+            margin-top: 6px !important;
+        }
+        .lang-dropdown-menu .dropdown-item {
+            border-radius: 8px;
+            padding: 0.5rem 0.85rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex; align-items: center; gap: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lang-dropdown-menu .dropdown-item:hover,
+        .lang-dropdown-menu .dropdown-item:focus {
+            background: rgba(78,205,196,0.1);
+            color: var(--hvrf-navy);
+        }
+        .lang-dropdown-menu .dropdown-item.active {
+            background: rgba(78,205,196,0.15);
+            color: var(--hvrf-teal-dark);
+            font-weight: 700;
+        }
+        .lang-dropdown-menu .dropdown-item span { font-size: 0.86rem; }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 991.98px) {
             .hero-title { font-size: 2.2rem; }
@@ -1525,5 +1614,7 @@ document.querySelectorAll('.newsletter-ajax-form').forEach(function (form) {
 </script>
 
 @yield('scripts')
+<!-- HVRF i18n -->
+<script src="{{ asset('js/i18n.js') }}"></script>
 </body>
 </html>

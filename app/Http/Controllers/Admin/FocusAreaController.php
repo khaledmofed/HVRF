@@ -22,9 +22,14 @@ class FocusAreaController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validateArea($request);
-        $validated['examples_json'] = $this->parseLines($request->input('examples'));
-        $validated['is_active']     = $request->boolean('is_active');
-        $validated['updated_at']    = now();
+        $validated['examples_json']       = $this->parseLines($request->input('examples'));
+        $validated['is_active']           = $request->boolean('is_active');
+        $validated['updated_at']          = now();
+        foreach (['ja','ko','es','zh_tw','vi'] as $l) {
+            $validated["title_{$l}"]        = $request->input("title_{$l}");
+            $validated["description_{$l}"]  = $request->input("description_{$l}");
+            $validated["examples_json_{$l}"] = $this->parseLines($request->input("examples_{$l}")) ?: null;
+        }
         FocusArea::create($validated);
         cache()->forget('focus_areas');
         return redirect()->route('admin.focus-areas.index')->with('success', 'Focus area created.');
@@ -38,9 +43,14 @@ class FocusAreaController extends Controller
     public function update(Request $request, FocusArea $focusArea)
     {
         $validated = $this->validateArea($request);
-        $validated['examples_json'] = $this->parseLines($request->input('examples'));
-        $validated['is_active']     = $request->boolean('is_active');
-        $validated['updated_at']    = now();
+        $validated['examples_json']       = $this->parseLines($request->input('examples'));
+        $validated['is_active']           = $request->boolean('is_active');
+        $validated['updated_at']          = now();
+        foreach (['ja','ko','es','zh_tw','vi'] as $l) {
+            $validated["title_{$l}"]        = $request->input("title_{$l}");
+            $validated["description_{$l}"]  = $request->input("description_{$l}");
+            $validated["examples_json_{$l}"] = $this->parseLines($request->input("examples_{$l}")) ?: null;
+        }
         $focusArea->update($validated);
         cache()->forget('focus_areas');
         return redirect()->route('admin.focus-areas.index')->with('success', 'Focus area updated.');

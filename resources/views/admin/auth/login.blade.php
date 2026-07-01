@@ -22,7 +22,7 @@
     <div class="d-flex justify-content-center">
         <div class="login-card">
             <div class="text-center mb-4">
-                <img src="/images/logo.jpeg" alt="HVRF" style="height: 60px; width: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #4ECDC4;">
+                <img src="/images/logo-hvrf.png" alt="HVRF" style="height: 60px; width: 60px; border-radius: 50%; object-fit: cover; ">
                 <h4 class="mt-3 mb-1" style="font-family: 'Playfair Display', serif;">HVRF Admin</h4>
                 <p class="text-muted small">Sign in to manage your foundation</p>
             </div>

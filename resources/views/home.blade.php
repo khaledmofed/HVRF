@@ -32,7 +32,7 @@
     <div class="hero-ring hero-ring-2" aria-hidden="true" style="z-index:1;"></div>
 
     {{-- Watermark --}}
-    <img src="/images/logo-hvrf.png" alt="" class="hero-watermark" aria-hidden="true" style="z-index:1;">
+    <img src="/images/logo-hvrf.png" alt="" class="hero-watermark" aria-hidden="true" style="z-index:1; zoom:0.6;">
 
     {{-- Content --}}
     <div class="container position-relative" style="z-index:3;">
@@ -44,27 +44,37 @@
                 <div class="gsap-hero-badge d-flex justify-content-center mb-4">
                     <span class="hero-badge">
                         <span class="badge-dot"></span>
-                        {{ $hero->quote_text }}
+                        <span data-i18n="hero.quote" data-db-ja="{{ $hero->quote_text_ja }}" data-db-ko="{{ $hero->quote_text_ko }}" data-db-es="{{ $hero->quote_text_es }}" data-db-zh-tw="{{ $hero->quote_text_zh_tw }}" data-db-vi="{{ $hero->quote_text_vi }}">{{ $hero->quote_text }}</span>
                     </span>
                 </div>
 
                 {{-- Title — words split by JS --}}
-                <h1 class="hero-title gsap-hero-title mb-4" data-title="{{ e($hero->headline) }}">
+                <h1 class="hero-title gsap-hero-title mb-4" data-title="{{ e($hero->headline) }}"
+                    data-title-ja="{{ e($hero->headline_ja) }}"
+                    data-title-ko="{{ e($hero->headline_ko) }}"
+                    data-title-es="{{ e($hero->headline_es) }}"
+                    data-title-zh-tw="{{ e($hero->headline_zh_tw) }}"
+                    data-title-vi="{{ e($hero->headline_vi) }}">
                     {{ $hero->headline }}
                 </h1>
 
                 {{-- Subtitle — typed by JS --}}
                 <p class="hero-subtitle gsap-hero-sub" style="min-height:3.5rem;"
-                   data-subtitle="{{ e($hero->subheadline) }}"></p>
+                   data-subtitle="{{ e($hero->subheadline) }}"
+                   data-subtitle-ja="{{ e($hero->subheadline_ja) }}"
+                   data-subtitle-ko="{{ e($hero->subheadline_ko) }}"
+                   data-subtitle-es="{{ e($hero->subheadline_es) }}"
+                   data-subtitle-zh-tw="{{ e($hero->subheadline_zh_tw) }}"
+                   data-subtitle-vi="{{ e($hero->subheadline_vi) }}"></p>
 
                 {{-- CTAs --}}
                 <div class="d-flex gap-3 justify-content-center flex-wrap mb-5 gsap-hero-btns">
                     <a href="{{ $hero->cta_primary_url }}" class="btn-hvrf-primary">
-                        {{ $hero->cta_primary_label }}
+                        <span data-i18n="hero.cta-primary" data-db-ja="{{ $hero->cta_primary_label_ja }}" data-db-ko="{{ $hero->cta_primary_label_ko }}" data-db-es="{{ $hero->cta_primary_label_es }}" data-db-zh-tw="{{ $hero->cta_primary_label_zh_tw }}" data-db-vi="{{ $hero->cta_primary_label_vi }}">{{ $hero->cta_primary_label }}</span>
                         <i class="bi bi-arrow-right-short fs-5"></i>
                     </a>
                     <a href="{{ $hero->cta_secondary_url }}" class="btn-hvrf-outline">
-                        {{ $hero->cta_secondary_label }}
+                        <span data-i18n="hero.cta-secondary" data-db-ja="{{ $hero->cta_secondary_label_ja }}" data-db-ko="{{ $hero->cta_secondary_label_ko }}" data-db-es="{{ $hero->cta_secondary_label_es }}" data-db-zh-tw="{{ $hero->cta_secondary_label_zh_tw }}" data-db-vi="{{ $hero->cta_secondary_label_vi }}">{{ $hero->cta_secondary_label }}</span>
                     </a>
                 </div>
                 @endif
@@ -73,17 +83,17 @@
                 <div class="hero-stats-bar d-flex justify-content-center align-items-center gap-4 flex-wrap gsap-hero-stats">
                     <div class="stat-item">
                         <span class="stat-value" data-count="5000" data-suffix="+">5,000+</span>
-                        <span class="stat-label">First Year Participants Target</span>
+                        <span class="stat-label" data-i18n="hero.stat1">First Year Participants Target</span>
                     </div>
                     <div class="stat-sep d-none d-sm-block"></div>
                     <div class="stat-item">
                         <span class="stat-value" data-count="100000" data-suffix="+">100,000+</span>
-                        <span class="stat-label">Users by Year 2 Goal</span>
+                        <span class="stat-label" data-i18n="hero.stat2">Users by Year 2 Goal</span>
                     </div>
                     <div class="stat-sep d-none d-sm-block"></div>
                     <div class="stat-item">
                         <span class="stat-value" data-count="5" data-suffix="">5</span>
-                        <span class="stat-label">Core Pillars of Focus</span>
+                        <span class="stat-label" data-i18n="hero.stat3">Core Pillars of Focus</span>
                     </div>
                 </div>
             </div>
@@ -93,7 +103,7 @@
     {{-- Scroll indicator --}}
     <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 d-none d-md-block" style="z-index:4;">
         <div style="display:flex;flex-direction:column;align-items:center;gap:6px;animation:scrollBob 2s ease-in-out infinite;">
-            <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;">Scroll</span>
+            <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;" data-i18n="hero.scroll">Scroll</span>
             <div style="width:1px;height:36px;background:linear-gradient(to bottom,rgba(78,205,196,0.7),transparent);"></div>
         </div>
     </div>
@@ -110,9 +120,9 @@
 
         {{-- Header --}}
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label">Our Model</span>
-            <h2 class="section-title" style="color:#fff; margin-top:.5rem;">How HVRF Operates</h2>
-            <p class="section-subtitle" style="color:rgba(255,255,255,0.55); max-width:560px; margin:.75rem auto 0;">
+            <span class="section-label" data-i18n="ops.label">Our Model</span>
+            <h2 class="section-title" style="color:#fff; margin-top:.5rem;" data-i18n="ops.heading">How HVRF Operates</h2>
+            <p class="section-subtitle" style="color:rgba(255,255,255,0.55); max-width:560px; margin:.75rem auto 0;" data-i18n="ops.subtitle">
                 A coordinated ecosystem bridging global stakeholders to protect and amplify human value in the age of AI.
             </p>
         </div>
@@ -125,15 +135,15 @@
 
         {{-- Flow Chain --}}
         <div class="text-center">
-            <p style="font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;">Value Flow</p>
+            <p style="font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;" data-i18n="ops.flow-label">Value Flow</p>
             <div class="eco-flow-row">
-                <div class="eco-fn">Funding</div>
+                <div class="eco-fn" data-i18n="ops.flow-1">Funding</div>
                 <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
-                <div class="eco-fn">Research</div>
+                <div class="eco-fn" data-i18n="ops.flow-2">Research</div>
                 <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
-                <div class="eco-fn">Communities</div>
+                <div class="eco-fn" data-i18n="ops.flow-3">Communities</div>
                 <div class="eco-fc"><span></span><span></span><span></span><span></span><span></span></div>
-                <div class="eco-fn">Human Impact</div>
+                <div class="eco-fn" data-i18n="ops.flow-4">Human Impact</div>
             </div>
         </div>
 
@@ -222,7 +232,7 @@
 
         /* ── HTML labels ── */
         var lblDiv = document.getElementById('ecoLbls');
-        nodes.forEach(function (n) {
+        nodes.forEach(function (n, i) {
             var el = document.createElement('div');
             el.style.cssText = 'position:absolute;transform:translate(-50%,-50%);text-align:center;width:112px;';
             el.style.left = (n.x / SZ * 100).toFixed(2) + '%';
@@ -237,6 +247,7 @@
         var cEl = document.createElement('div');
         cEl.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;';
         cEl.style.top = ((cy + 36) / SZ * 100).toFixed(2) + '%';
+        cEl.dataset.ecoCenter = '1';
         cEl.innerHTML = '<span style="display:block;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:rgba(32,178,170,.92);text-transform:uppercase;line-height:1.8;">HVRF</span>'
                       + '<span style="display:block;font-size:.62rem;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.65);text-transform:uppercase;line-height:1.4;">Foundation Core</span>';
         lblDiv.appendChild(cEl);
@@ -640,10 +651,10 @@
         </div>
         <div class="vs-caption">
             <div class="vs-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
-            <div class="vs-tag">{{ $slide->tag }}</div>
-            <h2 class="vs-title">{{ $slide->title }}</h2>
-            <p class="vs-desc">{{ $slide->description }}</p>
-            <span class="vs-pill"><i class="bi {{ $slide->pill_icon }}"></i>{{ $slide->pill_label }}</span>
+            <div class="vs-tag" data-i18n="vs.s{{ $loop->index }}.tag" data-db-ja="{{ $slide->tag_ja }}" data-db-ko="{{ $slide->tag_ko }}" data-db-es="{{ $slide->tag_es }}" data-db-zh-tw="{{ $slide->tag_zh_tw }}" data-db-vi="{{ $slide->tag_vi }}">{{ $slide->tag }}</div>
+            <h2 class="vs-title" data-i18n="vs.s{{ $loop->index }}.title" data-db-ja="{{ $slide->title_ja }}" data-db-ko="{{ $slide->title_ko }}" data-db-es="{{ $slide->title_es }}" data-db-zh-tw="{{ $slide->title_zh_tw }}" data-db-vi="{{ $slide->title_vi }}">{{ $slide->title }}</h2>
+            <p class="vs-desc" data-i18n="vs.s{{ $loop->index }}.desc" data-db-ja="{{ $slide->description_ja }}" data-db-ko="{{ $slide->description_ko }}" data-db-es="{{ $slide->description_es }}" data-db-zh-tw="{{ $slide->description_zh_tw }}" data-db-vi="{{ $slide->description_vi }}">{{ $slide->description }}</p>
+            <span class="vs-pill"><i class="bi {{ $slide->pill_icon }}"></i><span data-i18n="vs.s{{ $loop->index }}.pill" data-db-ja="{{ $slide->pill_label_ja }}" data-db-ko="{{ $slide->pill_label_ko }}" data-db-es="{{ $slide->pill_label_es }}" data-db-zh-tw="{{ $slide->pill_label_zh_tw }}" data-db-vi="{{ $slide->pill_label_vi }}">{{ $slide->pill_label }}</span></span>
         </div>
     </div>
     @endforeach
@@ -666,8 +677,8 @@
 
         {{-- Header --}}
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label">Who We Are</span>
-            <h2 class="section-title mt-2">About the Foundation</h2>
+            <span class="section-label" data-i18n="about.label">Who We Are</span>
+            <h2 class="section-title mt-2" data-i18n="about.heading">About the Foundation</h2>
         </div>
 
         @if($about)
@@ -677,40 +688,40 @@
             {{-- Card 1: Philosophy — dark navy --}}
             <div class="col-lg-3 col-md-6 gsap-stagger-child">
                 <div class="about-card about-card--dark h-100">
-                    <span class="about-card-label">Philosophy</span>
+                    <span class="about-card-label" data-i18n="about.card-philosophy">Philosophy</span>
                     <div class="about-card-quote">&ldquo;</div>
-                    <p class="about-card-body" style="font-style:italic;">"{{ $about->philosophy_body }}"</p>
-                    <small class="about-card-attr">— {{ $about->philosophy_title }}</small>
+                    <p class="about-card-body" style="font-style:italic;" data-i18n="about.philosophy-body" data-db-ja="{{ $about->philosophy_body_ja }}" data-db-ko="{{ $about->philosophy_body_ko }}" data-db-es="{{ $about->philosophy_body_es }}" data-db-zh-tw="{{ $about->philosophy_body_zh_tw }}" data-db-vi="{{ $about->philosophy_body_vi }}">"{{ $about->philosophy_body }}"</p>
+                    <small class="about-card-attr" data-i18n="about.philosophy-attr" data-db-ja="{{ $about->philosophy_title_ja ? '— '.$about->philosophy_title_ja : '' }}" data-db-ko="{{ $about->philosophy_title_ko ? '— '.$about->philosophy_title_ko : '' }}" data-db-es="{{ $about->philosophy_title_es ? '— '.$about->philosophy_title_es : '' }}" data-db-zh-tw="{{ $about->philosophy_title_zh_tw ? '— '.$about->philosophy_title_zh_tw : '' }}" data-db-vi="{{ $about->philosophy_title_vi ? '— '.$about->philosophy_title_vi : '' }}">— {{ $about->philosophy_title }}</small>
                 </div>
             </div>
 
             {{-- Card 2: Vision — teal tint --}}
             <div class="col-lg-3 col-md-6 gsap-stagger-child">
                 <div class="about-card about-card--teal h-100">
-                    <span class="about-card-label">Vision</span>
+                    <span class="about-card-label" data-i18n="about.card-vision">Vision</span>
                     <div class="about-card-icon"><i class="bi bi-eye-fill"></i></div>
-                    <h3 class="about-card-title">{{ $about->vision_title }}</h3>
-                    <p class="about-card-body">{{ $about->vision_body }}</p>
+                    <h3 class="about-card-title" data-i18n="about.vision-title" data-db-ja="{{ $about->vision_title_ja }}" data-db-ko="{{ $about->vision_title_ko }}" data-db-es="{{ $about->vision_title_es }}" data-db-zh-tw="{{ $about->vision_title_zh_tw }}" data-db-vi="{{ $about->vision_title_vi }}">{{ $about->vision_title }}</h3>
+                    <p class="about-card-body" data-i18n="about.vision-body" data-db-ja="{{ $about->vision_body_ja }}" data-db-ko="{{ $about->vision_body_ko }}" data-db-es="{{ $about->vision_body_es }}" data-db-zh-tw="{{ $about->vision_body_zh_tw }}" data-db-vi="{{ $about->vision_body_vi }}">{{ $about->vision_body }}</p>
                 </div>
             </div>
 
             {{-- Card 3: Mission — white --}}
             <div class="col-lg-3 col-md-6 gsap-stagger-child">
                 <div class="about-card about-card--white h-100">
-                    <span class="about-card-label">Mission</span>
+                    <span class="about-card-label" data-i18n="about.card-mission">Mission</span>
                     <div class="about-card-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
-                    <h3 class="about-card-title">{{ $about->mission_title }}</h3>
-                    <p class="about-card-body">{{ $about->mission_body }}</p>
+                    <h3 class="about-card-title" data-i18n="about.mission-title" data-db-ja="{{ $about->mission_title_ja }}" data-db-ko="{{ $about->mission_title_ko }}" data-db-es="{{ $about->mission_title_es }}" data-db-zh-tw="{{ $about->mission_title_zh_tw }}" data-db-vi="{{ $about->mission_title_vi }}">{{ $about->mission_title }}</h3>
+                    <p class="about-card-body" data-i18n="about.mission-body" data-db-ja="{{ $about->mission_body_ja }}" data-db-ko="{{ $about->mission_body_ko }}" data-db-es="{{ $about->mission_body_es }}" data-db-zh-tw="{{ $about->mission_body_zh_tw }}" data-db-vi="{{ $about->mission_body_vi }}">{{ $about->mission_body }}</p>
                 </div>
             </div>
 
             {{-- Card 4: Why Now — gold tint --}}
             <div class="col-lg-3 col-md-6 gsap-stagger-child">
                 <div class="about-card about-card--gold h-100">
-                    <span class="about-card-label">Why Now</span>
+                    <span class="about-card-label" data-i18n="about.card-why-now">Why Now</span>
                     <div class="about-card-icon"><i class="bi bi-hourglass-split"></i></div>
-                    <h3 class="about-card-title">The Urgency</h3>
-                    <p class="about-card-body">The window to shape a human-centered future is narrow. The choices made today define the next century.</p>
+                    <h3 class="about-card-title" data-i18n="about.urgency-title">The Urgency</h3>
+                    <p class="about-card-body" data-i18n="about.urgency-body">The window to shape a human-centered future is narrow. The choices made today define the next century.</p>
                 </div>
             </div>
 
@@ -733,9 +744,9 @@
 <section id="focus-areas" style="padding: 6rem 0 5rem; background: #fff;">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center">Our Work</span>
-            <h2 class="section-title mb-3">What the Foundation Will Do</h2>
-            <p class="section-subtitle">Five pillars to protect and amplify human value in the age of autonomous intelligence.</p>
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="focus.label">Our Work</span>
+            <h2 class="section-title mb-3" data-i18n="focus.heading">What the Foundation Will Do</h2>
+            <p class="section-subtitle" data-i18n="focus.subtitle">Five pillars to protect and amplify human value in the age of autonomous intelligence.</p>
         </div>
 
         <div class="row g-4 gsap-stagger">
@@ -746,12 +757,12 @@
                     <div class="focus-icon-wrap">
                         <i class="bi {{ $area->icon_name }}"></i>
                     </div>
-                    <h4 class="fw-bold mb-2" style="font-size: 1.05rem; color: var(--hvrf-navy);">{{ $area->title }}</h4>
-                    <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;">{{ $area->description }}</p>
+                    <h4 class="fw-bold mb-2" style="font-size: 1.05rem; color: var(--hvrf-navy);" data-i18n="fa.{{ $index }}.title" data-db-ja="{{ $area->title_ja }}" data-db-ko="{{ $area->title_ko }}" data-db-es="{{ $area->title_es }}" data-db-zh-tw="{{ $area->title_zh_tw }}" data-db-vi="{{ $area->title_vi }}">{{ $area->title }}</h4>
+                    <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;" data-i18n="fa.{{ $index }}.desc" data-db-ja="{{ $area->description_ja }}" data-db-ko="{{ $area->description_ko }}" data-db-es="{{ $area->description_es }}" data-db-zh-tw="{{ $area->description_zh_tw }}" data-db-vi="{{ $area->description_vi }}">{{ $area->description }}</p>
                     @if($area->examples_json)
                     <ul class="focus-examples">
-                        @foreach($area->examples_json as $example)
-                        <li>{{ $example }}</li>
+                        @foreach($area->examples_json as $ei => $example)
+                        <li data-i18n="fa.{{ $index }}.ex{{ $ei }}" data-db-ja="{{ ($area->examples_json_ja ?? [])[$ei] ?? '' }}" data-db-ko="{{ ($area->examples_json_ko ?? [])[$ei] ?? '' }}" data-db-es="{{ ($area->examples_json_es ?? [])[$ei] ?? '' }}" data-db-zh-tw="{{ ($area->examples_json_zh_tw ?? [])[$ei] ?? '' }}" data-db-vi="{{ ($area->examples_json_vi ?? [])[$ei] ?? '' }}">{{ $example }}</li>
                         @endforeach
                     </ul>
                     @endif
@@ -777,21 +788,21 @@
 <section id="programs" style="padding: 6rem 0; background: var(--hvrf-light);">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center">First 3 Years</span>
-            <h2 class="section-title mb-3">Our First 3 Years of Focus</h2>
-            <p class="section-subtitle">Focused investment in two foundational pillars — Human Connection and Human Purpose.</p>
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="programs.label">First 3 Years</span>
+            <h2 class="section-title mb-3" data-i18n="programs.heading">Our First 3 Years of Focus</h2>
+            <p class="section-subtitle" data-i18n="programs.subtitle">Focused investment in two foundational pillars — Human Connection and Human Purpose.</p>
         </div>
 
         <div class="d-flex justify-content-center mb-5 gsap-reveal" data-dir="up" data-delay="0.1">
             <ul class="nav pill-tabs" id="programTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="tab-connection" data-bs-toggle="tab" data-bs-target="#pane-connection" type="button" role="tab">
-                        <i class="bi bi-people-fill me-2"></i>Human Connection
+                        <i class="bi bi-people-fill me-2"></i><span data-i18n="programs.tab-connection">Human Connection</span>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="tab-purpose" data-bs-toggle="tab" data-bs-target="#pane-purpose" type="button" role="tab">
-                        <i class="bi bi-bullseye me-2"></i>Human Purpose
+                        <i class="bi bi-bullseye me-2"></i><span data-i18n="programs.tab-purpose">Human Purpose</span>
                     </button>
                 </li>
             </ul>
@@ -804,16 +815,17 @@
                     <div class="col-lg-4 gsap-stagger-child">
                         <div class="program-card">
                             <div class="program-icon"><i class="bi bi-people-fill"></i></div>
-                            <h4 class="mb-2" style="font-size: 1.1rem; color: var(--hvrf-navy);">{{ $program->title }}</h4>
-                            <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;">{{ $program->description }}</p>
-                            @foreach($program->features_json ?? [] as $feature)
+                            <h4 class="mb-2" style="font-size: 1.1rem; color: var(--hvrf-navy);" data-i18n="prog.c{{ $loop->index }}.title" data-db-ja="{{ $program->title_ja }}" data-db-ko="{{ $program->title_ko }}" data-db-es="{{ $program->title_es }}" data-db-zh-tw="{{ $program->title_zh_tw }}" data-db-vi="{{ $program->title_vi }}">{{ $program->title }}</h4>
+                            <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;" data-i18n="prog.c{{ $loop->index }}.desc" data-db-ja="{{ $program->description_ja }}" data-db-ko="{{ $program->description_ko }}" data-db-es="{{ $program->description_es }}" data-db-zh-tw="{{ $program->description_zh_tw }}" data-db-vi="{{ $program->description_vi }}">{{ $program->description }}</p>
+                            @foreach($program->features_json ?? [] as $fi => $feature)
+                            @php $pIdx = $loop->parent->index; @endphp
                             <div class="feature-item">
-                                <h6>{{ $feature['title'] ?? '' }}</h6>
-                                <p class="small mb-1" style="color: var(--hvrf-gray);">{{ $feature['description'] ?? '' }}</p>
+                                <h6 data-i18n="prog.c{{ $pIdx }}.f{{ $fi }}.title" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['title'] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['title'] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['title'] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['title'] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['title'] ?? '' }}">{{ $feature['title'] ?? '' }}</h6>
+                                <p class="small mb-1" style="color: var(--hvrf-gray);" data-i18n="prog.c{{ $pIdx }}.f{{ $fi }}.desc" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['description'] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['description'] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['description'] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['description'] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['description'] ?? '' }}">{{ $feature['description'] ?? '' }}</p>
                                 @if(!empty($feature['items']))
                                 <ul class="feature-items-list">
-                                    @foreach($feature['items'] as $item)
-                                    <li>{{ $item }}</li>
+                                    @foreach($feature['items'] as $ii => $item)
+                                    <li data-i18n="prog.c{{ $pIdx }}.f{{ $fi }}.i{{ $ii }}" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['items'][$ii] ?? '' }}">{{ $item }}</li>
                                     @endforeach
                                 </ul>
                                 @endif
@@ -832,16 +844,17 @@
                     <div class="col-lg-4">
                         <div class="program-card">
                             <div class="program-icon"><i class="bi bi-bullseye"></i></div>
-                            <h4 class="mb-2" style="font-size: 1.1rem; color: var(--hvrf-navy);">{{ $program->title }}</h4>
-                            <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;">{{ $program->description }}</p>
-                            @foreach($program->features_json ?? [] as $feature)
+                            <h4 class="mb-2" style="font-size: 1.1rem; color: var(--hvrf-navy);" data-i18n="prog.p{{ $loop->index }}.title" data-db-ja="{{ $program->title_ja }}" data-db-ko="{{ $program->title_ko }}" data-db-es="{{ $program->title_es }}" data-db-zh-tw="{{ $program->title_zh_tw }}" data-db-vi="{{ $program->title_vi }}">{{ $program->title }}</h4>
+                            <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.7;" data-i18n="prog.p{{ $loop->index }}.desc" data-db-ja="{{ $program->description_ja }}" data-db-ko="{{ $program->description_ko }}" data-db-es="{{ $program->description_es }}" data-db-zh-tw="{{ $program->description_zh_tw }}" data-db-vi="{{ $program->description_vi }}">{{ $program->description }}</p>
+                            @foreach($program->features_json ?? [] as $fi => $feature)
+                            @php $pIdx = $loop->parent->index; @endphp
                             <div class="feature-item">
-                                <h6>{{ $feature['title'] ?? '' }}</h6>
-                                <p class="small mb-1" style="color: var(--hvrf-gray);">{{ $feature['description'] ?? '' }}</p>
+                                <h6 data-i18n="prog.p{{ $pIdx }}.f{{ $fi }}.title" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['title'] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['title'] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['title'] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['title'] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['title'] ?? '' }}">{{ $feature['title'] ?? '' }}</h6>
+                                <p class="small mb-1" style="color: var(--hvrf-gray);" data-i18n="prog.p{{ $pIdx }}.f{{ $fi }}.desc" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['description'] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['description'] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['description'] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['description'] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['description'] ?? '' }}">{{ $feature['description'] ?? '' }}</p>
                                 @if(!empty($feature['items']))
                                 <ul class="feature-items-list">
-                                    @foreach($feature['items'] as $item)
-                                    <li>{{ $item }}</li>
+                                    @foreach($feature['items'] as $ii => $item)
+                                    <li data-i18n="prog.p{{ $pIdx }}.f{{ $fi }}.i{{ $ii }}" data-db-ja="{{ ($program->features_json_ja ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-ko="{{ ($program->features_json_ko ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-es="{{ ($program->features_json_es ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-zh-tw="{{ ($program->features_json_zh_tw ?? [])[$fi]['items'][$ii] ?? '' }}" data-db-vi="{{ ($program->features_json_vi ?? [])[$fi]['items'][$ii] ?? '' }}">{{ $item }}</li>
                                     @endforeach
                                 </ul>
                                 @endif
@@ -856,21 +869,21 @@
         </div>
 
         {{-- How HVRF Gets Involved --}}
-        @php $allInvolved = $connectionPrograms->first()?->how_involved_json ?? []; @endphp
+        @php $firstConnProg = $connectionPrograms->first(); $allInvolved = $firstConnProg?->how_involved_json ?? []; @endphp
         @if(count($allInvolved))
         <div class="involved-box mt-5 gsap-reveal" data-dir="up" data-delay="0.1">
             <div class="row align-items-center g-4">
                 <div class="col-lg-3">
-                    <h5 class="text-white mb-1" style="font-family:'Playfair Display',serif;">How HVRF Gets Involved</h5>
-                    <p class="small mb-0" style="color: rgba(255,255,255,0.45);">Our commitment across all programs</p>
+                    <h5 class="text-white mb-1" style="font-family:'Playfair Display',serif;" data-i18n="programs.involved-heading">How HVRF Gets Involved</h5>
+                    <p class="small mb-0" style="color: rgba(255,255,255,0.45);" data-i18n="programs.involved-sub">Our commitment across all programs</p>
                 </div>
                 <div class="col-lg-9">
                     <div class="row g-2">
-                        @foreach($allInvolved as $item)
+                        @foreach($allInvolved as $ii => $item)
                         <div class="col-md-4 col-sm-6">
                             <div class="involved-item">
                                 <div class="involved-check"><i class="bi bi-check-lg"></i></div>
-                                <span class="small text-white" style="opacity: 0.85;">{{ $item }}</span>
+                                <span class="small text-white" style="opacity: 0.85;" data-i18n="prog.involved{{ $ii }}" data-db-ja="{{ ($firstConnProg?->how_involved_json_ja ?? [])[$ii] ?? '' }}" data-db-ko="{{ ($firstConnProg?->how_involved_json_ko ?? [])[$ii] ?? '' }}" data-db-es="{{ ($firstConnProg?->how_involved_json_es ?? [])[$ii] ?? '' }}" data-db-zh-tw="{{ ($firstConnProg?->how_involved_json_zh_tw ?? [])[$ii] ?? '' }}" data-db-vi="{{ ($firstConnProg?->how_involved_json_vi ?? [])[$ii] ?? '' }}">{{ $item }}</span>
                             </div>
                         </div>
                         @endforeach
@@ -895,29 +908,29 @@
 <section id="roadmap" style="padding: 6rem 0; background: #fff;">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center">Strategic Plan</span>
-            <h2 class="section-title mb-3">10-Year Strategic Roadmap</h2>
-            <p class="section-subtitle">Three phases to build human capability, scale ecosystems, and establish global institutions of human value.</p>
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="roadmap.label">Strategic Plan</span>
+            <h2 class="section-title mb-3" data-i18n="roadmap.heading">10-Year Strategic Roadmap</h2>
+            <p class="section-subtitle" data-i18n="roadmap.subtitle">Three phases to build human capability, scale ecosystems, and establish global institutions of human value.</p>
         </div>
 
         {{-- Phase Tab Buttons --}}
         <div class="roadmap-tabs gsap-reveal" data-dir="up" data-delay="0.1">
             <button class="roadmap-tab active" data-phase="1">
-                <span class="rm-tab-num">Phase 1</span>
-                <span class="rm-tab-name">Foundation</span>
-                <span class="rm-tab-years">Years 1–3</span>
+                <span class="rm-tab-num" data-i18n="roadmap.p1-num">Phase 1</span>
+                <span class="rm-tab-name" data-i18n="roadmap.p1-name">Foundation</span>
+                <span class="rm-tab-years" data-i18n="roadmap.p1-years">Years 1–3</span>
             </button>
             <div class="rm-connector"></div>
             <button class="roadmap-tab" data-phase="2">
-                <span class="rm-tab-num">Phase 2</span>
-                <span class="rm-tab-name">Growth</span>
-                <span class="rm-tab-years">Years 4–6</span>
+                <span class="rm-tab-num" data-i18n="roadmap.p2-num">Phase 2</span>
+                <span class="rm-tab-name" data-i18n="roadmap.p2-name">Growth</span>
+                <span class="rm-tab-years" data-i18n="roadmap.p2-years">Years 4–6</span>
             </button>
             <div class="rm-connector"></div>
             <button class="roadmap-tab" data-phase="3">
-                <span class="rm-tab-num">Phase 3</span>
-                <span class="rm-tab-name">Institution</span>
-                <span class="rm-tab-years">Years 7–10</span>
+                <span class="rm-tab-num" data-i18n="roadmap.p3-num">Phase 3</span>
+                <span class="rm-tab-name" data-i18n="roadmap.p3-name">Institution</span>
+                <span class="rm-tab-years" data-i18n="roadmap.p3-years">Years 7–10</span>
             </button>
         </div>
 
@@ -926,8 +939,8 @@
             <div class="roadmap-phase-header">
                 <div class="roadmap-section-icon"><i class="bi bi-people-fill"></i></div>
                 <div>
-                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Foundation: Human Capability & Community</h5>
-                    <span class="small" style="color:var(--hvrf-gray);">Human Enhancement (Wisdom) + Human Connection Systems</span>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);" data-i18n="roadmap.p1-title">Foundation: Human Capability & Community</h5>
+                    <span class="small" style="color:var(--hvrf-gray);" data-i18n="roadmap.p1-sub">Human Enhancement (Wisdom) + Human Connection Systems</span>
                 </div>
             </div>
             <div class="row g-4">
@@ -935,12 +948,13 @@
                 <div class="col-lg-4 col-md-6">
                     @php $rmColors = ['teal','white','gold']; @endphp
                     <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
-                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
-                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
-                        <p class="rm-col-label teal">Projects</p>
-                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
-                        <p class="rm-col-label gold">KPIs</p>
-                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> <span data-i18n="rm.c{{ $loop->index }}.year" data-db-ja="{{ $yearData->year_label_ja }}" data-db-ko="{{ $yearData->year_label_ko }}" data-db-es="{{ $yearData->year_label_es }}" data-db-zh-tw="{{ $yearData->year_label_zh_tw }}" data-db-vi="{{ $yearData->year_label_vi }}">{{ $yearData->year_label }}</span></div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;" data-i18n="rm.c{{ $loop->index }}.goal" data-db-ja="{{ $yearData->goal_ja }}" data-db-ko="{{ $yearData->goal_ko }}" data-db-es="{{ $yearData->goal_es }}" data-db-zh-tw="{{ $yearData->goal_zh_tw }}" data-db-vi="{{ $yearData->goal_vi }}">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal" data-i18n="roadmap.projects">Projects</p>
+                        @php $rmIdx = $loop->index; @endphp
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $pi => $p)<li data-i18n="rm.c{{ $rmIdx }}.p{{ $pi }}" data-db-ja="{{ ($yearData->projects_json_ja ?? [])[$pi] ?? '' }}" data-db-ko="{{ ($yearData->projects_json_ko ?? [])[$pi] ?? '' }}" data-db-es="{{ ($yearData->projects_json_es ?? [])[$pi] ?? '' }}" data-db-zh-tw="{{ ($yearData->projects_json_zh_tw ?? [])[$pi] ?? '' }}" data-db-vi="{{ ($yearData->projects_json_vi ?? [])[$pi] ?? '' }}">{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold" data-i18n="roadmap.kpis">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $ki => $k)<li data-i18n="rm.c{{ $rmIdx }}.k{{ $ki }}" data-db-ja="{{ ($yearData->kpis_json_ja ?? [])[$ki] ?? '' }}" data-db-ko="{{ ($yearData->kpis_json_ko ?? [])[$ki] ?? '' }}" data-db-es="{{ ($yearData->kpis_json_es ?? [])[$ki] ?? '' }}" data-db-zh-tw="{{ ($yearData->kpis_json_zh_tw ?? [])[$ki] ?? '' }}" data-db-vi="{{ ($yearData->kpis_json_vi ?? [])[$ki] ?? '' }}">{{ $k }}</li>@endforeach</ul>
                     </div>
                 </div>
                 @endforeach
@@ -952,8 +966,8 @@
             <div class="roadmap-phase-header">
                 <div class="roadmap-section-icon"><i class="bi bi-graph-up-arrow"></i></div>
                 <div>
-                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Growth: Creativity & Stewardship Ecosystems</h5>
-                    <span class="small" style="color:var(--hvrf-gray);">Human Creativity Economy + Human Purpose Infrastructure</span>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);" data-i18n="roadmap.p2-title">Growth: Creativity & Stewardship Ecosystems</h5>
+                    <span class="small" style="color:var(--hvrf-gray);" data-i18n="roadmap.p2-sub">Human Creativity Economy + Human Purpose Infrastructure</span>
                 </div>
             </div>
             <div class="row g-4">
@@ -961,12 +975,13 @@
                 <div class="col-lg-4 col-md-6">
                     @php $rmColors = ['teal','white','gold']; @endphp
                     <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
-                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
-                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
-                        <p class="rm-col-label teal">Projects</p>
-                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
-                        <p class="rm-col-label gold">KPIs</p>
-                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> <span data-i18n="rm.p{{ $loop->index }}.year" data-db-ja="{{ $yearData->year_label_ja }}" data-db-ko="{{ $yearData->year_label_ko }}" data-db-es="{{ $yearData->year_label_es }}" data-db-zh-tw="{{ $yearData->year_label_zh_tw }}" data-db-vi="{{ $yearData->year_label_vi }}">{{ $yearData->year_label }}</span></div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;" data-i18n="rm.p{{ $loop->index }}.goal" data-db-ja="{{ $yearData->goal_ja }}" data-db-ko="{{ $yearData->goal_ko }}" data-db-es="{{ $yearData->goal_es }}" data-db-zh-tw="{{ $yearData->goal_zh_tw }}" data-db-vi="{{ $yearData->goal_vi }}">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal" data-i18n="roadmap.projects">Projects</p>
+                        @php $rmIdx = $loop->index; @endphp
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $pi => $p)<li data-i18n="rm.p{{ $rmIdx }}.p{{ $pi }}" data-db-ja="{{ ($yearData->projects_json_ja ?? [])[$pi] ?? '' }}" data-db-ko="{{ ($yearData->projects_json_ko ?? [])[$pi] ?? '' }}" data-db-es="{{ ($yearData->projects_json_es ?? [])[$pi] ?? '' }}" data-db-zh-tw="{{ ($yearData->projects_json_zh_tw ?? [])[$pi] ?? '' }}" data-db-vi="{{ ($yearData->projects_json_vi ?? [])[$pi] ?? '' }}">{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold" data-i18n="roadmap.kpis">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $ki => $k)<li data-i18n="rm.p{{ $rmIdx }}.k{{ $ki }}" data-db-ja="{{ ($yearData->kpis_json_ja ?? [])[$ki] ?? '' }}" data-db-ko="{{ ($yearData->kpis_json_ko ?? [])[$ki] ?? '' }}" data-db-es="{{ ($yearData->kpis_json_es ?? [])[$ki] ?? '' }}" data-db-zh-tw="{{ ($yearData->kpis_json_zh_tw ?? [])[$ki] ?? '' }}" data-db-vi="{{ ($yearData->kpis_json_vi ?? [])[$ki] ?? '' }}">{{ $k }}</li>@endforeach</ul>
                     </div>
                 </div>
                 @endforeach
@@ -978,8 +993,8 @@
             <div class="roadmap-phase-header">
                 <div class="roadmap-section-icon"><i class="bi bi-bank2"></i></div>
                 <div>
-                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);">Institution: Global Ethics & Governance</h5>
-                    <span class="small" style="color:var(--hvrf-gray);">Ethics & Governance — Human responsibility at a global scale</span>
+                    <h5 class="mb-0 fw-bold" style="color:var(--hvrf-navy);" data-i18n="roadmap.p3-title">Institution: Global Ethics & Governance</h5>
+                    <span class="small" style="color:var(--hvrf-gray);" data-i18n="roadmap.p3-sub">Ethics & Governance — Human responsibility at a global scale</span>
                 </div>
             </div>
             <div class="row g-4">
@@ -987,12 +1002,13 @@
                 <div class="col-lg-4 col-md-6">
                     @php $rmColors = ['teal','white','gold']; @endphp
                     <div class="roadmap-card roadmap-card--{{ $rmColors[$loop->index % 3] }} h-100">
-                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> {{ $yearData->year_label }}</div>
-                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;">{{ $yearData->goal }}</h6>
-                        <p class="rm-col-label teal">Projects</p>
-                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $p)<li>{{ $p }}</li>@endforeach</ul>
-                        <p class="rm-col-label gold">KPIs</p>
-                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $k)<li>{{ $k }}</li>@endforeach</ul>
+                        <div class="roadmap-year-pill"><i class="bi bi-calendar3"></i> <span data-i18n="rm.p3{{ $loop->index }}.year" data-db-ja="{{ $yearData->year_label_ja }}" data-db-ko="{{ $yearData->year_label_ko }}" data-db-es="{{ $yearData->year_label_es }}" data-db-zh-tw="{{ $yearData->year_label_zh_tw }}" data-db-vi="{{ $yearData->year_label_vi }}">{{ $yearData->year_label }}</span></div>
+                        <h6 class="fw-bold mb-3" style="color:var(--hvrf-navy);font-size:0.92rem;" data-i18n="rm.p3{{ $loop->index }}.goal" data-db-ja="{{ $yearData->goal_ja }}" data-db-ko="{{ $yearData->goal_ko }}" data-db-es="{{ $yearData->goal_es }}" data-db-zh-tw="{{ $yearData->goal_zh_tw }}" data-db-vi="{{ $yearData->goal_vi }}">{{ $yearData->goal }}</h6>
+                        <p class="rm-col-label teal" data-i18n="roadmap.projects">Projects</p>
+                        @php $rmIdx = $loop->index; @endphp
+                        <ul class="roadmap-list mb-3">@foreach($yearData->projects_json as $pi => $p)<li data-i18n="rm.p3{{ $rmIdx }}.p{{ $pi }}" data-db-ja="{{ ($yearData->projects_json_ja ?? [])[$pi] ?? '' }}" data-db-ko="{{ ($yearData->projects_json_ko ?? [])[$pi] ?? '' }}" data-db-es="{{ ($yearData->projects_json_es ?? [])[$pi] ?? '' }}" data-db-zh-tw="{{ ($yearData->projects_json_zh_tw ?? [])[$pi] ?? '' }}" data-db-vi="{{ ($yearData->projects_json_vi ?? [])[$pi] ?? '' }}">{{ $p }}</li>@endforeach</ul>
+                        <p class="rm-col-label gold" data-i18n="roadmap.kpis">KPIs</p>
+                        <ul class="roadmap-list kpi-list">@foreach($yearData->kpis_json as $ki => $k)<li data-i18n="rm.p3{{ $rmIdx }}.k{{ $ki }}" data-db-ja="{{ ($yearData->kpis_json_ja ?? [])[$ki] ?? '' }}" data-db-ko="{{ ($yearData->kpis_json_ko ?? [])[$ki] ?? '' }}" data-db-es="{{ ($yearData->kpis_json_es ?? [])[$ki] ?? '' }}" data-db-zh-tw="{{ ($yearData->kpis_json_zh_tw ?? [])[$ki] ?? '' }}" data-db-vi="{{ ($yearData->kpis_json_vi ?? [])[$ki] ?? '' }}">{{ $k }}</li>@endforeach</ul>
                     </div>
                 </div>
                 @endforeach
@@ -1014,9 +1030,9 @@
 <section id="team" style="padding: 6rem 0; background: var(--hvrf-light);">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center">The People</span>
-            <h2 class="section-title mb-3">Our Team</h2>
-            <p class="section-subtitle">An extraordinary group of humans committed to shaping a better future.</p>
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="team.label">The People</span>
+            <h2 class="section-title mb-3" data-i18n="team.heading">Our Team</h2>
+            <p class="section-subtitle" data-i18n="team.subtitle">An extraordinary group of humans committed to shaping a better future.</p>
         </div>
 
         @if($team->count())
@@ -1042,8 +1058,20 @@
                         <div class="team-ring"></div>
                     </div>
                     <h5 class="fw-bold mb-1 mt-1" style="font-size: 1rem; color: var(--hvrf-navy);">{{ $member->name }}</h5>
-                    <p class="small fw-semibold mb-2" style="color: var(--hvrf-teal); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px;">{{ $member->role }}</p>
-                    <p class="small mb-3" style="color: var(--hvrf-gray); line-height: 1.65; font-size: 0.83rem;">{{ Str::limit($member->bio, 120) }}</p>
+                    <p class="small fw-semibold mb-2 team-i18n-role" style="color: var(--hvrf-teal); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px;"
+                       data-original="{{ e($member->role) }}"
+                       data-db-ja="{{ e($member->role_ja) }}"
+                       data-db-ko="{{ e($member->role_ko) }}"
+                       data-db-es="{{ e($member->role_es) }}"
+                       data-db-zh-tw="{{ e($member->role_zh_tw) }}"
+                       data-db-vi="{{ e($member->role_vi) }}">{{ $member->role }}</p>
+                    <p class="small mb-3 team-i18n-bio" style="color: var(--hvrf-gray); line-height: 1.65; font-size: 0.83rem;"
+                       data-original="{{ e(Str::limit($member->bio, 120)) }}"
+                       data-db-ja="{{ e(Str::limit($member->bio_ja ?: '', 120)) }}"
+                       data-db-ko="{{ e(Str::limit($member->bio_ko ?: '', 120)) }}"
+                       data-db-es="{{ e(Str::limit($member->bio_es ?: '', 120)) }}"
+                       data-db-zh-tw="{{ e(Str::limit($member->bio_zh_tw ?: '', 120)) }}"
+                       data-db-vi="{{ e(Str::limit($member->bio_vi ?: '', 120)) }}">{{ Str::limit($member->bio, 120) }}</p>
                     @if($member->linkedin_url)
                     <a href="{{ $member->linkedin_url }}" target="_blank" rel="noopener"
                        style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; background:rgba(78,205,196,0.1); border:1px solid rgba(78,205,196,0.2); color:var(--hvrf-teal); text-decoration:none; transition:var(--transition);"
@@ -1061,7 +1089,7 @@
             <div style="width:80px; height:80px; border-radius:50%; background:rgba(78,205,196,0.08); border:2px dashed rgba(78,205,196,0.25); display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
                 <i class="bi bi-people" style="font-size:2rem; color:rgba(78,205,196,0.5);"></i>
             </div>
-            <p style="color: var(--hvrf-gray);">Team coming soon — we are building an extraordinary group of humans.</p>
+            <p style="color: var(--hvrf-gray);" data-i18n="team.coming-soon">Team coming soon — we are building an extraordinary group of humans.</p>
         </div>
         @endif
     </div>
@@ -1076,17 +1104,17 @@
     <div class="container position-relative text-center" style="z-index:2;">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-xl-6 gsap-reveal" data-dir="up">
-                <span class="section-label mb-4 d-flex justify-content-center" style="color: var(--hvrf-teal);">Get Involved</span>
-                <h2 class="section-title light mb-4">Join the Movement to<br>Preserve Human Value</h2>
-                <p class="mb-5" style="color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.8;">
+                <span class="section-label mb-4 d-flex justify-content-center" style="color: var(--hvrf-teal);" data-i18n="join.label">Get Involved</span>
+                <h2 class="section-title light mb-4" data-i18n-html="join.heading">Join the Movement to<br>Preserve Human Value</h2>
+                <p class="mb-5" style="color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.8;" data-i18n="join.subtitle">
                     Whether you're a researcher, philanthropist, technologist, or simply a human who cares — there's a place for you at HVRF.
                 </p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="#contact" class="btn-hvrf-primary">
-                        Partner With Us <i class="bi bi-arrow-right-short fs-5"></i>
+                        <span data-i18n="join.cta-primary">Partner With Us</span> <i class="bi bi-arrow-right-short fs-5"></i>
                     </a>
                     <button type="button" class="btn-hvrf-outline" data-bs-toggle="modal" data-bs-target="#newsletterModal">
-                        <i class="bi bi-bell"></i> Subscribe to Updates
+                        <i class="bi bi-bell"></i> <span data-i18n="join.cta-secondary">Subscribe to Updates</span>
                     </button>
                 </div>
             </div>
@@ -1100,10 +1128,10 @@
         <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
             <div class="modal-header border-0 pb-0 pt-3 px-4">
                 <div>
-                    <h5 class="modal-title" id="newsletterModalLabel" style="font-family: 'Playfair Display', serif; color: var(--hvrf-navy);">
+                    <h5 class="modal-title" id="newsletterModalLabel" style="font-family: 'Playfair Display', serif; color: var(--hvrf-navy);" data-i18n="news.title">
                         Stay Connected with HVRF
                     </h5>
-                    <p class="small mb-0" style="color: var(--hvrf-gray);">Receive updates on our programs, research, and mission.</p>
+                    <p class="small mb-0" style="color: var(--hvrf-gray);" data-i18n="news.subtitle">Receive updates on our programs, research, and mission.</p>
                 </div>
                 <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -1111,14 +1139,14 @@
                 <form class="newsletter-ajax-form">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">Your Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Jane Smith">
+                        <label class="form-label" data-i18n="news.name-label">Your Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Jane Smith" data-i18n-placeholder="news.name-ph">
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">Email Address <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" placeholder="you@example.com" required>
+                        <label class="form-label"><span data-i18n="news.email-label">Email Address</span> <span class="text-danger">*</span></label>
+                        <input type="email" name="email" class="form-control" placeholder="you@example.com" required data-i18n-placeholder="news.email-ph">
                     </div>
-                    <button type="submit" class="btn-hvrf-submit btn w-100">Subscribe to Updates</button>
+                    <button type="submit" class="btn-hvrf-submit btn w-100" data-i18n="news.submit">Subscribe to Updates</button>
                     <div class="newsletter-msg mt-2 text-center"></div>
                 </form>
             </div>
@@ -1132,9 +1160,9 @@
 <section id="contact" class="contact-section">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center">Get In Touch</span>
-            <h2 class="section-title mb-3">Contact Us</h2>
-            <p class="section-subtitle">We believe in the power of human connection. Reach out and let's build a better future together.</p>
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="contact.label">Get In Touch</span>
+            <h2 class="section-title mb-3" data-i18n="contact.heading">Contact Us</h2>
+            <p class="section-subtitle" data-i18n="contact.subtitle">We believe in the power of human connection. Reach out and let's build a better future together.</p>
         </div>
 
         <div class="row g-4">
@@ -1146,7 +1174,7 @@
                     <div class="contact-info-item">
                         <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
                         <div>
-                            <div class="small fw-semibold text-white">Email</div>
+                            <div class="small fw-semibold text-white" data-i18n="contact.email">Email</div>
                             <div class="small" style="color: rgba(255,255,255,0.55);">{{ $settings['contact_email'] ?? 'info@hvrf.org' }}</div>
                         </div>
                     </div>
@@ -1155,7 +1183,7 @@
                     <div class="contact-info-item">
                         <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
                         <div>
-                            <div class="small fw-semibold text-white">Phone</div>
+                            <div class="small fw-semibold text-white" data-i18n="contact.phone">Phone</div>
                             <div class="small" style="color: rgba(255,255,255,0.55);">{{ $settings['contact_phone'] }}</div>
                         </div>
                     </div>
@@ -1164,13 +1192,13 @@
                     <div class="contact-info-item">
                         <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
                         <div>
-                            <div class="small fw-semibold text-white">Location</div>
+                            <div class="small fw-semibold text-white" data-i18n="contact.location">Location</div>
                             <div class="small" style="color: rgba(255,255,255,0.55);">{{ $settings['contact_location'] ?? 'Global — Remote First' }}</div>
                         </div>
                     </div>
 
                     <div class="mt-auto pt-3" style="border-top: 1px solid rgba(255,255,255,0.07); margin-top: 1.5rem;">
-                        <p class="small mb-3" style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Follow Us</p>
+                        <p class="small mb-3" style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;" data-i18n="contact.follow">Follow Us</p>
                         <div class="footer-social d-flex gap-2">
                             <a href="{{ $settings['linkedin_url'] ?? '#' }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
                             <a href="{{ $settings['twitter_url'] ?? '#' }}" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
@@ -1195,28 +1223,28 @@
                         @csrf
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Your Name <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Jane Smith" required>
+                                <label class="form-label"><span data-i18n="contact.name-label">Your Name</span> <span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Jane Smith" required data-i18n-placeholder="contact.name-ph">
                                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <label class="form-label"><span data-i18n="contact.email-label">Email Address</span> <span class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="you@example.com" required>
                                 @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Subject <span class="text-danger">*</span></label>
-                            <input type="text" name="subject" class="form-control @error('subject') is-invalid @enderror" value="{{ old('subject') }}" placeholder="How can we collaborate?" required>
+                            <label class="form-label"><span data-i18n="contact.subject-label">Subject</span> <span class="text-danger">*</span></label>
+                            <input type="text" name="subject" class="form-control @error('subject') is-invalid @enderror" value="{{ old('subject') }}" placeholder="How can we collaborate?" required data-i18n-placeholder="contact.subject-ph">
                             @error('subject')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <div class="mb-4">
-                            <label class="form-label">Message <span class="text-danger">*</span></label>
-                            <textarea name="message" rows="5" class="form-control @error('message') is-invalid @enderror" placeholder="Tell us about your interest in HVRF..." required>{{ old('message') }}</textarea>
+                            <label class="form-label"><span data-i18n="contact.msg-label">Message</span> <span class="text-danger">*</span></label>
+                            <textarea name="message" rows="5" class="form-control @error('message') is-invalid @enderror" placeholder="Tell us about your interest in HVRF..." required data-i18n-placeholder="contact.msg-ph">{{ old('message') }}</textarea>
                             @error('message')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <button type="submit" class="btn-hvrf-submit btn">
-                            Send Message <i class="bi bi-send ms-2"></i>
+                            <span data-i18n="contact.submit">Send Message</span> <i class="bi bi-send ms-2"></i>
                         </button>
                     </form>
                 </div>

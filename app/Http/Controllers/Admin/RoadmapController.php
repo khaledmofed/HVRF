@@ -23,8 +23,14 @@ class RoadmapController extends Controller
     {
         $validated = $this->validateYear($request);
         $validated['projects_json'] = $this->parseLines($request->input('projects'));
-        $validated['kpis_json'] = $this->parseLines($request->input('kpis'));
-        $validated['updated_at'] = now();
+        $validated['kpis_json']     = $this->parseLines($request->input('kpis'));
+        $validated['updated_at']    = now();
+        foreach (['ja','ko','es','zh_tw','vi'] as $l) {
+            $validated["year_label_{$l}"]    = $request->input("year_label_{$l}");
+            $validated["goal_{$l}"]          = $request->input("goal_{$l}");
+            $validated["projects_json_{$l}"] = $this->parseLines($request->input("projects_{$l}")) ?: null;
+            $validated["kpis_json_{$l}"]     = $this->parseLines($request->input("kpis_{$l}")) ?: null;
+        }
         RoadmapYear::create($validated);
         cache()->forget('roadmap_connection');
         cache()->forget('roadmap_purpose');
@@ -40,8 +46,14 @@ class RoadmapController extends Controller
     {
         $validated = $this->validateYear($request);
         $validated['projects_json'] = $this->parseLines($request->input('projects'));
-        $validated['kpis_json'] = $this->parseLines($request->input('kpis'));
-        $validated['updated_at'] = now();
+        $validated['kpis_json']     = $this->parseLines($request->input('kpis'));
+        $validated['updated_at']    = now();
+        foreach (['ja','ko','es','zh_tw','vi'] as $l) {
+            $validated["year_label_{$l}"]    = $request->input("year_label_{$l}");
+            $validated["goal_{$l}"]          = $request->input("goal_{$l}");
+            $validated["projects_json_{$l}"] = $this->parseLines($request->input("projects_{$l}")) ?: null;
+            $validated["kpis_json_{$l}"]     = $this->parseLines($request->input("kpis_{$l}")) ?: null;
+        }
         $roadmap->update($validated);
         cache()->forget('roadmap_connection');
         cache()->forget('roadmap_purpose');

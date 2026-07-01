@@ -2,6 +2,8 @@
 @section('title', $member->id ? 'Edit Member' : 'New Member')
 @section('breadcrumb', 'Content / Team / ' . ($member->id ? 'Edit' : 'New'))
 
+@php $langs = [['en','🇺🇸'],['ja','🇯🇵'],['ko','🇰🇷'],['es','🇪🇸'],['zh_tw','🇹🇼'],['vi','🇻🇳']]; @endphp
+
 @section('content')
 <div class="d-flex align-items-center gap-3 mb-4">
     <a href="{{ route('admin.team.index') }}" class="btn-mg-secondary btn-mg-ghost" style="width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:8px;">
@@ -17,27 +19,61 @@
         @csrf
         @if($member->id) @method('PUT') @endif
 
-        <div class="row g-3 mb-3">
-            <div class="col-md-6">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                       value="{{ old('name', $member->name) }}" required>
-                @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Role / Title</label>
-                <input type="text" name="role" class="form-control @error('role') is-invalid @enderror"
-                       value="{{ old('role', $member->role) }}" required>
-                @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                   value="{{ old('name', $member->name) }}" required>
+            @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Bio</label>
-            <textarea name="bio" rows="3" class="form-control @error('bio') is-invalid @enderror"
-                      required>{{ old('bio', $member->bio) }}</textarea>
-            @error('bio')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        <hr style="border-color: rgba(255,255,255,0.08);">
+
+        {{-- Language tabs --}}
+        <ul class="nav nav-tabs mb-4">
+            @foreach($langs as [$code, $flag])
+            <li class="nav-item">
+                <button class="nav-link {{ $code === 'en' ? 'active' : '' }}" type="button"
+                        data-bs-toggle="tab" data-bs-target="#team-lang-{{ $code }}">
+                    {{ $flag }} {{ strtoupper($code === 'zh_tw' ? 'ZH' : $code) }}
+                </button>
+            </li>
+            @endforeach
+        </ul>
+
+        <div class="tab-content">
+            {{-- English --}}
+            <div class="tab-pane fade show active" id="team-lang-en">
+                <div class="mb-3">
+                    <label class="form-label">Role / Title</label>
+                    <input type="text" name="role" class="form-control @error('role') is-invalid @enderror"
+                           value="{{ old('role', $member->role) }}" required>
+                    @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Bio</label>
+                    <textarea name="bio" rows="3" class="form-control @error('bio') is-invalid @enderror"
+                              required>{{ old('bio', $member->bio) }}</textarea>
+                    @error('bio')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+
+            {{-- Other languages --}}
+            @foreach([['ja','🇯🇵'],['ko','🇰🇷'],['es','🇪🇸'],['zh_tw','🇹🇼'],['vi','🇻🇳']] as [$l, $flag])
+            <div class="tab-pane fade" id="team-lang-{{ $l }}">
+                <p class="small mb-3" style="color: var(--mg-text-muted);">{{ $flag }} Leave blank to fall back to English.</p>
+                <div class="mb-3">
+                    <label class="form-label">Role / Title</label>
+                    <input type="text" name="role_{{ $l }}" class="form-control" value="{{ old("role_{$l}", $member->{"role_{$l}"}) }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Bio</label>
+                    <textarea name="bio_{{ $l }}" rows="3" class="form-control">{{ old("bio_{$l}", $member->{"bio_{$l}"}) }}</textarea>
+                </div>
+            </div>
+            @endforeach
         </div>
+
+        <hr style="border-color: rgba(255,255,255,0.08);">
 
         {{-- Photo Upload --}}
         <div class="mb-3">
