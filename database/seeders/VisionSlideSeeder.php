@@ -9,8 +9,6 @@ class VisionSlideSeeder extends Seeder
 {
     public function run(): void
     {
-        if (VisionSlide::count() > 0) return;
-        VisionSlide::truncate();
 
         $slides = [
             [
@@ -103,7 +101,10 @@ class VisionSlideSeeder extends Seeder
         ];
 
         foreach ($slides as $slide) {
-            VisionSlide::create($slide);
+            VisionSlide::updateOrCreate(
+                ['sort_order' => $slide['sort_order']],
+                $slide
+            );
         }
     }
 }

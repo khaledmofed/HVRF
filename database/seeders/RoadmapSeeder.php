@@ -9,8 +9,6 @@ class RoadmapSeeder extends Seeder
 {
     public function run(): void
     {
-        if (RoadmapYear::count() > 0) return;
-        RoadmapYear::truncate();
 
         $years = [
             // ── CONNECTION PILLAR (Y1-Y3) ────────────────────────────
@@ -298,7 +296,10 @@ class RoadmapSeeder extends Seeder
         ];
 
         foreach ($years as $year) {
-            RoadmapYear::create(array_merge($year, ['updated_at' => now()]));
+            RoadmapYear::updateOrCreate(
+                ['pillar' => $year['pillar'], 'year_number' => $year['year_number']],
+                array_merge($year, ['updated_at' => now()])
+            );
         }
     }
 }

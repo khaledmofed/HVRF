@@ -9,8 +9,6 @@ class ProgramsSeeder extends Seeder
 {
     public function run(): void
     {
-        if (Program::count() > 0) return;
-        Program::truncate();
 
         $programs = [
             // ── CONNECTION ──────────────────────────────────────────────
@@ -355,7 +353,10 @@ class ProgramsSeeder extends Seeder
         ];
 
         foreach ($programs as $program) {
-            Program::create(array_merge($program, ['updated_at' => now()]));
+            Program::updateOrCreate(
+                ['pillar' => $program['pillar'], 'sort_order' => $program['sort_order']],
+                array_merge($program, ['updated_at' => now()])
+            );
         }
     }
 }

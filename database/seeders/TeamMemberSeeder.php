@@ -9,8 +9,6 @@ class TeamMemberSeeder extends Seeder
 {
     public function run(): void
     {
-        if (TeamMember::count() > 0) return;
-        TeamMember::truncate();
 
         $members = [
             [
@@ -76,7 +74,10 @@ class TeamMemberSeeder extends Seeder
         ];
 
         foreach ($members as $member) {
-            TeamMember::create(array_merge($member, ['updated_at' => now()]));
+            TeamMember::updateOrCreate(
+                ['name' => $member['name']],
+                array_merge($member, ['updated_at' => now()])
+            );
         }
     }
 }

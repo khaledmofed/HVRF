@@ -9,9 +9,6 @@ class FocusAreasSeeder extends Seeder
 {
     public function run(): void
     {
-        if (FocusArea::count() > 0) return;
-        FocusArea::truncate();
-
         $areas = [
             [
                 'number' => 1, 'icon_name' => 'bi-people-fill', 'sort_order' => 1, 'is_active' => true,
@@ -146,7 +143,10 @@ class FocusAreasSeeder extends Seeder
         ];
 
         foreach ($areas as $area) {
-            FocusArea::create(array_merge($area, ['updated_at' => now()]));
+            FocusArea::updateOrCreate(
+                ['number' => $area['number']],
+                array_merge($area, ['updated_at' => now()])
+            );
         }
     }
 }
