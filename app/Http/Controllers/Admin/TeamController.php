@@ -51,8 +51,8 @@ class TeamController extends Controller
 
     public function destroy(TeamMember $team)
     {
-        if ($team->photo_url && !str_starts_with($team->photo_url, 'http')) {
-            Storage::disk('r2')->delete($team->photo_url);
+        if ($team->photo_url && $this->isManagedPath($team->photo_url)) {
+            Storage::disk($this->storageDisk())->delete($team->photo_url);
         }
         $team->delete();
         cache()->forget('team');
@@ -88,10 +88,20 @@ class TeamController extends Controller
         }
 
         // Delete old file if it was a local upload
-        if ($existing && !str_starts_with($existing, 'http')) {
-            Storage::disk('r2')->delete($existing);
+        if ($existing && $this->isManagedPath($existing)) {
+            Storage::disk($this->storageDisk())->delete($existing);
         }
 
-        return $request->file('photo')->store('team', 'r2');
+        return $request->file('photo')->store('team', $this->storageDisk());
+    }
+
+    private function isManagedPath(string $path): bool
+    {
+        return !str_starts_with($path, 'http') && !str_starts_with($path, '/');
+    }
+
+    private function storageDisk(): string
+    {
+        return config('filesystems.disks.r2.bucket') ? 'r2' : 'public';
     }
 }

@@ -14,7 +14,8 @@
       "PowerShell(Start-Process \"http://localhost:8001\")",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(php artisan tinker '--execute= *)"
     ]
   }
 }
