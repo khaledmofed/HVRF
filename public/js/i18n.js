@@ -102,6 +102,10 @@
             'roadmap.p3-sub':      'Ethics & Governance — Human responsibility at a global scale',
             'roadmap.projects':    'Projects',
             'roadmap.kpis':        'KPIs',
+            // Initiators
+            'initiators.label':    'Backed By',
+            'initiators.heading':  'Our Initiators',
+            'initiators.subtitle': "Leading AI labs, enterprises, and visionaries helping shape HVRF's mission.",
             // Team
             'team.label':        'The People',
             'team.heading':      'Our Team',
@@ -325,6 +329,9 @@
             'roadmap.p3-sub':      '倫理とガバナンス — グローバルスケールでの人間の責任',
             'roadmap.projects':    'プロジェクト',
             'roadmap.kpis':        '主要業績評価指標',
+            'initiators.label':    '協力企業',
+            'initiators.heading':  '私たちのイニシエーター',
+            'initiators.subtitle': 'HVRFの使命を形作ることに協力する、主要なAI研究機関、企業、そして先見者たち。',
             'team.label':        '人材',
             'team.heading':      '私たちのチーム',
             'team.subtitle':     'より良い未来を形成するために献身する素晴らしい人々のグループ。',
@@ -542,6 +549,9 @@
             'roadmap.p3-sub':      '윤리와 거버넌스 — 글로벌 차원의 인간적 책임',
             'roadmap.projects':    '프로젝트',
             'roadmap.kpis':        '핵심 성과 지표',
+            'initiators.label':    '후원 기업',
+            'initiators.heading':  '우리의 이니시에이터',
+            'initiators.subtitle': 'HVRF의 사명을 형성하는 데 도움을 주는 선도적인 AI 연구소, 기업, 그리고 비전가들.',
             'team.label':        '사람들',
             'team.heading':      '우리 팀',
             'team.subtitle':     '더 나은 미래를 만들기 위해 헌신하는 특별한 인류 그룹.',
@@ -759,6 +769,9 @@
             'roadmap.p3-sub':      'Ética y Gobernanza — Responsabilidad humana a escala global',
             'roadmap.projects':    'Proyectos',
             'roadmap.kpis':        'KPIs',
+            'initiators.label':    'Respaldado Por',
+            'initiators.heading':  'Nuestros Iniciadores',
+            'initiators.subtitle': 'Laboratorios de IA líderes, empresas y visionarios que ayudan a dar forma a la misión de HVRF.',
             'team.label':        'Las Personas',
             'team.heading':      'Nuestro Equipo',
             'team.subtitle':     'Un grupo extraordinario de humanos comprometidos con dar forma a un futuro mejor.',
@@ -976,6 +989,9 @@
             'roadmap.p3-sub':      '倫理與治理 — 全球規模的人類責任',
             'roadmap.projects':    '項目',
             'roadmap.kpis':        '關鍵績效指標',
+            'initiators.label':    '支持夥伴',
+            'initiators.heading':  '我們的發起夥伴',
+            'initiators.subtitle': '協助塑造 HVRF 使命的頂尖人工智慧實驗室、企業與遠見者。',
             'team.label':        '我們的人員',
             'team.heading':      '我們的團隊',
             'team.subtitle':     '一群致力於塑造更美好未來的非凡人類。',
@@ -1193,6 +1209,9 @@
             'roadmap.p3-sub':      'Đạo Đức và Quản Trị — Trách Nhiệm Con Người Ở Quy Mô Toàn Cầu',
             'roadmap.projects':    'Dự Án',
             'roadmap.kpis':        'Chỉ Số Hiệu Suất',
+            'initiators.label':    'Được Hậu Thuẫn Bởi',
+            'initiators.heading':  'Các Nhà Sáng Lập',
+            'initiators.subtitle': 'Các phòng thí nghiệm AI hàng đầu, doanh nghiệp và những nhà tầm nhìn giúp định hình sứ mệnh của HVRF.',
             'team.label':        'Con Người',
             'team.heading':      'Đội Ngũ Của Chúng Tôi',
             'team.subtitle':     'Một nhóm người phi thường cam kết định hình tương lai tốt đẹp hơn.',
@@ -1451,6 +1470,12 @@
 
         /* 10. Team role/bio — DB attr takes priority, else revert to data-original */
         document.querySelectorAll('.team-i18n-role, .team-i18n-bio').forEach(function (el) {
+            var dbVal = lang !== 'en' ? el.getAttribute('data-' + dbAttrName(lang)) : '';
+            el.textContent = (dbVal && dbVal.trim()) ? dbVal : (el.getAttribute('data-original') || '');
+        });
+
+        /* 10b. Initiator names — DB attr takes priority, else revert to data-original */
+        document.querySelectorAll('.initiator-i18n-name').forEach(function (el) {
             var dbVal = lang !== 'en' ? el.getAttribute('data-' + dbAttrName(lang)) : '';
             el.textContent = (dbVal && dbVal.trim()) ? dbVal : (el.getAttribute('data-original') || '');
         });

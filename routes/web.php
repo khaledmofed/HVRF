@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\AboutController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\RoadmapController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\InitiatorController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\SettingController;
@@ -45,6 +47,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('programs', ProgramController::class)->names('programs');
         Route::resource('roadmap', RoadmapController::class)->names('roadmap');
         Route::resource('stats', StatController::class)->names('stats');
+        Route::resource('initiators', InitiatorController::class)->names('initiators');
         Route::resource('team', TeamController::class)->names('team');
 
         Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
@@ -58,5 +61,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+
+        Route::resource('admins', AdminController::class)->except(['show'])->names('admins');
     });
 });

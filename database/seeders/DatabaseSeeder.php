@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RoadmapSeeder::class,
             TeamMemberSeeder::class,
             StatsSeeder::class,
+            InitiatorSeeder::class,
         ]);
     }
 }

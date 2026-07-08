@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AboutSection;
 use App\Models\FocusArea;
 use App\Models\HeroSection;
+use App\Models\Initiator;
 use App\Models\Program;
 use App\Models\RoadmapYear;
 use App\Models\SiteSetting;
@@ -25,6 +26,7 @@ class HomeController extends Controller
         $connectionRoadmap = cache()->remember('roadmap_connection', 3600, fn() => RoadmapYear::where('pillar', 'connection')->orderBy('sort_order')->get());
         $purposeRoadmap = cache()->remember('roadmap_purpose', 3600, fn() => RoadmapYear::where('pillar', 'purpose')->orderBy('sort_order')->get());
         $team = cache()->remember('team', 3600, fn() => TeamMember::where('is_active', true)->orderBy('sort_order')->get());
+        $initiators = cache()->remember('initiators', 3600, fn() => Initiator::where('is_active', true)->orderBy('sort_order')->get());
         $settings = cache()->remember('settings', 3600, fn() => SiteSetting::pluck('value', 'key'));
         $visionSlides = cache()->remember('vision_slides', 3600, fn() => VisionSlide::where('is_active', true)->orderBy('sort_order')->get());
 
@@ -32,7 +34,7 @@ class HomeController extends Controller
             'hero', 'stats', 'about', 'focusAreas',
             'connectionPrograms', 'purposePrograms',
             'connectionRoadmap', 'purposeRoadmap',
-            'team', 'settings', 'visionSlides'
+            'team', 'initiators', 'settings', 'visionSlides'
         ));
     }
 }

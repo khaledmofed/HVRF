@@ -8,7 +8,13 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/admin/login)",
       "Bash(curl -s http://localhost:8000/admin/login)",
       "PowerShell(Set-Location \"D:\\\\khaledMofed\\\\HVRF\"; $response = Invoke-WebRequest -Uri \"http://localhost:8000/admin/login\" -UseBasicParsing -ErrorAction SilentlyContinue; if \\($response\\) { $response.StatusCode; $response.Content.Substring\\(0, 500\\) } else { \"Got error - trying raw\" })",
-      "PowerShell(Set-Location \"D:\\\\khaledMofed\\\\HVRF\"; php -r \"require 'vendor/autoload.php'; \\\\$app = require 'bootstrap/app.php'; \\\\$app->make\\('Illuminate\\\\Contracts\\\\Console\\\\Kernel'\\)->bootstrap\\(\\); \\\\$a = App\\\\Models\\\\FocusArea::first\\(\\); echo gettype\\(\\\\$a->examples_json\\) . PHP_EOL; var_dump\\(\\\\$a->examples_json\\);\")"
+      "PowerShell(Set-Location \"D:\\\\khaledMofed\\\\HVRF\"; php -r \"require 'vendor/autoload.php'; \\\\$app = require 'bootstrap/app.php'; \\\\$app->make\\('Illuminate\\\\Contracts\\\\Console\\\\Kernel'\\)->bootstrap\\(\\); \\\\$a = App\\\\Models\\\\FocusArea::first\\(\\); echo gettype\\(\\\\$a->examples_json\\) . PHP_EOL; var_dump\\(\\\\$a->examples_json\\);\")",
+      "PowerShell(Start-Sleep -Seconds 2; try { $r = Invoke-WebRequest -Uri \"http://localhost:8000/admin/login\" -TimeoutSec 10 -UseBasicParsing; \"Admin login: $\\($r.StatusCode\\) - $\\($r.Content.Length\\) bytes\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Start-Sleep -Seconds 4; try { $r = Invoke-WebRequest -Uri \"http://localhost:8001/admin/login\" -TimeoutSec 10 -UseBasicParsing; \"Status: $\\($r.StatusCode\\) - $\\($r.Content.Length\\) bytes\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Start-Process \"http://localhost:8001\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

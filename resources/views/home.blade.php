@@ -1025,6 +1025,46 @@
 </div>
 
 {{-- ═══════════════════════════════════════════
+     INITIATORS
+═══════════════════════════════════════════ --}}
+@if($initiators->count())
+<section id="initiators" style="padding: 4.5rem 0 3.5rem; background: var(--hvrf-light);">
+    <div class="container">
+        <div class="text-center mb-5 gsap-reveal" data-dir="up">
+            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="initiators.label">Backed By</span>
+            <h2 class="section-title mb-3" data-i18n="initiators.heading">Our Initiators</h2>
+            <p class="section-subtitle" data-i18n="initiators.subtitle">Leading AI labs, enterprises, and visionaries helping shape HVRF's mission.</p>
+        </div>
+    </div>
+
+    <div class="initiators-marquee-wrap gsap-reveal" data-dir="up">
+        <div class="initiators-marquee-track">
+            @foreach($initiators->concat($initiators) as $initiator)
+            @php
+                $logoSrc = Str::startsWith($initiator->logo_url, ['http', '/'])
+                    ? $initiator->logo_url
+                    : (config('filesystems.disks.r2.url')
+                        ? rtrim(config('filesystems.disks.r2.url'), '/') . '/' . $initiator->logo_url
+                        : asset('storage/' . $initiator->logo_url));
+                $hasLink = filled($initiator->website_url);
+                $tag = $hasLink ? 'a' : 'div';
+            @endphp
+            <{{ $tag }} class="initiator-logo-card"
+               @if($hasLink) href="{{ $initiator->website_url }}" target="_blank" rel="noopener noreferrer" @endif>
+                <img src="{{ $logoSrc }}" alt="{{ $initiator->name }}" loading="lazy">
+                <span class="initiator-logo-name initiator-i18n-name"
+                      data-original="{{ e($initiator->name) }}"
+                      data-db-ja="{{ e($initiator->name_ja) }}" data-db-ko="{{ e($initiator->name_ko) }}"
+                      data-db-es="{{ e($initiator->name_es) }}" data-db-zh-tw="{{ e($initiator->name_zh_tw) }}"
+                      data-db-vi="{{ e($initiator->name_vi) }}">{{ $initiator->name }}</span>
+            </{{ $tag }}>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+{{-- ═══════════════════════════════════════════
      TEAM
 ═══════════════════════════════════════════ --}}
 <section id="team" style="padding: 6rem 0; background: var(--hvrf-light);">

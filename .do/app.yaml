@@ -71,7 +71,7 @@ services:
       - key: LOG_LEVEL
         value: error
       - key: RUN_SEEDER
-        value: "true"
+        value: "false"
       - key: R2_ACCESS_KEY_ID
         scope: RUN_TIME
         type: SECRET

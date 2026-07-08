@@ -606,6 +606,10 @@
            class="sidebar-link {{ request()->routeIs('admin.roadmap*') ? 'active' : '' }}">
             <i class="bi bi-map-fill"></i> Roadmap
         </a>
+        <a href="{{ route('admin.initiators.index') }}"
+           class="sidebar-link {{ request()->routeIs('admin.initiators*') ? 'active' : '' }}">
+            <i class="bi bi-building-fill-gear"></i> Initiators
+        </a>
         <a href="{{ route('admin.team.index') }}"
            class="sidebar-link {{ request()->routeIs('admin.team*') ? 'active' : '' }}">
             <i class="bi bi-people-fill"></i> Team Members
@@ -635,6 +639,10 @@
         <a href="{{ route('admin.settings.index') }}"
            class="sidebar-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
             <i class="bi bi-sliders"></i> Site Settings
+        </a>
+        <a href="{{ route('admin.admins.index') }}"
+           class="sidebar-link {{ request()->routeIs('admin.admins*') ? 'active' : '' }}">
+            <i class="bi bi-person-badge-fill"></i> Admin Users
         </a>
     </nav>
 

@@ -39,7 +39,7 @@ The folder already contains logo image files — do NOT delete them. Keep them a
 ### Logo
 
 File: `public/images/logo.jpeg`
-Use `<img src="/images/logo.jpeg">` wherever the logo appears.
+Use `<img src="/images/logo-hvrf.png">` wherever the logo appears.
 
 ### Color Palette
 

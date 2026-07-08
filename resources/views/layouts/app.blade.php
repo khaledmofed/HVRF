@@ -1138,6 +1138,71 @@
             .rm-connector { max-width: 2rem; }
         }
 
+        /* ── INITIATORS ── */
+        .initiators-marquee-wrap {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+        }
+        .initiators-marquee-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            gap: 1.25rem;
+            padding: 0.5rem 1.75rem 0.75rem;
+            animation: initiators-scroll 40s linear infinite;
+        }
+        .initiators-marquee-wrap:hover .initiators-marquee-track { animation-play-state: paused; }
+        @keyframes initiators-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        .initiator-logo-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            width: 200px;
+            height: 108px;
+            background: #fff;
+            border: 1px solid var(--hvrf-border);
+            border-radius: var(--radius-card);
+            padding: 1rem 1.25rem 0.85rem;
+            opacity: 0.8;
+            filter: grayscale(1);
+            transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .initiator-logo-card:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(78,205,196,0.25);
+        }
+        .initiator-logo-card img {
+            height: 36px;
+            max-width: 160px;
+            object-fit: contain;
+        }
+        .initiator-logo-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--hvrf-gray);
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.2px;
+        }
+        @media (max-width: 576px) {
+            .initiator-logo-card { width: 150px; height: 90px; padding: 0.75rem 0.9rem 0.65rem; }
+            .initiator-logo-card img { height: 28px; max-width: 110px; }
+            .initiators-marquee-track { gap: 0.85rem; animation-duration: 28s; }
+        }
+
         /* ── TEAM ── */
         .team-card {
             text-align: center;
