@@ -1525,6 +1525,9 @@
             .hero-badge { max-width: 90vw; text-align: center; }
         }
     </style>
+    @if(!empty($settings['custom_css']))
+    <style id="hvrf-custom-css">{!! $settings['custom_css'] !!}</style>
+    @endif
 </head>
 <body>
 
@@ -1681,5 +1684,8 @@ document.querySelectorAll('.newsletter-ajax-form').forEach(function (form) {
 @yield('scripts')
 <!-- HVRF i18n -->
 <script src="{{ asset('js/i18n.js') }}"></script>
+@if(!empty($settings['custom_js']))
+<script id="hvrf-custom-js">{!! $settings['custom_js'] !!}</script>
+@endif
 </body>
 </html>

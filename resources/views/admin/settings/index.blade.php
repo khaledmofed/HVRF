@@ -50,6 +50,22 @@
         </div>
     </div>
 
+    {{-- Custom Code --}}
+    <div class="stat-card mb-4">
+        <h6 class="fw-semibold mb-1" style="color: #4ECDC4;"><i class="bi bi-code-slash me-2"></i>Custom Code</h6>
+        <p class="small text-muted mb-3">Injected into every public page — CSS just before <code>&lt;/head&gt;</code>, JS just before <code>&lt;/body&gt;</code>. Runs unescaped, so only paste code you trust.</p>
+        <div class="row g-3">
+            <div class="col-md-12">
+                <label class="form-label small fw-semibold">Custom CSS</label>
+                <textarea name="custom_css" rows="8" class="form-control" style="font-family: 'Courier New', monospace; font-size: 0.85rem;" placeholder=".my-class { color: red; }">{{ $settings['custom_css'] ?? '' }}</textarea>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label small fw-semibold">Custom JavaScript</label>
+                <textarea name="custom_js" rows="8" class="form-control" style="font-family: 'Courier New', monospace; font-size: 0.85rem;" placeholder="console.log('hello');">{{ $settings['custom_js'] ?? '' }}</textarea>
+            </div>
+        </div>
+    </div>
+
     <button type="submit" class="btn px-5" style="background: #4ECDC4; color: #fff; border: none;"><i class="bi bi-save me-2"></i>Save All Settings</button>
 </form>
 @endsection

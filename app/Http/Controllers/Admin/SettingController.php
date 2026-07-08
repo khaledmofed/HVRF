@@ -21,6 +21,7 @@ class SettingController extends Controller
             'contact_email', 'contact_phone', 'contact_location', 'map_embed_url',
             'linkedin_url', 'twitter_url', 'facebook_url', 'youtube_url',
             'meta_title', 'meta_description', 'og_image_url',
+            'custom_css', 'custom_js',
         ];
 
         foreach ($keys as $key) {
