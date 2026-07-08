@@ -73,7 +73,7 @@ services:
       - key: RUN_SEEDER
         value: "false"
       - key: RUN_INITIATOR_SEEDER
-        value: "true"
+        value: "false"
       - key: R2_ACCESS_KEY_ID
         scope: RUN_TIME
         type: SECRET
