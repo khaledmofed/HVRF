@@ -47,6 +47,11 @@ if [ "$RUN_SEEDER" = "true" ]; then
     php /var/www/html/artisan db:seed --force || echo "[startup] seed skipped"
 fi
 
+if [ "$RUN_INITIATOR_SEEDER" = "true" ]; then
+    echo "Seeding initiators only..."
+    php /var/www/html/artisan db:seed --class=InitiatorSeeder --force || echo "[startup] initiator seed skipped"
+fi
+
 php /var/www/html/artisan roadmap:ensure-phase3 || true
 
 echo "Starting supervisord on port $PORT..."
