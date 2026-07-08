@@ -48,6 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('roadmap', RoadmapController::class)->names('roadmap');
         Route::resource('stats', StatController::class)->names('stats');
         Route::resource('initiators', InitiatorController::class)->names('initiators');
+        Route::post('/initiators-header', [InitiatorController::class, 'updateHeader'])->name('initiators.header.update');
         Route::resource('team', TeamController::class)->names('team');
 
         Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');

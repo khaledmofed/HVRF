@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Initiator;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +13,39 @@ class InitiatorController extends Controller
     public function index()
     {
         $initiators = Initiator::orderBy('sort_order')->get();
-        return view('admin.initiators.index', compact('initiators'));
+        $settings = SiteSetting::pluck('value', 'key');
+        return view('admin.initiators.index', compact('initiators', 'settings'));
+    }
+
+    public function updateHeader(Request $request)
+    {
+        $validated = $request->validate([
+            'initiators_label'             => 'nullable|string|max:100',
+            'initiators_heading'           => 'nullable|string|max:150',
+            'initiators_subtitle'          => 'nullable|string|max:500',
+            'initiators_label_ja'          => 'nullable|string|max:100',
+            'initiators_heading_ja'        => 'nullable|string|max:150',
+            'initiators_subtitle_ja'       => 'nullable|string|max:500',
+            'initiators_label_ko'          => 'nullable|string|max:100',
+            'initiators_heading_ko'        => 'nullable|string|max:150',
+            'initiators_subtitle_ko'       => 'nullable|string|max:500',
+            'initiators_label_es'          => 'nullable|string|max:100',
+            'initiators_heading_es'        => 'nullable|string|max:150',
+            'initiators_subtitle_es'       => 'nullable|string|max:500',
+            'initiators_label_zh_tw'       => 'nullable|string|max:100',
+            'initiators_heading_zh_tw'     => 'nullable|string|max:150',
+            'initiators_subtitle_zh_tw'    => 'nullable|string|max:500',
+            'initiators_label_vi'          => 'nullable|string|max:100',
+            'initiators_heading_vi'        => 'nullable|string|max:150',
+            'initiators_subtitle_vi'       => 'nullable|string|max:500',
+        ]);
+
+        foreach ($validated as $key => $value) {
+            SiteSetting::set($key, $value ?? '');
+        }
+
+        cache()->forget('settings');
+        return redirect()->route('admin.initiators.index')->with('success', 'Section header updated.');
     }
 
     public function create()

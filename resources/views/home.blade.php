@@ -1031,9 +1031,21 @@
 <section id="initiators" style="padding: 4.5rem 0 3.5rem; background: var(--hvrf-light);">
     <div class="container">
         <div class="text-center mb-5 gsap-reveal" data-dir="up">
-            <span class="section-label mb-3 d-flex justify-content-center" data-i18n="initiators.label">Backed By</span>
-            <h2 class="section-title mb-3" data-i18n="initiators.heading">Our Initiators</h2>
-            <p class="section-subtitle" data-i18n="initiators.subtitle">Leading AI labs, enterprises, and visionaries helping shape HVRF's mission.</p>
+            <span class="section-label mb-3 d-flex justify-content-center initiators-i18n-label"
+                  data-original="{{ e($settings['initiators_label'] ?? 'Backed By') }}"
+                  data-db-ja="{{ e($settings['initiators_label_ja'] ?? '') }}" data-db-ko="{{ e($settings['initiators_label_ko'] ?? '') }}"
+                  data-db-es="{{ e($settings['initiators_label_es'] ?? '') }}" data-db-zh-tw="{{ e($settings['initiators_label_zh_tw'] ?? '') }}"
+                  data-db-vi="{{ e($settings['initiators_label_vi'] ?? '') }}">{{ $settings['initiators_label'] ?? 'Backed By' }}</span>
+            <h2 class="section-title mb-3 initiators-i18n-heading"
+                  data-original="{{ e($settings['initiators_heading'] ?? 'Our Initiators') }}"
+                  data-db-ja="{{ e($settings['initiators_heading_ja'] ?? '') }}" data-db-ko="{{ e($settings['initiators_heading_ko'] ?? '') }}"
+                  data-db-es="{{ e($settings['initiators_heading_es'] ?? '') }}" data-db-zh-tw="{{ e($settings['initiators_heading_zh_tw'] ?? '') }}"
+                  data-db-vi="{{ e($settings['initiators_heading_vi'] ?? '') }}">{{ $settings['initiators_heading'] ?? 'Our Initiators' }}</h2>
+            <p class="section-subtitle initiators-i18n-subtitle"
+                  data-original="{{ e($settings['initiators_subtitle'] ?? "Leading AI labs, enterprises, and visionaries helping shape HVRF's mission.") }}"
+                  data-db-ja="{{ e($settings['initiators_subtitle_ja'] ?? '') }}" data-db-ko="{{ e($settings['initiators_subtitle_ko'] ?? '') }}"
+                  data-db-es="{{ e($settings['initiators_subtitle_es'] ?? '') }}" data-db-zh-tw="{{ e($settings['initiators_subtitle_zh_tw'] ?? '') }}"
+                  data-db-vi="{{ e($settings['initiators_subtitle_vi'] ?? '') }}">{{ $settings['initiators_subtitle'] ?? "Leading AI labs, enterprises, and visionaries helping shape HVRF's mission." }}</p>
         </div>
     </div>
 
