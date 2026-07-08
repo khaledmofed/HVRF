@@ -48,7 +48,7 @@ jobs:
           SESSION_DRIVER=file
           LOG_CHANNEL=stderr
           LOG_LEVEL=error
-          RUN_SEEDER=false
+          RUN_SEEDER=true
           R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
           R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
           R2_BUCKET=${R2_BUCKET}
